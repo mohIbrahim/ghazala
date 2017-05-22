@@ -16,7 +16,7 @@ class Privileges
     public function handle($request, Closure $next)
     {   
         
-        $response = redirect(action('WelcomePageController@getWelcomePage'));
+        $response = redirect(action('HomeController@welcome'));
         
 
         $user = $request->user();

@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./jquery-ui.min');
 
 window.Vue = require('vue');
 
@@ -19,4 +20,39 @@ Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: '#app'
+});
+
+
+
+$( document ).ready(function() {
+
+    $( "#datepicker" ).datepicker({            
+	    changeMonth: true,
+	    changeYear: true ,
+	    yearRange: "-115:+0",       
+	});
+
+	$( "#datepicker2" ).datepicker({            
+	    changeMonth: true,
+	    changeYear: true ,
+	    yearRange: "-115:+5",       
+	});
+
+	$( "#datepicker3" ).datepicker({            
+	    changeMonth: true,
+	    changeYear: true ,
+	    yearRange: "-115:+5",       
+	});
+
+	$( "#datepicker4" ).datepicker({            
+	    changeMonth: true,
+	    changeYear: true ,
+	    yearRange: "-115:+5",       
+	});
+
+	$( "#datepicker5" ).datepicker({            
+	    changeMonth: true,
+	    changeYear: true ,
+	    yearRange: "-115:+5",       
+	});
 });

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Roles
+class Users
 {
     /**
      * Handle an incoming request.
@@ -29,36 +29,36 @@ class Roles
                 return $response;
         }
        
-        if($request->route()->getName() == 'roles.index'      && in_array('view_roles', $permissions)){
+        if($request->route()->getName() == 'users.index'      && in_array('view_users', $permissions)){
             $response = $next($request);
         }else        
        
-        if($request->route()->getName() == 'roles.show'       && in_array('view_roles', $permissions)){
+        if($request->route()->getName() == 'users.show'       && in_array('view_users', $permissions)){
            
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'roles.create'     && in_array('create_roles', $permissions)){
+        if($request->route()->getName() == 'users.create'     && in_array('create_users', $permissions)){
 
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'roles.store'      && in_array('create_roles', $permissions)){
+        if($request->route()->getName() == 'users.store'      && in_array('create_users', $permissions)){
 
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'roles.edit'       && in_array('update_roles', $permissions)){
+        if($request->route()->getName() == 'users.edit'       && in_array('update_users', $permissions)){
             
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'roles.update'     && in_array('update_roles', $permissions)){
+        if($request->route()->getName() == 'users.update'     && in_array('update_users', $permissions)){
             
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'roles.destroy'    && in_array('delete_roles', $permissions)){
+        if($request->route()->getName() == 'users.destroy'    && in_array('delete_users', $permissions)){
 
             $response = $next($request);
         }else{
