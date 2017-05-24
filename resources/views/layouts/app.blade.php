@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Ghazala') }}</title>
+    <title>
+        @yield('title')
+    </title>
 
 
     <!-- Styles -->
@@ -23,8 +25,9 @@
         <div class="col-md-8 col-md-offset-2">
             @include('flash::message')
         </div>
-        
-        @yield('content')
+        <div class="container-fluid">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

@@ -23,7 +23,7 @@ class UnitModelsController extends Controller
      */
     public function create()
     {
-        //
+        return view('unit_models.create');
     }
 
     /**

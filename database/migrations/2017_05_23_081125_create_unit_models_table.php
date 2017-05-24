@@ -17,8 +17,9 @@ class CreateUnitModelsTable extends Migration
             $table->engine = "InnoDB";
 
             $table->increments('id');
-            $table->string('name');
-            $table->string('tatal_area')->nullable();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->string('total_area')->nullable();
             $table->string('net_area')->nullable();
             $table->string('number_of_rooms')->nullable();
             $table->string('number_of_floors')->nullable();
@@ -32,7 +33,6 @@ class CreateUnitModelsTable extends Migration
             $table->string('pool_area')->nullable();
             $table->text('comments')->nullable();
             $table->integer('creator_user_id')->unsigned();
-
             $table->timestamps();
         });
     }
