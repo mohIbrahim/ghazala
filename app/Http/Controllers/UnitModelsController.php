@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UnitModelsRequest;
+
+use App\UnitModel;
 
 class UnitModelsController extends Controller
 {
@@ -32,9 +35,18 @@ class UnitModelsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UnitModelsRequest $request)
     {
-        //
+        
+        $request['slug']= str_slug($request->name);
+        $request["creator_user_id"] = auth()->user()->id;
+
+        $unitModel = UnitModel::create($request->all());
+        flash()->success('تم إضافة نموذج جديد بنجاح')->important();
+        return redirect()->action('UnitModelsController@show', ['slug'=>$unitModel->slug]);
+
+
+
     }
 
     /**
@@ -43,9 +55,10 @@ class UnitModelsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $unitModel = UnitModel::where("slug",$slug)->first();
+        return view('unit_models.show', compact('$unitModel'));
     }
 
     /**

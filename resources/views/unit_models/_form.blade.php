@@ -5,6 +5,15 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('type', 'نوع النموذج') !!}
+		{!! Form::select('type', ['شقة'=>'شقة',
+			'شقة دوبليكس'=>'شقة دوبليكس',
+			'فيلا'=>'فيلا',
+			'آخر'=>'آخر']
+			, null, ['class'=>'form-control', 'placeholder'=>'أختر نوع النموذج']) !!}
+	</div>
+
+	<div class="form-group">
 		{!! Form::label('total_area', ' المساحة الكلية للنموذج ') !!}
 		{!! Form::text('total_area', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل المساحة الكلية للنموذج بدون علامة الوحدات متر مربع']) !!}
 	</div>
@@ -55,8 +64,8 @@
 	<div class="form-group">
 		{!! Form::label('garden', 'وجود حدائق بالنموذج') !!}
 		{!! Form::select('garden', [
-			'يوجد'=>'يوجد',
-			'لا يوجد'=>'لا يوجد']
+			1=>'يوجد',
+			0=>'لا يوجد']
 			, null, ['class'=>'form-control ', 'placeholder'=>'أختر وجود او عدم وجود حدائق بالنموذج']) !!}
 	</div>
 
@@ -68,8 +77,8 @@
 	<div class="form-group">
 		{!! Form::label('pool', 'وجود حمام سباحة بالنموذج') !!}
 		{!! Form::select('pool', [
-			'يوجد'=>'يوجد',
-			'لا يوجد'=>'لا يوجد']
+			1 =>'يوجد',
+			0 =>'لا يوجد']
 			, null, ['class'=>'form-control ', 'placeholder'=>'أختر وجود او عدم وجود حمام سباحة بالنموذج']) !!}
 	</div>
 
@@ -84,7 +93,7 @@
 		{!! Form::textarea('comments', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل تعليقاً']) !!}
 	</div>
 
-	<button type="button" class="btn btn-primary">حفظ</button>
+	<button type="submit" class="btn btn-primary">حفظ</button>
 
 </div>
 

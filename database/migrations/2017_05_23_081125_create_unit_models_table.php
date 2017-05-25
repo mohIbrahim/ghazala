@@ -19,6 +19,7 @@ class CreateUnitModelsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('type')->nullable();
             $table->string('total_area')->nullable();
             $table->string('net_area')->nullable();
             $table->string('number_of_rooms')->nullable();
