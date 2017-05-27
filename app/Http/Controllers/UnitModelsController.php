@@ -9,6 +9,13 @@ use App\UnitModel;
 
 class UnitModelsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('unit_models');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,8 @@ class UnitModelsController extends Controller
      */
     public function index()
     {
-        //
+        $unitModels = UnitModel::latest()->paginate(25);
+        return view('unit_models.index', compact('unitModels'));
     }
 
     /**
@@ -37,16 +45,12 @@ class UnitModelsController extends Controller
      */
     public function store(UnitModelsRequest $request)
     {
-        
         $request['slug']= str_slug($request->name);
         $request["creator_user_id"] = auth()->user()->id;
 
         $unitModel = UnitModel::create($request->all());
         flash()->success('تم إضافة نموذج جديد بنجاح')->important();
         return redirect()->action('UnitModelsController@show', ['slug'=>$unitModel->slug]);
-
-
-
     }
 
     /**
@@ -58,7 +62,7 @@ class UnitModelsController extends Controller
     public function show($slug)
     {
         $unitModel = UnitModel::where("slug",$slug)->first();
-        return view('unit_models.show', compact('$unitModel'));
+        return view('unit_models.show', compact('unitModel'));
     }
 
     /**
@@ -67,9 +71,11 @@ class UnitModelsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $unitModel = UnitModel::where('slug',$slug)->first();
+        return view('unit_models.edit', compact('unitModel'));
+
     }
 
     /**
@@ -79,9 +85,13 @@ class UnitModelsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UnitModelsRequest $request, $id)
     {
-        //
+        $unitModel = UnitModel::findOrFail($id);
+        $request['slug']= str_slug($request->name);
+        $unitModel->update($request->all());
+        flash()->success('تم تعديل النموذج بنجاح')->important();
+        return redirect()->action('UnitModelsController@show', ['slug'=>$unitModel->slug]);
     }
 
     /**
@@ -92,6 +102,9 @@ class UnitModelsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $unitModel = UnitModel::findOrFail($id);
+        $unitModel->delete();
+        flash()->success('تم حذف النموذج بنجاح')->important();
+        return redirect()->action('UnitModelsController@index');
     }
 }

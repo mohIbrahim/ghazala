@@ -52,4 +52,10 @@ class User extends Authenticatable
         }
         return $selected;
     }
+
+
+    public function unitModels()
+    {
+        return $this->hasMany('App\UnitModel');
+    }
 }

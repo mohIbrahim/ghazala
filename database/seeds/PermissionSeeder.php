@@ -14,7 +14,9 @@ class PermissionSeeder extends Seeder
     {
         $this->permissions();
         $this->users();
-        $this->roles();        
+        $this->roles();
+        $this->unitModels();
+
     }
 
     /**
@@ -108,6 +110,39 @@ class PermissionSeeder extends Seeder
             "name"              =>"delete_roles",
             "slug"              =>"delete-roles",
             "descriptions"      =>"delete roles",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+   
+
+    /**
+     * [unitModels description]
+     * @return [type] [description]
+     */
+    private function unitModels()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_unit_models",
+            "slug"              =>"view-unit-models",
+            "descriptions"      =>"view unit models",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_unit_models",
+            "slug"              =>"create-unit-models",
+            "descriptions"      =>"create unit models",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_unit_models",
+            "slug"              =>"update-unit-models",
+            "descriptions"      =>"update unit models",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_unit_models",
+            "slug"              =>"delete-unit-models",
+            "descriptions"      =>"delete unit models",
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }

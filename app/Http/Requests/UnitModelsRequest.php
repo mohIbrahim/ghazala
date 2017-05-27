@@ -23,8 +23,9 @@ class UnitModelsRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-            "name"=>"required",
+            "name"=>"required|unique:unit_models,name,".$this->unit_model,
             "type"=>"required",
             "total_area"=>"integer",
             "net_area"=>"integer",
@@ -33,6 +34,7 @@ class UnitModelsRequest extends FormRequest
             "number_of_toilets"=>"integer",
             "number_of_balconies"=>"integer",
             "number_of_kitchens"=>"integer",
+            "finishing_type"=>"required",
         ];
     }
 
@@ -41,6 +43,7 @@ class UnitModelsRequest extends FormRequest
     {
         return[
             "name.required"=>"برجاء إدخال قيمة فى حقل اسم النموذج",
+            "name.unique"=>"اسم النموذج تم اخذه من قبل برجاء اختيار اسم آخر",
             "type.required"=>"برجاء أختيار قيمة لنوع النموذج",
             "total_area.integer"=>"برجاء إدخال قيمة عددية صحيحة للمساحة الكلية للنموذج",
             "net_area.integer"=>"برجاء إدخال قيمة عددية صحيحة للمساحة الصافية للنموذج",
@@ -49,6 +52,7 @@ class UnitModelsRequest extends FormRequest
             "number_of_toilets.integer"=>"برجاء إدخال قيمة عددية صحيحة لعدد دورات المياة بالنموذج",
             "number_of_balconies.integer"=>"برجاء إدخال قيمة عددية صحيحة لعدد الشُرُفات بالنموذج",
             "number_of_kitchens.integer"=>"برجاء إدخال قيمة عددية صحيحة لعدد المطابخ بالنموذج",
+            "finishing_type.required"=>"برجاء اختيار قيمة لنوع التشطيب بالنموذج",
         ];
     }
 }

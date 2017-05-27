@@ -1,4 +1,5 @@
 <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2 ">
+	@include('errors.list')
 	<div class="form-group">
 		{!! Form::label('name', ' اسم النموذج ') !!}
 		{!! Form::text('name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم النموذج']) !!}
@@ -96,4 +97,3 @@
 	<button type="submit" class="btn btn-primary">حفظ</button>
 
 </div>
-

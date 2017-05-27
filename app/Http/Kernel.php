@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'roles'                 =>  \App\Http\Middleware\Roles::class,        
         'users'                 =>  \App\Http\Middleware\Users::class,        
         'role_user'             =>  \App\Http\Middleware\RoleUser::class,
+        'unit_models'           =>  \App\Http\Middleware\UnitModels::class,
     ];
 }

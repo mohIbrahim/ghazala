@@ -35,6 +35,9 @@ class ViewComposerServiceProvider extends ServiceProvider
             'permissions.show',
 
             'role_user._form',
+
+            'unit_models.show',
+            'unit_models.index',
         ];
 
         view()->composer($v, function($view){

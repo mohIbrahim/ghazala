@@ -29,6 +29,11 @@ class UnitModel extends Model
 							'comments',
 							'creator_user_id'];
 
+	public function creator()
+	{
+		return $this->belongsTo('App\User', 'creator_user_id','id');
+	}
+
     
 
 }
