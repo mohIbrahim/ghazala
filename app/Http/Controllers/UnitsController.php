@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UnitsRequest;
+use App\Unit;
+use App\UnitModel;
 
 class UnitsController extends Controller
 {
@@ -23,7 +26,8 @@ class UnitsController extends Controller
      */
     public function create()
     {
-        //
+        $modelsNames = UnitModel::latest()->pluck('name', 'id');
+        return view('units.create', compact('modelsNames'));
     }
 
     /**
@@ -32,9 +36,12 @@ class UnitsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UnitsRequest $request)
     {
-        //
+        $request['creator_user_id'] = auth()->user()->id;
+        $unit = Unit::create($request->all());        
+        flash()->success('تم إضافة وحدة جديدة بنجاح')->important();
+        return redirect()->action('UnitsController@show', ['id'=>$unit->id]);
     }
 
     /**
@@ -45,7 +52,8 @@ class UnitsController extends Controller
      */
     public function show($id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        return $unit;
     }
 
     /**

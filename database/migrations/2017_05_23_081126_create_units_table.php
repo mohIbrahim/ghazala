@@ -19,27 +19,32 @@ class CreateUnitsTable extends Migration
             $table->increments('id');
             $table->string('code')->unique();
             $table->integer('model_id')->unsigned();
-            $table->string('unit_account_code')->unique()->nullable();
-            $table->string('electricity_meter_number')->unique()->nullable();
-
-            $table->string('type')->nullable();
-            $table->string('floor_number')->nullable();
-            $table->string('direction')->nullable();
 
             $table->boolean('for_sale')->nullable()->nullable();
             $table->text('sale_details')->nullable();
             $table->string('sale_price')->nullable();
 
             $table->boolean('for_rent')->nullable();
-            $table->dateTime('rent_from')->nullable();
-            $table->dateTime('rent_to')->nullable();
+            $table->timestamp('rent_from')->nullable();
+            $table->timestamp('rent_to')->nullable();
             $table->string('rent_price')->nullable();
             $table->text('rent_details')->nullable();
-
+            
+            $table->string('unit_account_code')->unique()->nullable();
+            $table->string('direction')->nullable();
+            $table->string('floor_number')->nullable();
+            $table->string('electricity_meter_number')->unique()->nullable();
             $table->text('comments')->nullable();
+            $table->integer('creator_user_id')->unsigned();
+            
             $table->timestamps();
-
             $table->foreign('model_id')->references('id')->on('unit_models');
+
+            
+
+
+
+
         });
     }
 

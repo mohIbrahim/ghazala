@@ -22,6 +22,9 @@
 	 Route::resource('permissions', 'PermissionController');
 	 Route::resource('users', 'UserController');
 	 Route::resource('role_user', 'RoleUserController');
-//Unit
+//Unit Models
  	Route::resource('unit_models', 'UnitModelsController');
+
+ //Unit Models
+ 	Route::resource('units', 'UnitsController');
 
