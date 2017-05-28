@@ -29,18 +29,34 @@ class Unit extends Model
 
     protected $dates = ['rent_from', 'rent_to'];
 
-
+    /**
+     * [setRentFromAttribute description]
+     * @param [type] $date [description]
+     */
     public function setRentFromAttribute($date){
         if($date != "")
             $this->attributes['rent_from'] = Carbon::parse($date);
         else
-            $this->attributes['rent_from'] = "0000-00-00 00:00:00";
+            $this->attributes['rent_from'] = null;
     }
 
+    /**
+     * [setRentToAttribute description]
+     * @param [type] $date [description]
+     */
     public function setRentToAttribute($date){
         if($date != "")
             $this->attributes['rent_to'] = Carbon::parse($date);
         else
-            $this->attributes['rent_to'] = "0000-00-00 00:00:00";
+            $this->attributes['rent_to'] = null;
+    }
+
+    /**
+     * [model description]
+     * @return [type] [description]
+     */
+    public function model()
+    {
+        return $this->belongsTo('App\UnitModel', 'model_id', 'id');
     }
 }

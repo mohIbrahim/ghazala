@@ -28,12 +28,22 @@ class UnitModel extends Model
 							'pool_area',
 							'comments',
 							'creator_user_id'];
-
+	/**
+	 * [creator description]
+	 * @return [type] [description]
+	 */
 	public function creator()
 	{
 		return $this->belongsTo('App\User', 'creator_user_id','id');
 	}
 
-    
+	/**
+	 * [units description]
+	 * @return [type] [description]
+	 */
+    public function units()
+    {
+    	return $this->hasMany('App\Unit', 'model_id', 'id');
+    }
 
 }

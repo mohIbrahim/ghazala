@@ -29,7 +29,7 @@ class UnitsRequest extends FormRequest
             'code'=>'required|unique:units',
             'model_id'=>'required',
             'unit_account_code'=>'required',
-            'electricity_meter_number'=>'required',
+            'electricity_meter_number'=>'required|unique:units',
             
         ];
     }
@@ -43,6 +43,7 @@ class UnitsRequest extends FormRequest
                 'model_id.required'=>'برجاء أختيار نوع نموذج الوحدة',
                 'unit_account_code.required'=>'برجاء إدخال كود حساب الوحدة',
                 'electricity_meter_number.required'=>'برجاء إدخال رقم عداد الكهرباء الخاص بالوحدة',
+                'electricity_meter_number.unique'=>'برجاء أختيار رقم عداد الكهرباء آخر للوحدة هذا الرقم تم أختياره من قبل',
                 ];
     }
 }

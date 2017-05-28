@@ -53,7 +53,7 @@ class UnitsController extends Controller
     public function show($id)
     {
         $unit = Unit::findOrFail($id);
-        return $unit;
+        return view('units.show',compact('unit'));
     }
 
     /**
