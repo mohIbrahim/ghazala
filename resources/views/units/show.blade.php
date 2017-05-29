@@ -96,7 +96,22 @@
 								<tr>
 									<td>{{ $unit->comments }}</td>
 									<th>:التعليقات</th>
-								</tr>								
+								</tr>
+
+								<tr>
+									<td>{{ $unit->creator->name }}</td>
+									<th>:إنشاء من قبل المستخدم</th>
+								</tr>
+
+								<tr>
+									<td>{{ $unit->created_at }}</td>
+									<th>:تاريخ و وقت الإنشاء</th>
+								</tr>	
+
+								<tr>
+									<td>{{ $unit->updated_at }}</td>
+									<th>:تاريخ و وقت التعديل</th>
+								</tr>					
 								
 								@if(in_array('update_units', $permissions))
 									<tr>

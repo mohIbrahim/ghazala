@@ -65,7 +65,9 @@ class UnitsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        $modelsNames = UnitModel::latest()->pluck('name', 'id');
+        return view('units.edit', compact('unit', 'modelsNames'));
     }
 
     /**
@@ -75,9 +77,12 @@ class UnitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UnitsRequest $request, $id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        $unit->update($request->all());
+        flash()->success('تم تعديل الوحدة بنجاح')->important();
+        return redirect()->action('UnitsController@show', ['id'=>$unit->id]);
     }
 
     /**

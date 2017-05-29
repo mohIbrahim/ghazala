@@ -60,4 +60,9 @@ class Unit extends Model
     {
         return $this->belongsTo('App\UnitModel', 'model_id', 'id');
     }
+
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator_user_id', 'id');
+    }
 }

@@ -17,7 +17,7 @@
 								<th>تعديل</th>
 								<th>تاريخ و وقت التعديل</th>
 								<th>تاريخ و وقت الإنشاء</th>
-								<th>إنشاء من قبل</th>
+								<th>إنشاء من قبل المستخدم</th>
 
 								
 								<th>هل الوحدة معروضة للإيجار؟</th>
@@ -33,22 +33,25 @@
 							
 						</thead>
 						<tbody>
-							@foreach($unitModels as $model)
+							@foreach($units as $unit)
 								<tr>
 									<td>
 										@if(in_array('update_unit_models', $permissions))
-											<a href="{{action('UnitModelsController@edit',['slug'=>$model->slug])  }}">تعديل</a>
+											<a href="{{action('UnitsController@edit',['id'=>$unit->id])  }}">تعديل</a>
 										@endif
 									</td>
-									<td>{{ $model->updated_at }}</td>
-									<td>{{ $model->created_at }}</td>
-									<td>{{ $model->creator->name }}</td>
-									<td>{{ $model->number_of_rooms }}</td>
-									<td>{{ $model->net_area }} m<sup>2</sup> </td>
-									<td>{{ $model->total_area }} m<sup>2</sup> </td> 
-									<td>{{ $model->type }}</td>
+									<td>{{ $unit->updated_at }}</td>
+									<td>{{ $unit->created_at }}</td>
+									<td>{{ $unit->creator->name }}</td>
+									<td>{{ $unit->for_rent }}</td>
+									<td>{{ $unit->for_sale }}</td>
+									<td>{{ $unit->electricity_meter_number }}</td>
+									<td>{{ $unit->floor_number }}</td>
+									<td>{{ $unit->address }}</td>
+									<td>{{ $unit->unit_account_code }}</td> 
+									<td>{{ $unit->model->name }}</td>
 									<td>
-										<a href="{{ action('UnitModelsController@show', ['slug'=>$model->slug]) }}">{{ $model->name }}</a>
+										<a href="{{ action('UnitModelsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
 									</td>
 								</tr>
 							@endforeach
@@ -56,7 +59,7 @@
 						</tbody>
 					</table>
 				</div>
-						{{ $unitModels->links() }}
+						{{ $units->links() }}
 			</div>
 		</div>
 		

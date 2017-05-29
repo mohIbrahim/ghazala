@@ -23,13 +23,24 @@ class UnitsRequest extends FormRequest
      */
     public function rules()
     {
+        $code = '';
+        $unit_account_code = '';
+        $electricity_meter_number = '';
 
+        if($this->unit){
+            $unit = \App\Unit::findOrFail($this->unit);
+
+            $code = $unit->code;
+            $unit_account_code = $unit->unit_account_code;
+            $electricity_meter_number = $unit->electricity_meter_number;
+
+        }
         //adjust uniques attruibte in update.
         return [
-            'code'=>'required|unique:units',
+            'code'=>"required|unique:units,id,".$this->unit,
             'model_id'=>'required',
-            'unit_account_code'=>'required|unique:units',
-            'electricity_meter_number'=>'required|unique:units',            
+            'unit_account_code'=>"required|unique:units,id,".$this->unit,
+            'electricity_meter_number'=>"required|unique:units,id,".$this->unit,            
         ];
     }
 
