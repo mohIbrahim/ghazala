@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title')
-	عرض كل النماذج للوحدات
+	عرض كل الوحدات
 @endsection
 @section('content')
 	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
 		
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title text-center"><strong>عرض كل النماذج للوحدات</strong></h3>
+				<h3 class="panel-title text-center"><strong>عرض كل الوحدات</strong></h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -18,11 +18,17 @@
 								<th>تاريخ و وقت التعديل</th>
 								<th>تاريخ و وقت الإنشاء</th>
 								<th>إنشاء من قبل</th>
-								<th>عدد الغرف بالنموذج</th>
-								<th>المساحة الصافية للنموذج</th>
-								<th>المساحة الكلية للنموذج</th>
+
+								
+								<th>هل الوحدة معروضة للإيجار؟</th>
+								<th>هل الوحدة للبيع؟</th>
+								<th>رقم عداد الكهرباء</th>
+								<th>رقم الدور</th>
+								<th>العنوان</th>
+								
+								<th>كود حساب الوحدة</th>
 								<th>نوع النموذج</th>
-								<th>اسم النموذج</th>
+								<th>كود الوحدة</th>
 							</tr>
 							
 						</thead>

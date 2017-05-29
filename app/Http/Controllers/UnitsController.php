@@ -16,7 +16,8 @@ class UnitsController extends Controller
      */
     public function index()
     {
-        //
+        $units = Unit::latest()->paginate(15);
+        return view('units.index', compact('units'));
     }
 
     /**

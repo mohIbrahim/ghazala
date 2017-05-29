@@ -16,6 +16,11 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('address', 'عنوان الوحدة') !!}
+		{!! Form::textarea('address', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل عنوان الوحدة']) !!}
+	</div>
+
+	<div class="form-group">
 		{!! Form::label('direction', 'إتجاة الوحدة') !!}
 		{!! Form::select('direction', [
 			"قبلي" =>'قبلي',

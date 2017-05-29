@@ -22,7 +22,8 @@ class Unit extends Model
     						'unit_account_code',
     						'direction',
     						'floor_number',
-    						'electricity_meter_number',
+                            'electricity_meter_number',
+    						'address',
     						'comments',
     						'creator_user_id',
     						];
