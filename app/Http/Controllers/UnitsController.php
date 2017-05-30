@@ -50,8 +50,8 @@ class UnitsController extends Controller
         $request['creator_user_id'] = auth()->user()->id;
         $unit = Unit::create($request->all());
 
-        if($request->hasFile('unitImages')){
-            foreach ($request->file('unitImages') as $unitImage) {
+        if($request->hasFile('images')){
+            foreach ($request->file('images') as $unitImage) {
                 if($unitImage->isValid()){
                     $image = $unitImage;
                     $imageNewName = str_random(64).'.'.$image->guessExtension();

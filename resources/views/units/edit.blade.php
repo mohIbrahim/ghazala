@@ -9,7 +9,7 @@
 				<h3 class="panel-title"><strong>  {{$unit->code}} :تعديل الوحدة</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::model($unit,['method'=>'PATCH', 'action'=>['UnitsController@update', 'id'=>$unit->id]]) !!}
+				{!! Form::model($unit,['method'=>'PATCH', 'action'=>['UnitsController@update', 'id'=>$unit->id], 'files'=>true]) !!}
 					@include('units._form')
 				{!! Form::close() !!}				
 			</div>

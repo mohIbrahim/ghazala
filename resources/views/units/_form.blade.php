@@ -41,8 +41,8 @@
 	<div class="input_fields_wrap">
 		<div class="form-group">
 	    	<button class="add_field_button btn btn-xs btn-success">أضف صورة اخرى</button>
-			{!! Form::label('unitImages', 'صورة للوحدة') !!}
-			{!! Form::file('unitImages[]', ['class'=>'form-control']) !!}
+			{!! Form::label('images', 'صورة للوحدة') !!}
+			{!! Form::file('images[]', ['class'=>'form-control']) !!}
 		</div>
 	</div>
 

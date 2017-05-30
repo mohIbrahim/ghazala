@@ -29,11 +29,11 @@ class UnitsRequest extends FormRequest
             'code'=>"required|unique:units,id,".$this->unit,
             'model_id'=>'required',
             'unit_account_code'=>"required|unique:units,id,".$this->unit,
-            'electricity_meter_number'=>"required|unique:units,id,".$this->unit,
-            
+            'electricity_meter_number'=>"required|unique:units,id,".$this->unit,            
         ];
-        for($i = 0 ; $i<= count($this->unitImages) ; $i++){
-            $rules['unitImages.'.$i] = 'image';
+        
+        for($i = 0 ; $i<= count($this->images) ; $i++){
+            $rules['images.'.$i] = 'image';
         }
 
         return $rules;
@@ -50,7 +50,7 @@ class UnitsRequest extends FormRequest
                 'unit_account_code.unique'=>'برجاء أختيار كود حساب الوحدة آخر هذا الكود تم أختياره من قبل',
                 'electricity_meter_number.required'=>'برجاء إدخال رقم عداد الكهرباء الخاص بالوحدة',
                 'electricity_meter_number.unique'=>'برجاء أختيار رقم عداد الكهرباء آخر للوحدة هذا الرقم تم أختياره من قبل',
-                'unitImages.0.image'=>'صورة للوحدة يجب أن تكون صورة ليس اى ملف آخر',
+                'images.0.image'=>'صورة للوحدة يجب أن تكون صورة ليس اى ملف آخر',
                 ];
 
        

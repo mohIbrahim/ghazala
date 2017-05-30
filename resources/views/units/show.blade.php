@@ -11,11 +11,9 @@
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive ">
-					<table class="table table-striped  table-condensed text-right">
+					<table class="table table-striped  table-condensed text-center">
 
-						<thead>
-							
-						</thead>
+						
 						
 						<tbody>
 								<tr>
@@ -92,6 +90,25 @@
 									<td>{{ $unit->rent_details }}</td>
 									<th>:تفاصيل الإيجار</th>
 								</tr>
+
+								<tr>
+									<td>
+
+										<div class="row">
+											@foreach($unit->images as $image)
+												<div class="col-xs-6 col-md-3">
+													<a href="{{ asset('images/unit_images/'.$image->unit_image)}}" class="thumbnail">
+														<img src="{{ asset('images/unit_images/'.$image->unit_image)}}" alt="...">
+													</a>
+												</div>
+											@endforeach
+										
+										</div>
+									</td>
+									<th>:الصور</th>
+								</tr>
+
+
 
 								<tr>
 									<td>{{ $unit->comments }}</td>

@@ -6,6 +6,7 @@
 /.idea
 /.vagrant
 /public/images/unit_images/*.jpg
+/public/images/unit_images/*.jpeg
 /public/images/unit_images/*.png
 Homestead.json
 Homestead.yaml
