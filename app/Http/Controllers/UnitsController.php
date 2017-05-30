@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UnitsRequest;
 use App\Unit;
 use App\UnitModel;
+use App\UnitImage;
 
 class UnitsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('units');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +48,19 @@ class UnitsController extends Controller
     public function store(UnitsRequest $request)
     {
         $request['creator_user_id'] = auth()->user()->id;
-        $unit = Unit::create($request->all());        
+        $unit = Unit::create($request->all());
+
+        if($request->hasFile('unitImages')){
+            foreach ($request->file('unitImages') as $unitImage) {
+                if($unitImage->isValid()){
+                    $image = $unitImage;
+                    $imageNewName = str_random(64).'.'.$image->guessExtension();
+                    $image->move('images/unit_images', $imageNewName);                              
+                    $unit->images()->save(new UnitImage(['unit_image'=>$imageNewName]));
+                }                
+            }            
+        }
+
         flash()->success('تم إضافة وحدة جديدة بنجاح')->important();
         return redirect()->action('UnitsController@show', ['id'=>$unit->id]);
     }
@@ -93,6 +113,9 @@ class UnitsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        $unit->delete();
+        flash()->success('تم حذف الوحدة بنجاح')->important();
+        return redirect()->action('UnitsController@index');
     }
 }

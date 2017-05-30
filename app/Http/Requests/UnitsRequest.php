@@ -23,31 +23,26 @@ class UnitsRequest extends FormRequest
      */
     public function rules()
     {
-        $code = '';
-        $unit_account_code = '';
-        $electricity_meter_number = '';
 
-        if($this->unit){
-            $unit = \App\Unit::findOrFail($this->unit);
 
-            $code = $unit->code;
-            $unit_account_code = $unit->unit_account_code;
-            $electricity_meter_number = $unit->electricity_meter_number;
-
-        }
-        //adjust uniques attruibte in update.
-        return [
+        $rules =  [
             'code'=>"required|unique:units,id,".$this->unit,
             'model_id'=>'required',
             'unit_account_code'=>"required|unique:units,id,".$this->unit,
-            'electricity_meter_number'=>"required|unique:units,id,".$this->unit,            
+            'electricity_meter_number'=>"required|unique:units,id,".$this->unit,
+            
         ];
+        for($i = 0 ; $i<= count($this->unitImages) ; $i++){
+            $rules['unitImages.'.$i] = 'image';
+        }
+
+        return $rules;
     }
 
 
     public function messages()
     {
-        return [
+            $messages = [
                 'code.required'=>'برجاء إدخال كود الوحدة',
                 'code.unique'=>'برجاء أختيار كود آخر للوحدة هذا الكود تم أختياره من قبل',
                 'model_id.required'=>'برجاء أختيار نوع نموذج الوحدة',
@@ -55,6 +50,10 @@ class UnitsRequest extends FormRequest
                 'unit_account_code.unique'=>'برجاء أختيار كود حساب الوحدة آخر هذا الكود تم أختياره من قبل',
                 'electricity_meter_number.required'=>'برجاء إدخال رقم عداد الكهرباء الخاص بالوحدة',
                 'electricity_meter_number.unique'=>'برجاء أختيار رقم عداد الكهرباء آخر للوحدة هذا الرقم تم أختياره من قبل',
+                'unitImages.0.image'=>'صورة للوحدة يجب أن تكون صورة ليس اى ملف آخر',
                 ];
+
+       
+            return $messages;
     }
 }

@@ -3,7 +3,7 @@
 	عرض كل الوحدات
 @endsection
 @section('content')
-	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
+	<div class="">
 		
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -36,22 +36,22 @@
 							@foreach($units as $unit)
 								<tr>
 									<td>
-										@if(in_array('update_unit_models', $permissions))
+										@if(in_array('update_units', $permissions))
 											<a href="{{action('UnitsController@edit',['id'=>$unit->id])  }}">تعديل</a>
 										@endif
 									</td>
 									<td>{{ $unit->updated_at }}</td>
 									<td>{{ $unit->created_at }}</td>
 									<td>{{ $unit->creator->name }}</td>
-									<td>{{ $unit->for_rent }}</td>
-									<td>{{ $unit->for_sale }}</td>
+									<td>{{ ($unit->for_rent)? "نعم":"لا" }}</td>
+									<td>{{ ($unit->for_sale)? "نعم":"لا" }}</td>
 									<td>{{ $unit->electricity_meter_number }}</td>
 									<td>{{ $unit->floor_number }}</td>
-									<td>{{ $unit->address }}</td>
+									<td>{{ str_limit($unit->address, 30) }}</td>
 									<td>{{ $unit->unit_account_code }}</td> 
 									<td>{{ $unit->model->name }}</td>
 									<td>
-										<a href="{{ action('UnitModelsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
+										<a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
 									</td>
 								</tr>
 							@endforeach

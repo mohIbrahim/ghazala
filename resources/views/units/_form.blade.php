@@ -37,6 +37,15 @@
 		{!! Form::label('electricity_meter_number', 'رقم عداد الكهرباء') !!}
 		{!! Form::text('electricity_meter_number', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم عداد الكهرباء للوحدة']) !!}
 	</div>
+
+	<div class="input_fields_wrap">
+		<div class="form-group">
+	    	<button class="add_field_button btn btn-xs btn-success">أضف صورة اخرى</button>
+			{!! Form::label('unitImages', 'صورة للوحدة') !!}
+			{!! Form::file('unitImages[]', ['class'=>'form-control']) !!}
+		</div>
+	</div>
+
 	
 	<div class="jumbotron">
 		<div class="container">

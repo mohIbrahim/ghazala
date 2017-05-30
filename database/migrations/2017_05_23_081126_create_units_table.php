@@ -33,7 +33,7 @@ class CreateUnitsTable extends Migration
             $table->string('unit_account_code')->unique()->nullable();
             $table->string('direction')->nullable();
             $table->string('floor_number')->nullable();
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
             $table->string('electricity_meter_number')->unique()->nullable();
             $table->text('comments')->nullable();
             $table->integer('creator_user_id')->unsigned();

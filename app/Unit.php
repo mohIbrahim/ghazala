@@ -60,9 +60,19 @@ class Unit extends Model
     {
         return $this->belongsTo('App\UnitModel', 'model_id', 'id');
     }
-
+    /**
+     * Return the user who create this unit
+     * @return [type] [description]
+     */
     public function creator()
     {
         return $this->belongsTo('App\User', 'creator_user_id', 'id');
     }
+
+
+    public function images()
+    {
+        return $this->hasMany('\App\UnitImage', 'unit_id', 'id');
+    }
+
 }

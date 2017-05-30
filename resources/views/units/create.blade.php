@@ -9,7 +9,7 @@
 				<h3 class="panel-title text-center"><strong>إنشاء وحدة جديدة</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::open(['method'=>'POST', 'action'=>'UnitsController@store']) !!}
+				{!! Form::open(['method'=>'POST', 'action'=>'UnitsController@store', 'files'=>true]) !!}
 					@include('units._form')
 				{!! Form::close() !!}				
 			</div>
