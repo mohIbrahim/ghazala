@@ -100,6 +100,27 @@ class UnitsController extends Controller
     public function update(UnitsRequest $request, $id)
     {
         $unit = Unit::findOrFail($id);
+
+
+        //if we upload new images
+        if($request->hasFile('images')){
+              foreach ($request->file('images') as $unitImage) {
+                    if($unitImage->isValid()){
+                          $image = $unitImage;
+                          $imageNewName = str_random(64).'.'.$image->guessExtension();
+                          $image->move('images/unit_images', $imageNewName);
+                          $unit->images()->save(new UnitImage(['unit_image'=>$imageNewName]));
+                    }
+              }
+        }
+        //if we need to delete old images
+        if($request->imageToDelete){
+              foreach ($request->imageToDelete as $imageName){
+                    $unit->images()->where('unit_image',$imageName)->get()->first()->delete();
+                    $this->deleteFile('images/unit_images/'.$imageName);
+              }
+        }
+
         $unit->update($request->all());
         flash()->success('تم تعديل الوحدة بنجاح')->important();
         return redirect()->action('UnitsController@show', ['id'=>$unit->id]);
@@ -114,8 +135,31 @@ class UnitsController extends Controller
     public function destroy($id)
     {
         $unit = Unit::findOrFail($id);
+
+        if(isset($unit->images) || !empty($unit->images)){
+            foreach($unit->images as $image){
+                $this->deleteFile('images/unit_images/'.$image->unit_image);
+            }
+        }
+
         $unit->delete();
         flash()->success('تم حذف الوحدة بنجاح')->important();
         return redirect()->action('UnitsController@index');
+    }
+
+
+    /**
+     * [deleteFile description]
+     * @param  [type] $source [description]
+     * @return [type]         [description]
+     */
+    private function deleteFile($source){        
+        if(file_exists($source)){
+            try{
+                unlink(public_path().'/'.$source);
+            }catch(\Exception $e){
+                return $e->getMessage();
+            }
+        }    
     }
 }

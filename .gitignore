@@ -8,6 +8,7 @@
 /public/images/unit_images/*.jpg
 /public/images/unit_images/*.jpeg
 /public/images/unit_images/*.png
+!/public/images/unit_images/no_image.png
 Homestead.json
 Homestead.yaml
 npm-debug.log

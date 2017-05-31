@@ -46,6 +46,24 @@
 		</div>
 	</div>
 
+	@if(isset($unit->images))
+		<div class="form-group">
+			<div class="row">
+				@foreach($unit->images as $image)
+					<div class="col-md-2">
+						<div class="checkbox">
+							<label>
+								<img src="{{asset('images/unit_images/'.$image->unit_image)}}" class="img-responsive" alt="Image">
+								<input name="imageToDelete[]" type="checkbox" value="{{$image->unit_image}}">
+								قم بوضع علامة لحــذف الصورة
+							</label>
+						</div>
+					</div>
+				@endforeach
+			</div>
+		</div>
+	@endif
+
 	
 	<div class="jumbotron">
 		<div class="container">
