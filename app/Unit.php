@@ -34,7 +34,8 @@ class Unit extends Model
      * [setRentFromAttribute description]
      * @param [type] $date [description]
      */
-    public function setRentFromAttribute($date){
+    public function setRentFromAttribute($date)
+    {
         if($date != "")
             $this->attributes['rent_from'] = Carbon::parse($date);
         else
@@ -45,7 +46,8 @@ class Unit extends Model
      * [setRentToAttribute description]
      * @param [type] $date [description]
      */
-    public function setRentToAttribute($date){
+    public function setRentToAttribute($date)
+    {
         if($date != "")
             $this->attributes['rent_to'] = Carbon::parse($date);
         else

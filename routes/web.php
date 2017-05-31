@@ -15,16 +15,17 @@
 //Authentications routes
 	Auth::routes();
 //HomeController
-	 Route::get('/', 'HomeController@welcome')->name('welcome');
-	 Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/', 'HomeController@welcome')->name('welcome');
+	Route::get('/home', 'HomeController@index')->name('home');
 //Privileges
-	 Route::resource('roles', 'RoleController');
-	 Route::resource('permissions', 'PermissionController');
-	 Route::resource('users', 'UserController');
-	 Route::resource('role_user', 'RoleUserController');
+	Route::resource('roles', 'RoleController');
+	Route::resource('permissions', 'PermissionController');
+	Route::resource('users', 'UserController');
+	Route::resource('role_user', 'RoleUserController');
 //Unit Models
  	Route::resource('unit_models', 'UnitModelsController');
-
  //Unit Models
  	Route::resource('units', 'UnitsController');
+ //Owner
+ 	Route::resource('owners', 'OwnersController');
 
