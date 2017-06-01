@@ -75,12 +75,48 @@
 		{!! Form::file('personal_image', ['class'=>'form-control text-right', 'placeholder'=>' إدخل الصورة الشخصية']) !!}
 	</div>
 
+	@if(isset($owner->personal_image) && $owner->personal_image !== "no_image.png")
+		<div class="form-group">
+			<div class="row">
+				
+				<div class="col-md-2">
+					<div class="checkbox">
+						<label>
+							<img src="{{asset('images/owner_images/'.$owner->personal_image)}}" class="img-responsive" alt="Image">
+							<input name="imageToDelete" type="checkbox" value="{{$owner->personal_image}}">
+							قم بوضع علامة لحــذف الصورة
+						</label>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	@endif
+
 
 	<div class="form-group">
-		{!! Form::label('personal_image', 'صورة من عقد بيع الوحدة') !!}
+		{!! Form::label('contract_image', 'صورة من عقد بيع الوحدة') !!}
 		<p class="text-right">.pdf إدخل صورة من عقد البيع بالامتداد</p>
-		{!! Form::file('personal_image', ['class'=>'form-control text-right', 'placeholder'=>' إدخل صورة من عقد البيع بالامتداد PDF']) !!}
+		{!! Form::file('contract_image', ['class'=>'form-control text-right', 'placeholder'=>' إدخل صورة من عقد البيع بالامتداد PDF']) !!}
 	</div>
+
+	@if(isset($owner->contract_image))
+		<div class="form-group">
+			<div class="row">
+				
+				<div class="col-md-2">
+					<div class="checkbox">
+						<h3>
+							<a href="{{asset('images/owner_contracts_images/'.$owner->contract_image)}}"> العقد</a>
+						</h3>	
+							<input name="contractToDelete" type="checkbox" value="{{$owner->personal_image}}">
+							قم بوضع علامة لحــذف العقد
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	@endif
 
 	<div class="form-group">
 		{!! Form::label('contract_date', 'تاريخ عقد بيع الوحدة') !!}

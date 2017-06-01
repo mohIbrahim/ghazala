@@ -17,8 +17,8 @@ class CreateOwnersTable extends Migration
             $table->engine = "InnoDB";
 
             $table->increments('id');
-            $table->text('name')->unique();
-            $table->text('slug')->unique();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('ssn')->unique()->nullable();
 
             $table->dateTime('date_of_birth')->nullable();
@@ -28,7 +28,7 @@ class CreateOwnersTable extends Migration
             $table->string('email')->nullable();
             $table->string('work_email')->nullable();
             $table->text('contact_person_name')->nullable();
-            $table->strings('contact_person_phone')->nullable();
+            $table->string('contact_person_phone')->nullable();
             $table->text('address')->nullable();
             $table->string('occupation')->nullable();
             $table->string('bank_account_number')->nullable();

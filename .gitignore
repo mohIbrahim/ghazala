@@ -9,6 +9,14 @@
 /public/images/unit_images/*.jpeg
 /public/images/unit_images/*.png
 !/public/images/unit_images/no_image.png
+
+/public/images/owner_images/*.jpg
+/public/images/owner_images/*.jpeg
+/public/images/owner_images/*.png
+!/public/images/owner_images/no_image.png
+
+/public/images/owner_contracts_images/*.pdf
+
 Homestead.json
 Homestead.yaml
 npm-debug.log

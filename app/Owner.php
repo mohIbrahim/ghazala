@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Owner extends Model
 {
     protected $table = 'owners';
 
-    protected $fillable = 	[	'name',
+    protected $fillable = 	[	
+    							'name',
+    							'slug',
     							'ssn',
     							'date_of_birth',
     							'mobile_1',

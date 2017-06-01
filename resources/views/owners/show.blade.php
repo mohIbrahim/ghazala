@@ -1,151 +1,154 @@
 @extends('layouts.app')
 @section('title')
-	الوحدة {{$unit->code}}
+	المالك {{$owner->name}}
+@endsection
+@section('head')
+
 @endsection
 @section('content')
-	<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3  col-lg-6 col-lg-offset-3">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
 		
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title text-center"><strong> {{$unit->code}} :الوحدة</strong></h3>
+				<h3 class="panel-title text-center"><strong> {{$owner->name}} :المالك</strong></h3>
 			</div>
 			<div class="panel-body">
-				<div class="table-responsive ">
-					<table class="table table-striped  table-condensed text-center">
-
+				
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">				
+					
+					<div class="bs-callout bs-callout-info">
 						
-						
-						<tbody>
-								<tr>
-									<td>{{ $unit->code }}</td>
-									<th>:كود الوحدة</th>
-								</tr>
+						<div class="table-responsive ">
+							<table class="table table-striped table-condensed table-hover">
+								<tbody class="text-right">
+										<tr>
+											<td>{{ $owner->name }}</td>
+											<td><strong>:اسم المالك</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->model->name }}</td>
-									<th>:اسم النموذج</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->ssn }}</td>
+											<td><strong>:رقم البطاقة</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->unit_account_code }}</td>
-									<th>:كود حساب الوحدة</th>
-								</tr>
+										<tr>
+											<td>{{ ($owner->date_of_birth)? $owner->date_of_birth->format('d-m-Y') : "" }}</td>
+											<td><strong>:تاريخ الميلاد</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->address }}</td>
-									<th>:عنوان الوحدة</th>
-								</tr>
+										<tr>
+											<td>{{ ($owner->date_of_birth)? $owner->date_of_birth->age : "" }}</td>
+											<td><strong>:السن</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->direction }}</td>
-									<th>:إتجاة الوحدة</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->mobile_1 }}</td>
+											<td><strong>:رقم الموبيل 1</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->floor_number }}</td>
-									<th>:رقم الدور</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->mobile_2 }}</td>
+											<td><strong>:رقم الموبيل 2</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->electricity_meter_number }}</td>
-									<th>:رقم عداد الكهرباء</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->telephone }}</td>
+											<td><strong>:رقم التليفون الارضي</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ ($unit->for_sale)?"نعم":"لا" }}</td>
-									<th>هل الوحدة للبيع؟</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->email }}</td>
+											<td><strong>:البريد الإلكتروني الشخصي</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->sale_details }}</td>
-									<th>:تفاصيل البيع</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->work_email }}</td>
+											<td><strong>:البريد الإلكتروني الخاص بالعمل</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->sale_price }}</td>
-									<th>:سعر البيع</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->contact_person_name }}</td>
+											<td><strong>:اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ ($unit->for_rent)? "نعم" : "لا" }}</td>
-									<th>هل الوحدة معروضة للإيجار؟</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->contact_person_phone }}</td>
+											<td><strong>:رقم تليفون الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ isset($unit->rent_from)? $unit->rent_from->format('d-m-Y'):"" }}</td>
-									<th>:بداية المدة المحددة للإيجار</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->address }}</td>
+											<td><strong>:العنوان</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ isset($unit->rent_to)?$unit->rent_to->format('d-m-Y'):"" }}</td>
-									<th>:نهاية المدة المحددة للإيجار</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->occupation }}</td>
+											<td><strong>:المهنة</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->rent_price }} EGP</td>
-									<th>:سعر الإيجار</th>
-								</tr>
+										<tr>
+											<td>{{ $owner->bank_account_number }}</td>
+											<td><strong>:رقم الحساب البنكي</strong></td>
+										</tr>
 
-								<tr>
-									<td>{{ $unit->rent_details }}</td>
-									<th>:تفاصيل الإيجار</th>
-								</tr>
+										<tr>
+											<td><a href="{{ asset('images/owner_contracts_images/'.$owner->contract_image) }}" target="_blank">الملف </td>
+											<td><strong>:صورة من عقد بيع الوحدة</strong></td>
+										</tr>
 
-								<tr>
-									<td>
+										<tr>
+											<td>{{ ($owner->contract_date)? $owner->contract_date->format('d-m-Y') : "" }}</td>
+											<td><strong>:تاريخ عقد بيع الوحدة</strong></td>
+										</tr>
 
-										<div class="row">
-											@foreach($unit->images as $image)
-												<div class="col-xs-6 col-md-3">
-													<a href="{{ asset('images/unit_images/'.$image->unit_image)}}" class="thumbnail">
-														<img src="{{ asset('images/unit_images/'.$image->unit_image)}}" alt="...">
-													</a>
-												</div>
-											@endforeach
+										<tr>
+											<td>{{ $owner->owner_status }}</td>
+											<td><strong>:وضع المالك</strong></td>
+										</tr>
+
+										<tr>
+											<td>{{ $owner->comments }}</td>
+											<td><strong>:التعليقات</strong></td>
+										</tr>
+
+
+
+														
 										
-										</div>
-									</td>
-									<th>:الصور</th>
-								</tr>
+										@if(in_array('update_owners', $permissions))
+											<tr>
+												<td><a href="{{action('OwnersController@edit',['slug'=>$owner->slug])  }}">تعديل</a></td>
+												<th>:تعديل</th>
+											</tr>
+										@endif
+										@if(in_array('delete_owners', $permissions))
+											<tr>
+												<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
+												<th>:حذف</th>
+											</tr>
+										@endif
+									
+								</tbody>
+							</table>
+						</div>
 
-
-
-								<tr>
-									<td>{{ $unit->comments }}</td>
-									<th>:التعليقات</th>
-								</tr>
-
-								<tr>
-									<td>{{ $unit->creator->name }}</td>
-									<th>:إنشاء من قبل المستخدم</th>
-								</tr>
-
-								<tr>
-									<td>{{ $unit->created_at }}</td>
-									<th>:تاريخ و وقت الإنشاء</th>
-								</tr>	
-
-								<tr>
-									<td>{{ $unit->updated_at }}</td>
-									<th>:تاريخ و وقت التعديل</th>
-								</tr>					
-								
-								@if(in_array('update_units', $permissions))
-									<tr>
-										<td><a href="{{action('UnitsController@edit',['id'=>$unit->id])  }}">تعديل</a></td>
-										<th>:تعديل</th>
-									</tr>
-								@endif
-								@if(in_array('delete_units', $permissions))
-									<tr>
-										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
-										<th>:حذف</th>
-									</tr>
-								@endif
-							
-						</tbody>
-					</table>
+					</div>
+					
 				</div>
+
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">				
+					
+					<a href="{{ asset('images/owner_images/'.$owner->personal_image) }}" class="thumbnail">
+						<img data-src="" alt="" src="{{ asset('images/owner_images/'.$owner->personal_image) }}">
+					</a>
+
+
+					
+				</div>
+
+					
+			
+
 						
 			</div>
 		</div>
@@ -153,9 +156,9 @@
 	</div>
 
 
-@include('partial.deleteConfirm',['name'=>$unit->code,
-										'id'=>$unit->id,
-										'message'=>'هل انت متأكد تريد حذف الوحدة',
-										'route'=>'UnitsController@destroy'])
+@include('partial.deleteConfirm',['name'=>$owner->name,
+										'id'=>$owner->id,
+										'message'=>'هل انت متأكد تريد حذف المالك',
+										'route'=>'OwnersController@destroy'])
 	 
 @endsection

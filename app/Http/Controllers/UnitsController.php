@@ -153,7 +153,8 @@ class UnitsController extends Controller
      * @param  [type] $source [description]
      * @return [type]         [description]
      */
-    private function deleteFile($source){        
+    private function deleteFile($source)
+    {        
         if(file_exists($source)){
             try{
                 unlink(public_path().'/'.$source);
