@@ -25,7 +25,7 @@ class OwnersRequest extends FormRequest
     {
        
         return [
-            'name'=>'required|unique:owners,id,'.$this->owner,
+            'name'=>'required|unique:owners,name,'.$this->owner,
             'mobile_1'=>'required|numeric',
 
             'date_of_birth'=>'date|nullable',

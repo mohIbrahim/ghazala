@@ -92,7 +92,11 @@
 										</tr>
 
 										<tr>
-											<td><a href="{{ asset('images/owner_contracts_images/'.$owner->contract_image) }}" target="_blank">الملف </td>
+											<td>
+												@if($owner->contract_image)
+													<a href="{{ asset('images/owner_contracts_images/'.$owner->contract_image) }}" target="_blank">الملف </a>
+												@endif
+											</td>
 											<td><strong>:صورة من عقد بيع الوحدة</strong></td>
 										</tr>
 

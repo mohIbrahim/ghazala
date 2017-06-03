@@ -12,8 +12,12 @@
 
 	<div class="form-group">
 		{!! Form::label('date_of_birth', 'تاريخ الميلاد') !!}
-		{!! Form::text('date_of_birth', null, ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الميلاد']) !!}
+		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
+		{!! Form::text('date_of_birth',
+		 				isset($owner->date_of_birth)? $owner->date_of_birth->format('m/d/Y'):null,
+		 ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الميلاد']) !!}
 	</div>
+
 
 	<div class="form-group">
 		{!! Form::label('mobile_1', ' رقم الموبيل 1 ') !!}<span style="color: red"> *</span>
@@ -109,7 +113,7 @@
 						<h3>
 							<a href="{{asset('images/owner_contracts_images/'.$owner->contract_image)}}"> العقد</a>
 						</h3>	
-							<input name="contractToDelete" type="checkbox" value="{{$owner->personal_image}}">
+							<input name="contractToDelete" type="checkbox" value="{{$owner->contract_image}}">
 							قم بوضع علامة لحــذف العقد
 					</div>
 				</div>
@@ -120,7 +124,10 @@
 
 	<div class="form-group">
 		{!! Form::label('contract_date', 'تاريخ عقد بيع الوحدة') !!}
-		{!! Form::text('contract_date', null, ['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ عقد بيع الوحدة']) !!}
+		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
+		{!! Form::text('contract_date', 
+				isset($owner->contract_date)?$owner->contract_date->format('m/d/Y'): null,
+				['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ عقد بيع الوحدة']) !!}
 	</div>
 
 	<div class="form-group">

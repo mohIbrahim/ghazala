@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 
 //Authentications routes
 	Auth::routes();
@@ -28,4 +31,5 @@
  	Route::resource('units', 'UnitsController');
  //Owner
  	Route::resource('owners', 'OwnersController');
+ 	Route::get('index_ajax', 'OwnersController@indexAjax')->name('index_ajax');
 

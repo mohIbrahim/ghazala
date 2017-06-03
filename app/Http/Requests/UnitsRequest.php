@@ -26,10 +26,10 @@ class UnitsRequest extends FormRequest
 
 
         $rules =  [
-            'code'=>"required|unique:units,id,".$this->unit,
+            'code'=>"required|unique:units,code,".$this->unit,
             'model_id'=>'required',
-            'unit_account_code'=>"required|unique:units,id,".$this->unit,
-            'electricity_meter_number'=>"required|unique:units,id,".$this->unit,            
+            'unit_account_code'=>"required|unique:units,unit_account_code,".$this->unit,
+            'electricity_meter_number'=>"required|unique:units,electricity_meter_number,".$this->unit,            
         ];
         
         for($i = 0 ; $i<= count($this->images) ; $i++){

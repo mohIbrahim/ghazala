@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./jquery-ui.min');
+require('./jquery.dataTables.min.js');
 
 window.Vue = require('vue');
 
@@ -29,7 +30,7 @@ $( document ).ready(function() {
     $( "#datepicker" ).datepicker({            
 	    changeMonth: true,
 	    changeYear: true ,
-	    yearRange: "-115:+0",       
+	    yearRange: "-115:+0",  
 	});
 
 	$( "#datepicker2" ).datepicker({            
@@ -77,3 +78,5 @@ $( document ).ready(function() {
 	        e.preventDefault(); $(this).parent('div').remove(); x--;
 	    })
 	});
+
+// Data table options

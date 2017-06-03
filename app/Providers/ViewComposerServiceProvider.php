@@ -43,6 +43,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             'units.index',
 
             'owners.show',
+            'owners.index',
         ];
 
         view()->composer($v, function($view){
