@@ -6,6 +6,11 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('units_ids', 'كود الوحدة') !!}<span style="color: red"> *</span>
+		{!! Form::select('units_ids[]', $unitsIDs, null, ['id'=>'select2', 'multiple', 'class'=>'form-control']) !!}
+	</div>
+
+	<div class="form-group">
 		{!! Form::label('ssn', 'رقم البطاقة') !!}
 		{!! Form::text('ssn', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم البطاقة']) !!}
 	</div>
@@ -143,3 +148,5 @@
 	
 	<button type="submit" class="btn btn-primary">حفظ</button>
 </div>
+
+

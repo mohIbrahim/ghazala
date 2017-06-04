@@ -11,65 +11,80 @@
 @section('content')
 
     
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <div class="form-group">
-            {!! Form::label('op', 'Search') !!}
-            {!! Form::text('op', null, ['class'=>'form-control', 'id'=>'op']) !!}
+    
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center"><strong>عرض المُلاَّك</strong></h3>
+        </div>
+        <div class="panel-body">
+
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right text-right">
+                <div class="form-group">
+                    <h4>{!! Form::label('op', 'بحــــث') !!}</h3>
+                    {!! Form::text('op', null, ['class'=>'form-control', 'id'=>'op']) !!}
+                </div>
+            </div>
+            
+            <div id="search_results">
+               {{-- resutls --}}
+
+               <table class="table table-condensed table-hover table-bordered text-center">
+                   <thead>
+                        <tr>                            
+                            <td><strong>حالة المالك</strong></td>
+                            <td><strong>المهنة</strong></td>
+                            <td><strong>العنوان</strong></td>
+                            <td><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+                            <td><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+                            <td><strong>الايميل الخاص بالعمل</strong></td>
+                            <td><strong>الايميل الشخصى</strong></td>
+                            <td><strong>التليفون الارضي</strong></td>
+                            <td><strong>موبيل 2</strong></td>
+                            <td><strong>موبيل 1</strong></td>
+                            <td><strong>السن</strong></td>
+                            <td><strong>رقم البطاقة</strong></td>
+                            <td><strong>الاسم</strong></td>
+                            <td><strong>الرقم</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach($owners as $key=>$owner)
+                            <tr>
+                                <td>{{$owner->owner_status}}</td>
+                                <td>{{$owner->occupation}}</td>
+                                <td>{{$owner->address}}</td>
+                                <td>{{$owner->contact_person_phone}}</td>
+                                <td>{{$owner->contact_person_name}}</td>
+                                <td>{{$owner->work_email}}</td>
+                                <td>{{$owner->email}}</td>
+                                <td>{{$owner->telephone}}</td>
+                                <td>{{$owner->mobile_2}}</td>
+                                <td>{{$owner->mobile_1}}</td>
+                                <td>{{$owner->date_of_birth->age}}</td>
+                                <td>{{$owner->ssn}}</td>
+                                <td><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{$owner->name}}</a></td>
+                                <td>{{$owner->id}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+               </table>
+
+            </div>
+            {{ $owners->links() }}
+
         </div>
     </div>
-    <div id="search_results">
-       {{-- resutls --}}
 
-       <table class="table table-bordered" id="owners-table">
-            <thead>
-                <tr>
-                    <th>تاريخ التعديل</th>
-                    <th>تاريخ الانشاء</th>
-                    <th>حالة المالك</th>
-                    <th>المهنة</th>
-                    <th>العنوان</th>
-                    <th>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</th>
-                    <th>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</th>
-                    <th>الايميل الخاص بالعمل</th>
-                    <th>الايميل الشخصى</th>
-                    <th>التليفون الارضي</th>
-                    <th>موبيل 2</th>
-                    <th>موبيل 1</th>
-                    <th>تاريخ الميلاد</th>
-                    <th>رقم البطاقة</th>
-                    <th>الاسم</th>
-                    <th>الرقم</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>a</td>
-                    <td>b</td>
-                    <td>c</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-            
-        </table>
 
-    </div>
+    
      
 @endsection
 @section('jsFooter')
     <script>
-        $(function() {
+        $(document).ready(function() {
             $('#owners-table').DataTable({               
                "searching": false,
             });
@@ -83,12 +98,13 @@
                     type:"GET",
                     data:"key="+key,
                     dataType:'script',
+                    timeout: 3000,
                     beforeSend:function(http){
                         $('#search_results').html('Loading..');
                     },
                     success:function (response, status, http) {
                         $('#search_results').html(response);
-                    }
+                    },
                 });
             });
         });

@@ -1,6 +1,6 @@
 @if(in_array('view_unit_models', $permissions) || in_array('view_units', $permissions))
     <li class="dropdown">
-        @if(in_array('view_permissions',$permissions))
+        @if(in_array('view_units',$permissions))
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
            <strong>الوحدات والنماذج</strong>
             <span class="caret"></span>

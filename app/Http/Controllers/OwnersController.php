@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\OwnersRequest;
 use App\Owner;
+use App\Unit;
 
 class OwnersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +22,8 @@ class OwnersController extends Controller
      */
     public function index()
     {
-        
-        return view('owners.index');
+        $owners = Owner::latest()->paginate(25);
+        return view('owners.index', compact('owners'));
     }
 
     /**
@@ -26,7 +33,8 @@ class OwnersController extends Controller
      */
     public function create()
     {
-        return view('owners.create');
+        $unitsIDs = Unit::latest()->pluck('code', 'id');
+        return view('owners.create', compact('unitsIDs'));
     }
 
     /**
@@ -188,25 +196,24 @@ class OwnersController extends Controller
     {
        $key = request()->key;
 
-       $startTable = '<table class="table table-bordered" id="owners-table">';
+       $startTable = '<table class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
        $tHead = '<thead>
                        <tr>
-                           <th>تاريخ التعديل</th>
-                           <th>تاريخ الانشاء</th>
-                           <th>حالة المالك</th>
-                           <th>المهنة</th>
-                           <th>العنوان</th>
-                           <th>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</th>
-                           <th>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</th>
-                           <th>الايميل الخاص بالعمل</th>
-                           <th>الايميل الشخصى</th>
-                           <th>التليفون الارضي</th>
-                           <th>موبيل 2</th>
-                           <th>موبيل 1</th>
-                           <th>تاريخ الميلاد</th>
-                           <th>رقم البطاقة</th>
-                           <th>الاسم</th>
-                           <th>الرقم</th>
+                           
+                           <td><strong>حالة المالك</strong></td>
+                           <td><strong>المهنة</strong></td>
+                           <td><strong>العنوان</strong></td>
+                           <td><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+                           <td><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+                           <td><strong>الايميل الخاص بالعمل</strong></td>
+                           <td><strong>الايميل الشخصى</strong></td>
+                           <td><strong>التليفون الارضي</strong></td>
+                           <td><strong>موبيل 2</strong></td>
+                           <td><strong>موبيل 1</strong></td>
+                           <td><strong>السن</strong></td>
+                           <td><strong>رقم البطاقة</strong></td>
+                           <td><strong>الاسم</strong></td>
+                           <td><strong>الرقم</strong></td>
                        </tr>
                 </thead>';
         $tableBody = '<tbody>';
@@ -216,8 +223,7 @@ class OwnersController extends Controller
                             ->get();
         foreach ($owners as $key => $owner) {
             $tableBody .= '<tr>                                    
-                                    <td>'.$owner->updated_at.'</td>
-                                    <td>'.$owner->created_at.'</td>
+                                    
                                     <td>'.$owner->owner_status.'</td>
                                     <td>'.$owner->occupation.'</td>
                                     <td>'.$owner->address.'</td>
@@ -228,15 +234,18 @@ class OwnersController extends Controller
                                     <td>'.$owner->telephone.'</td>
                                     <td>'.$owner->mobile_2.'</td>
                                     <td>'.$owner->mobile_1.'</td>
-                                    <td>'.$owner->date_of_birth->format("d-m-Y").'</td>
+                                    <td>'.$owner->date_of_birth->age.'</td>
                                     <td>'.$owner->ssn.'</td>
-                                    <td>'.$owner->name.'</td>
+                                    <td><a href="'.action("OwnersController@show",["slug"=>$owner->slug]).'" target="_blank">'.$owner->name.'</a></td>
                                     <td>'.$owner->id.'</td>
                         </tr>';
         }
         $endTable = '</table>';
         
-        return $startTable.$tHead.$tableBody.$endTable;
+            return $startTable.$tHead.$tableBody.$endTable;
+            
+        
+        
     }
 
 
