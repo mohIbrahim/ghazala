@@ -28,6 +28,7 @@
 								
 								<th>كود حساب الوحدة</th>
 								<th>نوع النموذج</th>
+								<th>أسماء المُلاَّك</th>
 								<th>كود الوحدة</th>
 							</tr>
 							
@@ -48,8 +49,17 @@
 									<td>{{ $unit->electricity_meter_number }}</td>
 									<td>{{ $unit->floor_number }}</td>
 									<td>{{ str_limit($unit->address, 30) }}</td>
-									<td>{{ $unit->unit_account_code }}</td> 
+									<td>{{ $unit->unit_account_code }}</td>
+
+
 									<td>{{ $unit->model->name }}</td>
+
+									<td>
+										@foreach($unit->owners as $owner)
+											<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }}</a></p>
+										@endforeach
+									</td>
+
 									<td>
 										<a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
 									</td>

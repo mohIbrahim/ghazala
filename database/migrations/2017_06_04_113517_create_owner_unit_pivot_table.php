@@ -15,8 +15,8 @@ class CreateOwnerUnitPivotTable extends Migration
     {
         Schema::create('owner_unit', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('owner_id')->unsigned();
-            $table->integer('unit_id')->unsigned();
+            $table->integer('owner_id')->unsigned()->indexed();
+            $table->integer('unit_id')->unsigned()->indexed();
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');

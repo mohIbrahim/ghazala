@@ -56,6 +56,34 @@ class Owner extends Model
             $this->attributes['contract_date'] = null;
     }
 
+    /**
+     * Form model biding for unit ids 
+     * @return [type] [description]
+     */
+    public function getUnitsIdsAttribute()
+    {
+    	return $this->units->pluck('id');
+    }
+
+
+    /**
+     * Get the units associated with the given owner.
+     * @return [] [description]
+     */
+    public function units()
+    {
+    	return  $this->belongsToMany('\App\Unit', 'owner_unit');
+    }
+
+    /**
+     * [creator description]
+     * @return [type] [description]
+     */
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator_user_id', 'id');
+    }
+
 
 
     

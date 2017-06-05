@@ -25,6 +25,14 @@
 											<td>{{ $owner->name }}</td>
 											<td><strong>:اسم المالك</strong></td>
 										</tr>
+										<tr>
+											<td>
+												@foreach($owner->units as $unit)
+													<p><a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}" target="_blank">{{ $unit->code }}</a></p>
+												@endforeach
+											</td>
+											<td><strong>: أرقام الوحدات</strong></td>
+										</tr>
 
 										<tr>
 											<td>{{ $owner->ssn }}</td>
@@ -113,6 +121,21 @@
 										<tr>
 											<td>{{ $owner->comments }}</td>
 											<td><strong>:التعليقات</strong></td>
+										</tr>
+										
+										<tr>
+											<td>{{ $owner->creator->name }}</td>
+											<td><strong>: اسم منشئ المحتوى</strong></td>
+										</tr>
+
+										<tr>
+											<td>{{ $owner->created_at }}</td>
+											<td><strong>:وقت و تاريخ الإنشاء</strong></td>
+										</tr>
+
+										<tr>
+											<td>{{ $owner->updated_at }}</td>
+											<td><strong>:وقت و تاريخ التعديل</strong></td>
 										</tr>
 
 

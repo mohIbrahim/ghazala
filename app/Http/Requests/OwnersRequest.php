@@ -26,6 +26,7 @@ class OwnersRequest extends FormRequest
        
         return [
             'name'=>'required|unique:owners,name,'.$this->owner,
+            'units_ids'=>'required',
             'mobile_1'=>'required|numeric',
 
             'date_of_birth'=>'date|nullable',
@@ -46,6 +47,7 @@ class OwnersRequest extends FormRequest
     {
         return [
             'name.required'=>'برجاء إدخال اسم المالك',
+            'units_ids.required'=>'برجاء إختيار كود الوحدة',
             'name.unique'=>'هذا الاسم تم إدخاله من قبل برجاء أختيار اسم آخر',
 
             'date_of_birth.date'=>'برجاء إدخال تاريخ الميلاد بشكل صحيح',

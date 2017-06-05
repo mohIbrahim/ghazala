@@ -16,18 +16,3 @@
 		</div>
 	</div>
 @endsection
-@section('head')
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-@endsection
-@section('jsFooter')
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-	<script type="text/javascript">
-
-		$(document).ready(function(){
-			$('#select2').select2({
-				placeholder: "أختار كود الوحدة",
-			});
-		});
-		
-	</script>
-@endsection

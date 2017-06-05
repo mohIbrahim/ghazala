@@ -69,6 +69,9 @@ class OwnersController extends Controller
         }
         
         $owner = Owner::create($newArray);
+
+        $owner->units()->attach($request->units_ids);
+
         flash()->success('تم إضافة مالك جديد بنجاح')->important();
         return redirect()->action('OwnersController@show', ['slug'=>$owner->slug]);
     }
@@ -94,7 +97,8 @@ class OwnersController extends Controller
     public function edit($slug)
     {
         $owner = Owner::where('slug', $slug)->first();
-        return view('owners.edit', compact('owner'));
+        $unitsIDs = Unit::latest()->pluck('code', 'id');
+        return view('owners.edit', compact('owner', 'unitsIDs'));
     }
 
     /**
@@ -158,6 +162,9 @@ class OwnersController extends Controller
 
 
         $owner->update($newArray);
+
+        $owner->units()->sync($request->units_ids);
+
         flash()->success('تم تعديل المالك بنجاح')->important();
         return redirect()->action('OwnersController@show', ['slug'=>$owner->slug]);        
     }
@@ -170,7 +177,15 @@ class OwnersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+
+        $this->deleteFile('images/owner_images/'.$owner->personal_image);
+        $this->deleteFile('images/owner_contracts_images/'.$owner->contract_image);
+
+        $owner->delete();
+
+        flash()->success('تم حذف المالك بنجاح')->important();
+        return redirect()->action('OwnersController@index');
     }
 
     /**
@@ -196,7 +211,7 @@ class OwnersController extends Controller
     {
        $key = request()->key;
 
-       $startTable = '<table class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
+       $startTable = '<div class="table-responsive"><table class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
        $tHead = '<thead>
                        <tr>
                            
@@ -213,34 +228,53 @@ class OwnersController extends Controller
                            <td><strong>السن</strong></td>
                            <td><strong>رقم البطاقة</strong></td>
                            <td><strong>الاسم</strong></td>
+                           <td><strong>أرقام الوحدات</strong></td>
+                           <td><strong>الصورة الشخصية</strong></td>
                            <td><strong>الرقم</strong></td>
                        </tr>
                 </thead>';
         $tableBody = '<tbody>';
+        $unitsCodes = '';
+
+        
 
         $owners = Owner::where('name', 'like', '%'.$key.'%')
                             ->orWhere('owner_status', 'like', '%'.$key.'%')
-                            ->get();
-        foreach ($owners as $key => $owner) {
+                             ->orWhereHas('units', function($query) use($key) {
+                            $query->where('code', 'like', '%'.$key.'%');
+                            })->get();
+        foreach ($owners as $key => $owner) 
+        {
+
+            foreach ($owner->units as $key => $unit) 
+            {
+                $unitsCodes .= '<p><a href="'.action('UnitsController@show', ['id'=>$unit->id]).'">'.$unit->code.'</a></p>' ;
+            }
+
             $tableBody .= '<tr>                                    
                                     
-                                    <td>'.$owner->owner_status.'</td>
-                                    <td>'.$owner->occupation.'</td>
-                                    <td>'.$owner->address.'</td>
-                                    <td>'.$owner->contact_person_phone.'</td>
-                                    <td>'.$owner->contact_person_name.'</td>
-                                    <td>'.$owner->work_email.'</td>
-                                    <td>'.$owner->email.'</td>
-                                    <td>'.$owner->telephone.'</td>
-                                    <td>'.$owner->mobile_2.'</td>
-                                    <td>'.$owner->mobile_1.'</td>
-                                    <td>'.$owner->date_of_birth->age.'</td>
-                                    <td>'.$owner->ssn.'</td>
-                                    <td><a href="'.action("OwnersController@show",["slug"=>$owner->slug]).'" target="_blank">'.$owner->name.'</a></td>
-                                    <td>'.$owner->id.'</td>
+                                <td>'.$owner->owner_status.'</td>
+                                <td>'.$owner->occupation.'</td>
+                                <td>'.$owner->address.'</td>
+                                <td>'.$owner->contact_person_phone.'</td>
+                                <td>'.$owner->contact_person_name.'</td>
+                                <td>'.$owner->work_email.'</td>
+                                <td>'.$owner->email.'</td>
+                                <td>'.$owner->telephone.'</td>
+                                <td>'.$owner->mobile_2.'</td>
+                                <td>'.$owner->mobile_1.'</td>
+                                <td>'.$owner->date_of_birth->age.'</td>
+                                <td>'.$owner->ssn.'</td>
+                                <td>'.$unitsCodes.'</td>
+                                <td><a href="'.action("OwnersController@show",["slug"=>$owner->slug]).'" target="_blank">'.$owner->name.'</a></td>
+                                <td>
+                                    <img src="'. asset('images/owner_images/'.$owner->personal_image) .'" class="img-responsive" alt="Image" width="30px">
+                                </td>
+                                <td>'.$owner->id.'</td>
                         </tr>';
+            $unitsCodes = '';
         }
-        $endTable = '</table>';
+        $endTable = '</table></div>';
         
             return $startTable.$tHead.$tableBody.$endTable;
             

@@ -12,13 +12,22 @@
 			<div class="panel-body">
 				<div class="table-responsive ">
 					<table class="table table-striped  table-condensed text-center">
-
 						
 						
 						<tbody>
+
 								<tr>
 									<td>{{ $unit->code }}</td>
 									<th>:كود الوحدة</th>
+								</tr>
+
+								<tr>
+									<td>
+										@foreach($unit->owners as $owner)
+											<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }} </a></p>
+										@endforeach
+									</td>
+									<th>:أسماء المُلاَّك</th>
 								</tr>
 
 								<tr>

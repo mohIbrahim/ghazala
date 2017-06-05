@@ -71,10 +71,22 @@ class Unit extends Model
         return $this->belongsTo('App\User', 'creator_user_id', 'id');
     }
 
-
+    /**
+     * Get Unit Images from multi valued attribute that converted to (one to many relationship)
+     * @return [UnitImage] [description]
+     */
     public function images()
     {
         return $this->hasMany('\App\UnitImage', 'unit_id', 'id');
+    }
+    
+    /**
+     * Get the owners associated with the given unit
+     * @return [type] [description]
+     */
+    public function owners()
+    {
+        return $this->belongsToMany('\App\Owner', 'owner_unit');
     }
 
 }
