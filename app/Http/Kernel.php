@@ -58,12 +58,13 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         
-        'privileges'            =>  \App\Http\Middleware\Privileges::class,
-        'roles'                 =>  \App\Http\Middleware\Roles::class,        
-        'users'                 =>  \App\Http\Middleware\Users::class,        
-        'role_user'             =>  \App\Http\Middleware\RoleUser::class,
-        'unit_models'           =>  \App\Http\Middleware\UnitModels::class,
-        'units'                 =>  \App\Http\Middleware\Units::class,
-        'owners'                =>  \App\Http\Middleware\Owners::class,
+        'privileges'                =>  \App\Http\Middleware\Privileges::class,
+        'roles'                     =>  \App\Http\Middleware\Roles::class,        
+        'users'                     =>  \App\Http\Middleware\Users::class,        
+        'role_user'                 =>  \App\Http\Middleware\RoleUser::class,
+        'unit_models'               =>  \App\Http\Middleware\UnitModels::class,
+        'units'                     =>  \App\Http\Middleware\Units::class,
+        'owners'                    =>  \App\Http\Middleware\Owners::class,
+        'owners_family_members'     =>  \App\Http\Middleware\Owners::class,
     ];
 }

@@ -18,6 +18,7 @@ class PermissionSeeder extends Seeder
         $this->unitModels();
         $this->units();
         $this->owners();
+        $this->ownersFamilyMembers();
 
     }
 
@@ -205,6 +206,36 @@ class PermissionSeeder extends Seeder
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }
+
+    private function ownersFamilyMembers()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_owners_family_members",
+            "slug"              =>"view-owners-family-members",
+            "descriptions"      =>"view owners family members",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_owners_family_members",
+            "slug"              =>"create-owners-family-members",
+            "descriptions"      =>"create owners family members",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_owners_family_members",
+            "slug"              =>"update-owners-family-members",
+            "descriptions"      =>"update owners family members",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_owners_family_members",
+            "slug"              =>"delete-owners-family-members",
+            "descriptions"      =>"delete owners family members",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+
 
 
 

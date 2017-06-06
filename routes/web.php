@@ -32,4 +32,6 @@ Route::get('/clear-cache', function() {
  //Owner
  	Route::resource('owners', 'OwnersController');
  	Route::get('index_ajax', 'OwnersController@indexAjax')->name('index_ajax');
+ //Owner Family Members
+ 	Route::resource('owners_family_members', 'OwnersFamilyMembersController');
 

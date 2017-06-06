@@ -17,7 +17,17 @@
                 @endif
             @endif
 
-            <li role="separator" class="divider"></li>            
+            <li role="separator" class="divider"></li>
+
+            @if(in_array('view_owners_family_members', $permissions))
+                <li class="dropdown-header text-center"><h4>أفراد عائلات المُلاَّك</h4></li>
+                <li><a href="{{ action('OwnersFamilyMembersController@index') }}" class="text-center">عرض كل الافراد</a></li>
+                @if(in_array('create_owners_family_members', $permissions))
+                    <li><a href="{{ action('OwnersFamilyMembersController@create') }}" class="text-center">إنشاء عضو عائلة جديد</a></li>
+                @endif
+            @endif
+
+            <li role="separator" class="divider"></li>              
             
         </ul>
     </li>
