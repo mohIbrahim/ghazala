@@ -6,8 +6,8 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('owners_ids', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
-		{!! Form::select('owners_ids[]', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
+		{!! Form::label('owner_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
+		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
 	</div>
 
 	

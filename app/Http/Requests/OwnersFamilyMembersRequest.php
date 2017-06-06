@@ -25,7 +25,7 @@ class OwnersFamilyMembersRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'owners_ids'=>'required',
+            'owner_id'=>'required',
         ];
     }
 
@@ -34,7 +34,7 @@ class OwnersFamilyMembersRequest extends FormRequest
     {
         return [
             'name.required'=>'برجاء إدخال اسم العضو',         
-            'owners_ids.required'=>'برجاء أختيار اسم المالك',         
+            'owner_id.required'=>'برجاء أختيار اسم المالك',         
         ];
     }
 }

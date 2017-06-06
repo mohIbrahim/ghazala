@@ -18,8 +18,11 @@ class CreateOwnersFamilyMembers extends Migration
             $table->string('name');
             $table->string('slug');
             $table->dateTime('date_of_birth');
+            $table->integer('owner_id')->unsigned();
             $table->integer('creator_user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
         });
     }
 

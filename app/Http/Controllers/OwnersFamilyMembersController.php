@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\OwnersFamilyMembersRequest;
+use App\OwnerFamilyMember;
 use App\Owner;
 
 class OwnersFamilyMembersController extends Controller
@@ -15,7 +16,8 @@ class OwnersFamilyMembersController extends Controller
      */
     public function index()
     {
-        $members  = OwnerFamilyMember::latest()->pagenate();
+        $members  = OwnerFamilyMember::latest()->paginate();
+        return view('owners_family_members.index');
     }
 
     /**
@@ -27,7 +29,6 @@ class OwnersFamilyMembersController extends Controller
     {
         $ownersIDs  = Owner::latest()->pluck('name', 'id');
         return view('owners_family_members.create', compact('ownersIDs'));
-
     }
 
     /**
@@ -42,6 +43,7 @@ class OwnersFamilyMembersController extends Controller
         $arr['slug'] = str_slug($request->name);
         $arr['creator_user_id'] = auth()->user()->id;
 
+
         $member = OwnerFamilyMember::create($arr);
         flash()->success('تم إضافة عضو جديد بنجاح')->important();
         return redirect()->action('OwnersFamilyMembersController@show', ['slug'=>$member->slug]);
@@ -55,7 +57,7 @@ class OwnersFamilyMembersController extends Controller
      */
     public function show($slug)
     {
-        $member = OwnerFamilyMember::where('slub', $slug)->first();
+        $member = OwnerFamilyMember::where('slug', $slug)->first();        
         return view('owners_family_members.show', compact('member'));
     }
 
