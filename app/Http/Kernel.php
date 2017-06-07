@@ -65,6 +65,6 @@ class Kernel extends HttpKernel
         'unit_models'               =>  \App\Http\Middleware\UnitModels::class,
         'units'                     =>  \App\Http\Middleware\Units::class,
         'owners'                    =>  \App\Http\Middleware\Owners::class,
-        'owners_family_members'     =>  \App\Http\Middleware\Owners::class,
+        'owners_family_members'     =>  \App\Http\Middleware\OwnersFamilyMembers::class,
     ];
 }

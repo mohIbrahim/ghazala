@@ -9,6 +9,14 @@ use App\Owner;
 
 class OwnersFamilyMembersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('owners_family_members');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +24,8 @@ class OwnersFamilyMembersController extends Controller
      */
     public function index()
     {
-        $members  = OwnerFamilyMember::latest()->paginate();
-        return view('owners_family_members.index');
+        $members  = OwnerFamilyMember::latest()->paginate(15);
+        return view('owners_family_members.index', compact('members'));
     }
 
     /**
@@ -69,7 +77,7 @@ class OwnersFamilyMembersController extends Controller
      */
     public function edit($slug)
     {
-        $member = OwnerFamilyMember::where('slub', $slug)->first();
+        $member = OwnerFamilyMember::where('slug', $slug)->first();
         $ownersIDs  = Owner::latest()->pluck('name', 'id');
         return view('owners_family_members.edit', compact('member', 'ownersIDs'));
 
@@ -86,11 +94,11 @@ class OwnersFamilyMembersController extends Controller
     {
         $arr = $request->all();
         $arr['slug'] = str_slug($request->name);
-        $member = OwnerFamilyMember::findOrFail('id', $id);
+        $member = OwnerFamilyMember::findOrFail($id);
         $member->update($arr);
 
         flash()->success('تم تعديل العضو بنجاح')->important();
-        return redirect()->action('OwnersFamilyMembersController@show', ['id'=>$id]);
+        return redirect()->action('OwnersFamilyMembersController@show', ['slug'=>$member->slug]);
 
     }
 
@@ -102,7 +110,7 @@ class OwnersFamilyMembersController extends Controller
      */
     public function destroy($id)
     {
-        $member = OwnerFamilyMember::findOrFail('id', $id);
+        $member = OwnerFamilyMember::findOrFail($id);
         $member->delete();
 
         flash()->success('تم حذف العضو بنجاح')->important();

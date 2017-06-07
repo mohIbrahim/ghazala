@@ -25,12 +25,12 @@
 
 								<tr>
 									<td>{{ $member->date_of_birth->age }}</td>
-									<th>:اسم النموذج</th>
+									<th>:السن</th>
 								</tr>
 
 								<tr>
-									<td>{{ $member->owner->name }}</td>
-									<th>:اسم المالك</th>
+									<td><a href="{{ action('OwnersController@show', ['slug'=>$member->owner->slug]) }}" target="_blank"> {{ $member->owner->name }}</a></td>
+									<th>:اسم مالك الوحدة التابع له</th>
 								</tr>
 
 								<tr>

@@ -15,7 +15,7 @@
 		{!! Form::label('date_of_birth', 'تاريخ الميلاد') !!}
 		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
 		{!! Form::text('date_of_birth',
-		 				isset($owner->date_of_birth)? $owner->date_of_birth->format('m/d/Y'):null,
+		 				isset($member->date_of_birth)? $member->date_of_birth->format('m/d/Y'):null,
 		 ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الميلاد']) !!}
 	</div>
 
