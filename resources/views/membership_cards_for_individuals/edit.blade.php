@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('title')
- تعديل المالك {{$owner->name}}
+ تعديل الكارت {{$membershipCard->serial}}
 @endsection
 @section('content')
 	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">		
 		<div class="panel panel-info text-right">
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong>  {{$owner->code}} :تعديل المالك</strong></h3>
+				<h3 class="panel-title"><strong>  {{$membershipCard->serial}} :تعديل الكارت</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::model($owner,['method'=>'PATCH', 'action'=>['OwnersController@update', 'id'=>$owner->id], 'files'=>true]) !!}
-					@include('owners._form')
+				{!! Form::model($membershipCard,['method'=>'PATCH', 'action'=>['MembershipCardsForIndividualsController@update', 'id'=>$membershipCard->id], 'files'=>true]) !!}
+					@include('membership_cards_for_individuals._form')
 				{!! Form::close() !!}				
 			</div>
 		</div>

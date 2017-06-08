@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    عرض المُلاَّك 
+    عرض الكروت
 @endsection
 
 @section('head')
@@ -15,7 +15,7 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title text-center"><strong>عرض المُلاَّك</strong></h3>
+            <h3 class="panel-title text-center"><strong>عرض الكروت</strong></h3>
         </div>
         <div class="panel-body">
 
@@ -34,58 +34,40 @@
                     <table class="table table-condensed table-hover table-bordered text-center">
                        <thead>
                             <tr>                            
-                                <td><strong>حالة المالك</strong></td>
-                                <td><strong>المهنة</strong></td>
-                                <td><strong>العنوان</strong></td>
-                                <td><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                                <td><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                                <td><strong>الايميل الخاص بالعمل</strong></td>
-                                <td><strong>الايميل الشخصى</strong></td>
-                                <td><strong>التليفون الارضي</strong></td>
-                                <td><strong>موبيل 2</strong></td>
-                                <td><strong>موبيل 1</strong></td>
-                                <td><strong>السن</strong></td>
-                                <td><strong>رقم البطاقة</strong></td>
-                                <td><strong>أرقام الوحدات</strong></td>
-                                <td><strong>الاسم</strong></td>
-                                <td><strong>الصورة الشخصية</strong></td>
-                                <td><strong>الرقم</strong></td>
+                                <td><strong>تاريخ و وقت التعديل</strong></td>
+                                <td><strong>تاريخ و وقت الإنشاء</strong></td>
+                                <td><strong>إنشاء من قبل المستخدم</strong></td>
+                                <td><strong>تاريخ تسليم الكارت</strong></td>
+                                <td><strong>هل تم تسليم الكارت؟</strong></td>
+                                <td><strong>حالة الكارت</strong></td>
+                                <td><strong>تاريخ الإصدار</strong></td>
+                                <td><strong>نوع الكارت</strong></td>
+                                <td><strong>اسم مالك الوحدة</strong></td>
+                                <td><strong>الكود</strong></td>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach($owners as $key=>$owner)
+                            @foreach($membershipCards as $key=>$membershipCard)
                                 <tr>
-                                    <td>{{$owner->owner_status}}</td>
-                                    <td>{{$owner->occupation}}</td>
-                                    <td>{{$owner->address}}</td>
-                                    <td>{{$owner->contact_person_phone}}</td>
-                                    <td>{{$owner->contact_person_name}}</td>
-                                    <td>{{$owner->work_email}}</td>
-                                    <td>{{$owner->email}}</td>
-                                    <td>{{$owner->telephone}}</td>
-                                    <td>{{$owner->mobile_2}}</td>
-                                    <td>{{$owner->mobile_1}}</td>
-                                    <td>{{$owner->date_of_birth->age}}</td>
-                                    <td>{{$owner->ssn}}</td>
-                                    <td>
-                                        @foreach($owner->units as $unit)
-                                            <p><a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}"> {{ $unit->code }} </a></p>
-                                        @endforeach
-                                    </td>
-                                    <td><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{$owner->name}}</a></td>
-                                    <td>
-                                        <img src="{{ asset("images/owner_images/".$owner->personal_image) }}" class="img-responsive" alt="Image" width="30px">
-                                    </td>
-                                    <td>{{$owner->id}}</td>
-                                </tr>
+                                    <td>{{$membershipCard->updated_at}}</td>
+                                    <td>{{$membershipCard->created_at}}</td>
+                                    <td>{{$membershipCard->creator->name}}</td>
+                                    <td>{{($membershipCard->delivered_date)? $membershipCard->delivered_date->format('d-m-Y') : ""}}</td>
+                                    <td>{{$membershipCard->deliverd}}</td>
+                                    <td>{{$membershipCard->status}}</td>
+                                    <td>{{($membershipCard->release_date)?$membershipCard->release_date->format('d-m-Y') : ""}}</td>
+                                    <td>{{$membershipCard->type}}</td>
+                                    <td>{{$membershipCard->owner->name}}</td>
+                                    <td>{{$membershipCard->serial}}</td>
+                                    
                             @endforeach
                         </tbody>
                     </table>
                 </div>
 
             </div>
-            {{ $owners->links() }}
+            {{ $membershipCards->links() }}
 
         </div>
     </div>

@@ -19,6 +19,7 @@ class PermissionSeeder extends Seeder
         $this->units();
         $this->owners();
         $this->ownersFamilyMembers();
+        $this->membershipCardsForIndividuals();
 
     }
 
@@ -234,6 +235,36 @@ class PermissionSeeder extends Seeder
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }
+
+    private function membershipCardsForIndividuals()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_membership_cards_for_individuals",
+            "slug"              =>"view-membership-cards-for-individuals",
+            "descriptions"      =>"view membership cards for individuals",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_membership_cards_for_individuals",
+            "slug"              =>"create-membership-cards-for-individuals",
+            "descriptions"      =>"create membership cards for individuals",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_membership_cards_for_individuals",
+            "slug"              =>"update-membership-cards-for-individuals",
+            "descriptions"      =>"update membership cards for individuals",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_membership_cards_for_individuals",
+            "slug"              =>"delete-membership-cards-for-individuals",
+            "descriptions"      =>"delete membership cards for individuals",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+
 
 
 

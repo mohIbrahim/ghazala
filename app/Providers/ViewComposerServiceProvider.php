@@ -47,6 +47,9 @@ class ViewComposerServiceProvider extends ServiceProvider
 
             'owners_family_members.show',
             'owners_family_members.index',
+            
+            'membership_cards_for_individuals.show',
+            'membership_cards_for_individuals.index',            
 
         ];
 

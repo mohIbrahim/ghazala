@@ -9,7 +9,7 @@
 				<h3 class="panel-title"><strong>  {{$member->name}} :تعديل بينات العضو</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::model($member,['method'=>'PATCH', 'action'=>['OwnersFamilyMembersController@update', 'id'=>$member->id], 'files'=>true]) !!}
+				{!! Form::model($member,['method'=>'PATCH', 'action'=>['OwnersFamilyMembersController@update', 'id'=>$member->id] ]) !!}
 					@include('owners_family_members._form')
 				{!! Form::close() !!}				
 			</div>

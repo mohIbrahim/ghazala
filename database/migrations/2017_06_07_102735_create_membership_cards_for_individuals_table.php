@@ -18,13 +18,15 @@ class CreateMembershipCardsForIndividualsTable extends Migration
             $table->string('serial');
             $table->string('type');
             $table->dateTime('release_date');
-            $table->boolean('status')->default(0);
-            $table->boolean('delivered')->default(0);
-            $table->dateTime('delivered_date');
-            $table->text('comments');
+            $table->boolean('status')->nullable();
+            $table->boolean('delivered')->nullable();
+            $table->dateTime('delivered_date')->nullable();
+            $table->text('comments')->nullable();
+            $table->timestamps();
+
             $table->integer('owner_id')->unsigned();
             $table->integer('creator_user_id')->unsigned();
-            $table->timestamps();
+
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
         });
     }

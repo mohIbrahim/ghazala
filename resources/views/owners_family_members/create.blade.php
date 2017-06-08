@@ -9,7 +9,7 @@
 				<h3 class="panel-title text-center"><strong>إنشاء عضو عائلة جديد</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::open(['method'=>'POST', 'action'=>'OwnersFamilyMembersController@store', 'files'=>true]) !!}
+				{!! Form::open(['method'=>'POST', 'action'=>'OwnersFamilyMembersController@store']) !!}
 					@include('Owners_family_members._form')
 				{!! Form::close() !!}				
 			</div>

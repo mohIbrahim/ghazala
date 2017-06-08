@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MembershipCardsForIndividualsRequest;
+use App\Owner;
+use App\MembershipCardForIndividual;
 
 class MembershipCardsForIndividualsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('membership_cards_for_individuals');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class MembershipCardsForIndividualsController extends Controller
      */
     public function index()
     {
-        //
+        $membershipCards = MembershipCardForIndividual::latest()->paginate(25);
+        return view('membership_cards_for_individuals.index',  compact('membershipCards'));
     }
 
     /**
@@ -23,7 +33,8 @@ class MembershipCardsForIndividualsController extends Controller
      */
     public function create()
     {
-        //
+        $ownersIDs = Owner::latest()->pluck('name', 'id');
+        return view('membership_cards_for_individuals.create',  compact('ownersIDs'));
     }
 
     /**
@@ -32,9 +43,13 @@ class MembershipCardsForIndividualsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MembershipCardsForIndividualsRequest $request)
     {
-        //
+        $arr = $request->all();
+        $arr['creator_user_id'] = auth()->user()->id;
+        $membershipCard = MembershipCardForIndividual::create($arr);
+        flash()->success('تم إضافة كرت العضوية بنجاح')->important();
+        return redirect()->action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]);
     }
 
     /**
@@ -45,7 +60,8 @@ class MembershipCardsForIndividualsController extends Controller
      */
     public function show($id)
     {
-        //
+        $membershipCard = MembershipCardForIndividual::findOrFail($id);
+        return view('membership_cards_for_individuals.show', compact('membershipCard'));
     }
 
     /**
@@ -56,7 +72,9 @@ class MembershipCardsForIndividualsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $membershipCard = MembershipCardForIndividual::findOrFail($id);
+        $ownersIDs = Owner::latest()->pluck('name', 'id');
+        return view('membership_cards_for_individuals.edit', compact('membershipCard', 'ownersIDs'));        
     }
 
     /**
@@ -66,9 +84,14 @@ class MembershipCardsForIndividualsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MembershipCardsForIndividualsRequest $request, $id)
     {
-        //
+        $membershipCard = MembershipCardForIndividual::findOrFail($id);
+        $membershipCard->update($request->all());
+                
+        flash()->success('تم تعديل كرت العضوية بنجاح')->important();
+        return redirect()->action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]);
+        
     }
 
     /**
@@ -79,6 +102,10 @@ class MembershipCardsForIndividualsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $membershipCard = MembershipCardForIndividual::findOrFail($id);
+        $membershipCard->delete();        
+        flash()->success('تم حذف كرت العضوية بنجاح')->important();
+        return redirect()->action('MembershipCardsForIndividualsController@index', ['id'=>$membershipCard->id]);
+
     }
 }

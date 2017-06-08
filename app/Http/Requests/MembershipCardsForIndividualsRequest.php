@@ -13,7 +13,7 @@ class MembershipCardsForIndividualsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,9 +22,24 @@ class MembershipCardsForIndividualsRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {            
         return [
-            //
+            'serial'=>'required|unique:membership_cards_for_individuals,serial,'.$this->membership_cards_for_individual,
+            'owner_id'=>'required',
+            'type'=>'required',
+            'release_date'=>'required',
         ];
+    }
+
+
+    public function messages()
+    {
+        return  [
+                    'serial.required'=>'برجاء إدخال الكود الخاص بالكارت',
+                    'serial.unique'=>'برجاء أختيار كود آخر الخاص بالكارت لان هذا الكود تم إدخالة من قبل',
+                    'owner_id.required'=>'برجاء أختيار اسم مالك الوحدة',
+                    'release_date.required'=>'برجاء أختيار تاريخ الاصدار',
+                    'type.required'=>'برجاء أختيار نوع الكارت',
+                ];  
     }
 }
