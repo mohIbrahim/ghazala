@@ -57,10 +57,17 @@ class Owners
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'owners.destroy'    && in_array('delete_owners', $permissions)){
+        if($request->route()->getName() == 'owners_index_ajax'    && in_array('view_owners', $permissions)){
 
             $response = $next($request);
-        }else{
+        }
+
+        else
+        if($request->route()->getName() == 'owners.show'       && in_array('view_owners', $permissions)){
+       
+        $response = $next($request);
+        }else
+        {
             flash()->warning('<h3><img src="'.asset("images/helper_images/logo-accessdenied.png").'" width="80">  Ask IT Manager for Permission!</h3>');
         }
 

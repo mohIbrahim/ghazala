@@ -60,7 +60,14 @@ class MembershipCardsForIndividuals
         if($request->route()->getName() == 'membership_cards_for_individuals.destroy'    && in_array('delete_membership_cards_for_individuals', $permissions)){
 
             $response = $next($request);
-        }else{
+        }else
+
+        if($request->route()->getName() == 'membership_cards_for_individual_index_ajax'     && in_array('view_membership_cards_for_individuals', $permissions)){
+            
+            $response = $next($request);
+        }else
+
+        {
             flash()->warning('<h3><img src="'.asset("images/helper_images/logo-accessdenied.png").'" width="80">  Ask IT Manager for Permission!</h3>');
         }
 

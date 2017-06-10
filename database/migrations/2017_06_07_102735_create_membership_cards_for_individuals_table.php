@@ -25,9 +25,11 @@ class CreateMembershipCardsForIndividualsTable extends Migration
             $table->timestamps();
 
             $table->integer('owner_id')->unsigned();
+            $table->integer('unit_id')->unsigned();
             $table->integer('creator_user_id')->unsigned();
 
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }
 

@@ -2,12 +2,6 @@
 @section('title')
     عرض المُلاَّك 
 @endsection
-
-@section('head')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-@endsection
-
-
 @section('content')
 
     
@@ -96,12 +90,6 @@
 @endsection
 @section('jsFooter')
     <script>
-        $(document).ready(function() {
-            $('#owners-table').DataTable({               
-               "searching": false,
-            });
-        });
-
         $(document).ready(function(){
             $('#op').on('keyup',function(){
                 var key = $('#op').val();

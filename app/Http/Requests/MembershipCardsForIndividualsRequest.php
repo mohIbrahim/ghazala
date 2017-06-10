@@ -26,8 +26,10 @@ class MembershipCardsForIndividualsRequest extends FormRequest
         return [
             'serial'=>'required|unique:membership_cards_for_individuals,serial,'.$this->membership_cards_for_individual,
             'owner_id'=>'required',
+            'unit_id'=>'required',
             'type'=>'required',
             'release_date'=>'required',
+            'status'=>'required',
         ];
     }
 
@@ -38,8 +40,10 @@ class MembershipCardsForIndividualsRequest extends FormRequest
                     'serial.required'=>'برجاء إدخال الكود الخاص بالكارت',
                     'serial.unique'=>'برجاء أختيار كود آخر الخاص بالكارت لان هذا الكود تم إدخالة من قبل',
                     'owner_id.required'=>'برجاء أختيار اسم مالك الوحدة',
+                    'unit_id.required'=>'برجاء أختيار كود الوحدة',
                     'release_date.required'=>'برجاء أختيار تاريخ الاصدار',
                     'type.required'=>'برجاء أختيار نوع الكارت',
+                    'status.required'=>'برجاء أختيار حالة الكارت من حيث حالة التفعيله',
                 ];  
     }
 }

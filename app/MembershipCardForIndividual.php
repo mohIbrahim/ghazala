@@ -15,7 +15,8 @@ class MembershipCardForIndividual extends Model
     						'delivered', 
     						'delivered_date', 
     						'comments', 
-    						'owner_id', 
+                            'owner_id', 
+    						'unit_id', 
     						'creator_user_id', ];
 
     protected $dates = ['release_date', 'delivered_date'];
@@ -56,10 +57,22 @@ class MembershipCardForIndividual extends Model
         return $this->belongsTo('\App\User', 'creator_user_id', 'id');
     }
 
-
+    /**
+     * [owner description]
+     * @return [type] [description]
+     */
     public function owner()
     {
         return $this->belongsTo('\App\Owner', 'owner_id', 'id');
+    }
+
+    /**
+     * [unit description]
+     * @return [type] [description]
+     */
+    public function unit()
+    {
+        return $this->belongsTo('\App\Unit', 'unit_id', 'id');
     }
 
     

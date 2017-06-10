@@ -27,7 +27,15 @@
                 @endif
             @endif
 
-            <li role="separator" class="divider"></li>              
+            <li role="separator" class="divider"></li>
+
+            @if(in_array('view_membership_cards_for_individuals', $permissions))
+                <li class="dropdown-header text-center"><h4>كروت دخول القرية</h4></li>
+                <li><a href="{{ action('MembershipCardsForIndividualsController@index') }}" class="text-center">عرض كل الكروت</a></li>
+                @if(in_array('create_membership_cards_for_individuals', $permissions))
+                    <li><a href="{{ action('MembershipCardsForIndividualsController@create') }}" class="text-center">إنشاء كارت جديد</a></li>
+                @endif
+            @endif
             
         </ul>
     </li>

@@ -6,10 +6,17 @@
 		{!! Form::text('serial', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل الكود الخاص بالكارت']) !!}
 	</div>
 
+
 	<div class="form-group">
-		{!! Form::label('owner_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
-		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
+		{!! Form::label('unit_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
+		{!! Form::select('unit_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
 	</div>
+	<div class="form-group">
+		{!! Form::label('owner_id', 'كود الوحدة') !!}<span style="color: red"> *</span>
+		<p>فى حالة أن المالك يمكن أن يملك أكثر من وحدة برجاء أختيار الوحدة بشكل صحيح</p>
+		{!! Form::select('owner_id', $unitsIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار كود الوحدة']) !!}
+	</div>
+
 
 	<div class="form-group">
 		{!! Form::label('type', 'نوع الكارت') !!}<span style="color: red"> *</span>
@@ -25,7 +32,7 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('status', 'حالة الكارت') !!}
+		{!! Form::label('status', 'حالة الكارت') !!}<span style="color: red"> *</span>
 		{!! Form::select('status',[1=>'مفعّال', 0=> 'غير مفعّال'] , null, [ 'class'=>'form-control', 'placeholder'=>'أختار حالة الكارت']) !!}
 	</div>
 

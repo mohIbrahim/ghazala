@@ -13,6 +13,7 @@ class OwnersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('owners');
     }
 
     /**
@@ -227,8 +228,8 @@ class OwnersController extends Controller
                            <td><strong>موبيل 1</strong></td>
                            <td><strong>السن</strong></td>
                            <td><strong>رقم البطاقة</strong></td>
-                           <td><strong>الاسم</strong></td>
                            <td><strong>أرقام الوحدات</strong></td>
+                           <td><strong>الاسم</strong></td>
                            <td><strong>الصورة الشخصية</strong></td>
                            <td><strong>الرقم</strong></td>
                        </tr>

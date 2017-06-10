@@ -31,9 +31,10 @@ Route::get('/clear-cache', function() {
  	Route::resource('units', 'UnitsController');
  //Owner
  	Route::resource('owners', 'OwnersController');
- 	Route::get('index_ajax', 'OwnersController@indexAjax')->name('index_ajax');
+ 	Route::get('owners_index_ajax', 'OwnersController@indexAjax')->name('owners_index_ajax');
  //Owner Family Members
  	Route::resource('owners_family_members', 'OwnersFamilyMembersController');
  //Membership Cards For Individuals
  	Route::resource('membership_cards_for_individuals', 'MembershipCardsForIndividualsController');
+ 	Route::get('membership_cards_for_individual_index_ajax', 'MembershipCardsForIndividualsController@indexAjax')->name('membership_cards_for_individual_index_ajax');
 

@@ -17,11 +17,24 @@
 						<tbody class="text-right">
 								<tr>
 									<td>{{ $membershipCard->serial }}</td>
-									<td><strong>:الكود</strong></td>
+									<td><strong>:الكود الكارت</strong></td>
 								</tr>
 
 								<tr>
-									<td>{{ $membershipCard->owner->name }}</td>
+									<td>
+										<a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
+											{{ $membershipCard->unit->code }}
+										</a>
+									</td>
+									<td><strong>:كود الوحدة</strong></td>
+								</tr>
+
+								<tr>
+									<td>
+										<a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blandk"> 
+											{{ $membershipCard->owner->name }}
+										</a>
+									</td>
 									<td><strong>:اسم مالك الوحدة</strong></td>
 								</tr>
 
@@ -101,6 +114,6 @@
 @include('partial.deleteConfirm',['name'=>$membershipCard->serial,
 										'id'=>$membershipCard->id,
 										'message'=>'هل انت متأكد تريد حذف الكارت',
-										'route'=>'OwnersController@destroy'])
+										'route'=>'MembershipCardsForIndividualsController@destroy'])
 	 
 @endsection

@@ -2,12 +2,6 @@
 @section('title')
     عرض الكروت
 @endsection
-
-@section('head')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-@endsection
-
-
 @section('content')
 
     
@@ -42,6 +36,7 @@
                                 <td><strong>حالة الكارت</strong></td>
                                 <td><strong>تاريخ الإصدار</strong></td>
                                 <td><strong>نوع الكارت</strong></td>
+                                <td><strong>كود الوحدة</strong></td>
                                 <td><strong>اسم مالك الوحدة</strong></td>
                                 <td><strong>الكود</strong></td>
                             </tr>
@@ -54,12 +49,25 @@
                                     <td>{{$membershipCard->created_at}}</td>
                                     <td>{{$membershipCard->creator->name}}</td>
                                     <td>{{($membershipCard->delivered_date)? $membershipCard->delivered_date->format('d-m-Y') : ""}}</td>
-                                    <td>{{$membershipCard->deliverd}}</td>
-                                    <td>{{$membershipCard->status}}</td>
-                                    <td>{{($membershipCard->release_date)?$membershipCard->release_date->format('d-m-Y') : ""}}</td>
+                                    <td>{{($membershipCard->delivered)? "نعم":"لا"}}</td>
+                                    <td>{!!($membershipCard->status)? "فعال":"<span style='color:red'>موقوف</span>"!!}</td>
+                                    <td>{{($membershipCard->release_date)?$membershipCard->release_date->format('Y') : ""}}</td>
                                     <td>{{$membershipCard->type}}</td>
-                                    <td>{{$membershipCard->owner->name}}</td>
-                                    <td>{{$membershipCard->serial}}</td>
+                                    <td>
+                                        <a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
+                                            {{$membershipCard->unit->code}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blank"> 
+                                            {{$membershipCard->owner->name}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]) }}" target="_blank"> 
+                                            {{$membershipCard->serial}}
+                                        </a>
+                                    </td>
                                     
                             @endforeach
                         </tbody>
@@ -78,17 +86,11 @@
 @endsection
 @section('jsFooter')
     <script>
-        $(document).ready(function() {
-            $('#owners-table').DataTable({               
-               "searching": false,
-            });
-        });
-
         $(document).ready(function(){
             $('#op').on('keyup',function(){
                 var key = $('#op').val();
                 $.ajax({
-                    url:"{{action('OwnersController@indexAjax')}}",
+                    url:"{{action('MembershipCardsForIndividualsController@indexAjax')}}",
                     type:"GET",
                     data:"key="+key,
                     dataType:'script',
