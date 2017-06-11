@@ -50,7 +50,7 @@ class MembershipCardsForIndividualsController extends Controller
         $arr = $request->all();
         $arr['creator_user_id'] = auth()->user()->id;
         $membershipCard = MembershipCardForIndividual::create($arr);
-        flash()->success('تم إضافة كرت العضوية بنجاح')->important();
+        flash()->success('تم إضافة كارت العضوية بنجاح')->important();
         return redirect()->action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]);
     }
 
@@ -92,7 +92,7 @@ class MembershipCardsForIndividualsController extends Controller
         $membershipCard = MembershipCardForIndividual::findOrFail($id);
         $membershipCard->update($request->all());
                 
-        flash()->success('تم تعديل كرت العضوية بنجاح')->important();
+        flash()->success('تم تعديل كارت العضوية بنجاح')->important();
         return redirect()->action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]);
         
     }
@@ -107,7 +107,7 @@ class MembershipCardsForIndividualsController extends Controller
     {
         $membershipCard = MembershipCardForIndividual::findOrFail($id);
         $membershipCard->delete();        
-        flash()->success('تم حذف كرت العضوية بنجاح')->important();
+        flash()->success('تم حذف كارت العضوية بنجاح')->important();
         return redirect()->action('MembershipCardsForIndividualsController@index', ['id'=>$membershipCard->id]);
 
     }

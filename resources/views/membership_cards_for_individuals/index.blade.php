@@ -54,14 +54,18 @@
                                     <td>{{($membershipCard->release_date)?$membershipCard->release_date->format('Y') : ""}}</td>
                                     <td>{{$membershipCard->type}}</td>
                                     <td>
-                                        <a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
-                                            {{$membershipCard->unit->code}}
-                                        </a>
+                                        @if($membershipCard->unit)
+                                            <a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
+                                                {{$membershipCard->unit->code}}
+                                            </a>
+                                        @endif
                                     </td>
                                     <td>
-                                        <a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blank"> 
-                                            {{$membershipCard->owner->name}}
-                                        </a>
+                                        @if($membershipCard->owner)
+                                            <a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blank"> 
+                                                {{$membershipCard->owner->name}}
+                                            </a>
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="{{ action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]) }}" target="_blank"> 

@@ -22,18 +22,22 @@
 
 								<tr>
 									<td>
-										<a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
-											{{ $membershipCard->unit->code }}
-										</a>
+										@if($membershipCard->unit)
+											<a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
+												{{ $membershipCard->unit->code }}
+											</a>
+										@endif
 									</td>
 									<td><strong>:كود الوحدة</strong></td>
 								</tr>
 
 								<tr>
 									<td>
-										<a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blandk"> 
-											{{ $membershipCard->owner->name }}
-										</a>
+										@if($membershipCard->owner)
+											<a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blandk"> 
+												{{ $membershipCard->owner->name }}
+											</a>
+										@endif
 									</td>
 									<td><strong>:اسم مالك الوحدة</strong></td>
 								</tr>
