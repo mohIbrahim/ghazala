@@ -14,6 +14,7 @@ class CreateMembershipCardsForIndividualsTable extends Migration
     public function up()
     {
         Schema::create('membership_cards_for_individuals', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->string('serial');
             $table->string('type');

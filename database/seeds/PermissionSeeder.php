@@ -20,6 +20,7 @@ class PermissionSeeder extends Seeder
         $this->owners();
         $this->ownersFamilyMembers();
         $this->membershipCardsForIndividuals();
+        $this->entryStickersForCars();
 
     }
 
@@ -260,6 +261,34 @@ class PermissionSeeder extends Seeder
             "name"              =>"delete_membership_cards_for_individuals",
             "slug"              =>"delete-membership-cards-for-individuals",
             "descriptions"      =>"delete membership cards for individuals",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+    private function entryStickersForCars()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_entry_stickers_for_cars",
+            "slug"              =>"view-entry-stickers-for-cars",
+            "descriptions"      =>"view entry stickers for cars",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_entry_stickers_for_cars",
+            "slug"              =>"create-entry-stickers-for-cars",
+            "descriptions"      =>"create entry stickers for cars",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_entry_stickers_for_cars",
+            "slug"              =>"update-entry-stickers-for-cars",
+            "descriptions"      =>"update entry stickers for cars",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_entry_stickers_for_cars",
+            "slug"              =>"delete-entry-stickers-for-cars",
+            "descriptions"      =>"delete entry stickers for cars",
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }

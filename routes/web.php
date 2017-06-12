@@ -37,4 +37,6 @@ Route::get('/clear-cache', function() {
  //Membership Cards For Individuals
  	Route::resource('membership_cards_for_individuals', 'MembershipCardsForIndividualsController');
  	Route::get('membership_cards_for_individual_index_ajax', 'MembershipCardsForIndividualsController@indexAjax')->name('membership_cards_for_individual_index_ajax');
-
+ //Entry Stickers For Cars
+ 	Route::resource('entry_stickers_for_cars', 'EntryStickersForCarsController');
+ 	

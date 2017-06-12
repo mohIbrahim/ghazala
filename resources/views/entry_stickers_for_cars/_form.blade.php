@@ -2,8 +2,8 @@
 	@include('errors.list')
 
 	<div class="form-group">
-		{!! Form::label('serial', 'الكود الخاص بالكارت') !!}<span style="color: red"> *</span>
-		{!! Form::text('serial', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل الكود الخاص بالكارت']) !!}
+		{!! Form::label('code', 'كود الملصق الخاص بالسيارة') !!}<span style="color: red"> *</span>
+		{!! Form::text('code', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل كود الملصق الخاص بالسيارة']) !!}
 	</div>
 
 
@@ -11,18 +11,14 @@
 		{!! Form::label('owner_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
 		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
 	</div>
-	<div class="form-group">
-		{!! Form::label('unit_id', 'كود الوحدة') !!}<span style="color: red"> *</span>
-		<p>فى حالة أن المالك يمكن أن يملك أكثر من وحدة برجاء أختيار الوحدة بشكل صحيح</p>
-		{!! Form::select('unit_id', $unitsIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار كود الوحدة']) !!}
-	</div>
 
 
 	<div class="form-group">
-		{!! Form::label('type', 'نوع الكارت') !!}<span style="color: red"> *</span>
-		{!! Form::select('type',['مالك'=>'مالك', 'زائر'=> 'زائر'] , null, [ 'class'=>'form-control', 'placeholder'=>'أختار نوع الكارت']) !!}
+		{!! Form::label('car_owner', 'اسم المالك الفعلي للسيارة') !!}<span style="color: red"> *</span>
+		{!! Form::text('car_owner', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم المالك الفعلي للسيارة']) !!}
 	</div>
-	
+
+
 	<div class="form-group">
 		{!! Form::label('release_date', 'تاريخ الإصدار') !!}<span style="color: red"> *</span>
 		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
@@ -30,6 +26,45 @@
 		 				isset($membershipCard->release_date)? $membershipCard->release_date->format('m/d/Y'):null,
 		 ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الإصدار']) !!}
 	</div>
+
+	<div class="form-group">
+		{!! Form::label('plate_number', 'رقم لوحة السيارة') !!}<span style="color: red"> *</span>
+		{!! Form::text('plate_number', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم لوحة السيارة']) !!}
+	</div>
+
+
+	<div class="form-group">
+		{!! Form::label('the_manufacture_company', 'اسم الشركة المصنعة للسيارة') !!}<span style="color: red"> *</span>
+		{!! Form::text('the_manufacture_company', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم الشركة المصنعة للسيارة']) !!}
+	</div>
+
+	<div class="form-group">
+		{!! Form::label('type', 'نوع السيارة') !!}<span style="color: red"> *</span>
+		{!! Form::select('type',[	
+									'2 doors hatchback'=>'2 doors hatchback',
+									'2 doors sedan'=> '2 doors sedan',
+									'4 doors hatchback'=> '4 doors hatchback',
+									'4 doors sedan'=> '4 doors sedan',
+								] , null, [ 'class'=>'form-control', 'placeholder'=>'أختار نوع السيارة']) !!}
+	</div>
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+	
+	
+	
 
 	<div class="form-group">
 		{!! Form::label('status', 'حالة الكارت') !!}<span style="color: red"> *</span>

@@ -14,6 +14,7 @@ class CreateOwnerUnitPivotTable extends Migration
     public function up()
     {
         Schema::create('owner_unit', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->integer('owner_id')->unsigned()->indexed();
             $table->integer('unit_id')->unsigned()->indexed();

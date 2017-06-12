@@ -14,6 +14,7 @@ class CreateOwnersFamilyMembers extends Migration
     public function up()
     {
         Schema::create('owners_family_members', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
