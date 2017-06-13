@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\EnteryStickersForCarsRequest;
 use App\Owner;
 
 class EntryStickersForCarsController extends Controller
@@ -34,9 +35,9 @@ class EntryStickersForCarsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnteryStickersForCarsRequest $request)
     {
-        //
+        
     }
 
     /**

@@ -13,7 +13,7 @@ class EnteryStickersForCarsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class EnteryStickersForCarsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'code'=>'required|unique',
+            'car_owner'=>'required',
+            'release_date'=>'required',
+            'plate_number'=>'required|unique',
+            'the_manufacture_company'=>'required',
+            'owner_id'=>'required',
         ];
     }
 }
