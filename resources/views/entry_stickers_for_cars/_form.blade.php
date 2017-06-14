@@ -23,7 +23,7 @@
 		{!! Form::label('release_date', 'تاريخ الإصدار') !!}<span style="color: red"> *</span>
 		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
 		{!! Form::text('release_date',
-		 				isset($membershipCard->release_date)? $membershipCard->release_date->format('m/d/Y'):null,
+		 				isset($entrySticker->release_date)? $entrySticker->release_date->format('m/d/Y'):null,
 		 ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الإصدار']) !!}
 	</div>
 

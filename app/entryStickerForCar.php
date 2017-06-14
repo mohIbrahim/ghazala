@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class entryStickerForCar extends Model
+class EntryStickerForCar extends Model
 {
     protected $table = 'entry_stickers_for_cars';
 
-    protected $fillabel =	[	
+    protected $fillable =	[	
     							"code",
 								"car_owner",
 								"release_date",

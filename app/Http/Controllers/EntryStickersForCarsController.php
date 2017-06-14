@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\EnteryStickersForCarsRequest;
 use App\Owner;
+use App\EntryStickerForCar;
+
 
 class EntryStickersForCarsController extends Controller
 {
@@ -15,7 +17,8 @@ class EntryStickersForCarsController extends Controller
      */
     public function index()
     {
-        //
+        $entryStickers = EntryStickerForCar::latest()->paginate(25);
+        return view('entry_stickers_for_cars.index', compact('entryStickers'));
     }
 
     /**
@@ -37,7 +40,12 @@ class EntryStickersForCarsController extends Controller
      */
     public function store(EnteryStickersForCarsRequest $request)
     {
-        
+        $arr = $request->all();
+        $arr['creator_user_id'] = auth()->user()->id;
+
+        $entrySticker = EntryStickerForCar::create($arr);
+        flash()->success('تم إدخال الملصق دخول السيارة بنجاح')->important();
+        return redirect()->action('EntryStickersForCarsController@show', ['id'=>$entrySticker->id]);
     }
 
     /**
@@ -48,7 +56,9 @@ class EntryStickersForCarsController extends Controller
      */
     public function show($id)
     {
-        //
+        $entrySticker  = EntryStickerForCar::findOrFail($id);
+        $ownersIDs = Owner::latest()->pluck('name', 'id');
+        return view('entry_stickers_for_cars.show', compact('entrySticker', 'ownersIDs'));
     }
 
     /**
@@ -59,7 +69,9 @@ class EntryStickersForCarsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $entrySticker  = EntryStickerForCar::findOrFail($id);
+        $ownersIDs = Owner::latest()->pluck('name', 'id');
+        return view('entry_stickers_for_cars.edit', compact('entrySticker', 'ownersIDs'));
     }
 
     /**
@@ -69,9 +81,12 @@ class EntryStickersForCarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EnteryStickersForCarsRequest $request, $id)
     {
-        //
+        $entrySticker  = EntryStickerForCar::findOrFail($id);
+        $entrySticker->update($request->all());
+        flash()->success('تم تعديل الملصق الخاص بالسيارة بنجاح')->important();
+        return redirect()->action('EntryStickersForCarsController@show', ['id'=>$entrySticker->id]);
     }
 
     /**
@@ -82,6 +97,10 @@ class EntryStickersForCarsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $entrySticker  = EntryStickerForCar::findOrFail($id);
+        $entrySticker->delete();
+        flash()->success('تم حذف الملصق الخاص بالسيارة بنجاح')->important();
+        return redirect()->action('EntryStickersForCarsController@index');
+
     }
 }
