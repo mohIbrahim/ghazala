@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'owners'                                =>  \App\Http\Middleware\Owners::class,
         'owners_family_members'                 =>  \App\Http\Middleware\OwnersFamilyMembers::class,
         'membership_cards_for_individuals'      =>  \App\Http\Middleware\MembershipCardsForIndividuals::class,
+        'entry_stickers_for_cars'               =>  \App\Http\Middleware\EntryStickersForCars::class,
     ];
 }

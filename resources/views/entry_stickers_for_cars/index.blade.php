@@ -47,9 +47,34 @@
                         <tbody>
                             @foreach($entryStickers as $key=>$entrySticker)
                                 <tr>                                    
-                                    <td>{{$entrySticker->car_owner}}</td>
-                                    <td>{{$entrySticker->owner->name}}</td>
-                                    <td>{{$entrySticker->code}}</td>
+                                    <td>{{ $entrySticker->updated_at }}</td>
+                                    <td>{{ $entrySticker->created_at }}</td>
+                                    <td>
+                                        @if($entrySticker->creator)
+                                            {{ $entrySticker->creator->name }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $entrySticker->comments }}</td>
+                                    <td>{!! ($entrySticker->status)? '<span style="color:green">مسموح بالدخول</span>' : '<span style="color:red">غير مسموح بالدخول</span>' !!}</td>
+                                    <td>{{ $entrySticker->color }}</td>
+                                    <td>{{ $entrySticker->model }}</td>
+                                    <td>{{ $entrySticker->type }}</td>
+                                    <td>{{ $entrySticker->the_manufacture_company }}</td>
+                                    <td>{{ $entrySticker->plate_number }}</td>
+                                    <td>{{ $entrySticker->release_date->format('Y') }}</td>
+                                    <td>{{ $entrySticker->car_owner}}</td>
+                                    <td>
+                                        @if($entrySticker->owner)
+                                            <a href="{{ action('OwnersController@show', ['slug'=>$entrySticker->owner->slug]) }}" target="_blank"> 
+                                                {{ $entrySticker->owner->name}}
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ action('EntryStickersForCarsController@show', ['id'=>$entrySticker->id]) }}" target="_blank"> 
+                                            {{ $entrySticker->code}}
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -72,7 +97,7 @@
             $('#op').on('keyup',function(){
                 var key = $('#op').val();
                 $.ajax({
-                    url:"{{action('MembershipCardsForIndividualsController@indexAjax')}}",
+                    url:"{{action('EntryStickersForCarsController@indexAjax')}}",
                     type:"GET",
                     data:"key="+key,
                     dataType:'script',

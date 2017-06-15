@@ -73,13 +73,13 @@
 
 												
 								
-								@if(in_array('update_entery_stickers_for_cars', $permissions))
+								@if(in_array('update_entry_stickers_for_cars', $permissions))
 									<tr>
 										<td><a href="{{action('EntryStickersForCarsController@edit',['id'=>$entrySticker->id])  }}">تعديل</a></td>
 										<td><strong>:تعديل</strong></td>
 									</tr>
 								@endif
-								@if(in_array('delete_entery_stickers_for_cars', $permissions))
+								@if(in_array('delete_entry_stickers_for_cars', $permissions))
 									<tr>
 										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
 										<td><strong>:حذف</strong></td>

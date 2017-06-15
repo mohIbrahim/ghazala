@@ -116,8 +116,7 @@ class MembershipCardsForIndividualsController extends Controller
 
     public function indexAjax()
     {
-       $key = request()->key;       
-
+       $key = request()->key;
        $startTable = '<div class="table-responsive"><table class="table table-condensed table-hover table-bordered text-center">';
        $tHead = '<thead>
                        <tr>                           
@@ -135,19 +134,16 @@ class MembershipCardsForIndividualsController extends Controller
                        </tr>
                 </thead>';
         $tableBody = '<tbody>';
-        $unitsCodes = '';        
-
-        $membershipCards = MembershipCardForIndividual::where('serial', 'like', '%'.$key.'%')                            
+        $membershipCards = MembershipCardForIndividual::where('serial', 'like', '%'.$key.'%')
                                     ->orWhereHas('owner', function($query) use($key) {
                                                         $query->where('name', 'like', '%'.$key.'%');
                                                 })
                                     ->orWhereHas('unit', function($query) use($key) {
                                                         $query->where('code', 'like', '%'.$key.'%');
-                                                })->get();
-
+                                                })->paginate(30);
         foreach ($membershipCards as $key => $membershipCard) 
         {
-            $tableBody .= '<tr>                                    
+            $tableBody .= '<tr>
                                 <td>'.$membershipCard->updated_at.'</td>
                                 <td>'.$membershipCard->created_at.'</td>
                                 <td>'.$membershipCard->creator->name.'</td>
@@ -159,19 +155,13 @@ class MembershipCardsForIndividualsController extends Controller
 
                                 <td>'.$membershipCard->type.'</td>
                                 <td><a href="'.action('UnitsController@show', ['id'=>$membershipCard->unit->id]).'" target="_blank">'.$membershipCard->unit->code.'</a></td>
-                                <td><a href="'.action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]).'" target="_blank">'.$membershipCard->owner->name.'</a></td>                                
+                                <td><a href="'.action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]).'" target="_blank">'.$membershipCard->owner->name.'</a></td>
                                 <td><a href="'.action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]).'" target="_blank">'.$membershipCard->serial.'</a></td>
-                                
                         </tr>';
-            $unitsCodes = '';
         }
-
         $endTable = '</table></div>';
         
             return $startTable.$tHead.$tableBody.$endTable;
-            
-        
-        
     }
 
 }

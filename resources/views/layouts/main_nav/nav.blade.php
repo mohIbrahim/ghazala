@@ -12,7 +12,8 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Ghazala') }}
+                        <img src="{{asset('images/helper_images/ghazala-bay-head.png')}}" class="img-responsive" alt="Image" style="width:20px; display: inline">
+                        <span style="color: black">GHAZALA BAY</span>
                     </a>
                 </div>
 

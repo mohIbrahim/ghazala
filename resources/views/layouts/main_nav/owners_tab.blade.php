@@ -36,6 +36,16 @@
                     <li><a href="{{ action('MembershipCardsForIndividualsController@create') }}" class="text-center">إنشاء كارت جديد</a></li>
                 @endif
             @endif
+
+            <li role="separator" class="divider"></li>
+
+            @if(in_array('view_entry_stickers_for_cars', $permissions))
+                <li class="dropdown-header text-center"><h4>ملصقات دخول السيارات</h4></li>
+                <li><a href="{{ action('EntryStickersForCarsController@index') }}" class="text-center">عرض كل الملصقات</a></li>
+                @if(in_array('create_entry_stickers_for_cars', $permissions))
+                    <li><a href="{{ action('EntryStickersForCarsController@create') }}" class="text-center">إنشاء ملصق جديد</a></li>
+                @endif
+            @endif
             
         </ul>
     </li>
