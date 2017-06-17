@@ -53,6 +53,10 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 'entry_stickers_for_cars.show',
                 'entry_stickers_for_cars.index',
+
+
+                'renters.show',
+                'renters.index',
             ];
 
         view()->composer($v, function($view){

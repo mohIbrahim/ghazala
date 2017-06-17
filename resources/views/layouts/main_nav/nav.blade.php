@@ -27,6 +27,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
 
+                        {{-- Renters --}}
+                        @include('layouts.main_nav.renters_tab')
                         {{-- Owners --}}
                         @include('layouts.main_nav.owners_tab')
                         {{-- Units --}}

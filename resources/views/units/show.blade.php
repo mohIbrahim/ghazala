@@ -18,7 +18,7 @@
 
 								<tr>
 									<td>{{ $unit->code }}</td>
-									<th>:كود الوحدة</th>
+									<td><strong>:كود الوحدة</strong></td>
 								</tr>
 
 								<tr>
@@ -27,77 +27,77 @@
 											<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }} </a></p>
 										@endforeach
 									</td>
-									<th>:أسماء المُلاَّك</th>
+									<td><strong>:أسماء المُلاَّك</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->model->name }}</td>
-									<th>:اسم النموذج</th>
+									<td><strong>:اسم النموذج</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->unit_account_code }}</td>
-									<th>:كود حساب الوحدة</th>
+									<td><strong>:كود حساب الوحدة</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->address }}</td>
-									<th>:عنوان الوحدة</th>
+									<td><strong>:عنوان الوحدة</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->direction }}</td>
-									<th>:إتجاة الوحدة</th>
+									<td><strong>:إتجاة الوحدة</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->floor_number }}</td>
-									<th>:رقم الدور</th>
+									<td><strong>:رقم الدور</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->electricity_meter_number }}</td>
-									<th>:رقم عداد الكهرباء</th>
+									<td><strong>:رقم عداد الكهرباء</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ ($unit->for_sale)?"نعم":"لا" }}</td>
-									<th>هل الوحدة للبيع؟</th>
+									<td><strong>هل الوحدة للبيع؟</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->sale_details }}</td>
-									<th>:تفاصيل البيع</th>
+									<td><strong>:تفاصيل البيع</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->sale_price }}</td>
-									<th>:سعر البيع</th>
+									<td><strong>:سعر البيع</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ ($unit->for_rent)? "نعم" : "لا" }}</td>
-									<th>هل الوحدة معروضة للإيجار؟</th>
+									<td><strong>هل الوحدة معروضة للإيجار؟</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ isset($unit->rent_from)? $unit->rent_from->format('d-m-Y'):"" }}</td>
-									<th>:بداية المدة المحددة للإيجار</th>
+									<td><strong>:بداية المدة المحددة للإيجار</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ isset($unit->rent_to)?$unit->rent_to->format('d-m-Y'):"" }}</td>
-									<th>:نهاية المدة المحددة للإيجار</th>
+									<td><strong>:نهاية المدة المحددة للإيجار</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->rent_price }} EGP</td>
-									<th>:سعر الإيجار</th>
+									<td><strong>:سعر الإيجار</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->rent_details }}</td>
-									<th>:تفاصيل الإيجار</th>
+									<td><strong>:تفاصيل الإيجار</strong></td>
 								</tr>
 
 								<tr>
@@ -105,50 +105,54 @@
 
 										<div class="row">
 											@foreach($unit->images as $image)
-												<div class="col-xs-6 col-md-3">
-													<a href="{{ asset('images/unit_images/'.$image->unit_image)}}" class="thumbnail">
-														<img src="{{ asset('images/unit_images/'.$image->unit_image)}}" alt="...">
+												
+													<a href="{{ asset('images/unit_images/'.$image->unit_image)}}" >
+														<img src="{{ asset('images/unit_images/'.$image->unit_image)}}" alt="..." width="100px">
 													</a>
-												</div>
+												
 											@endforeach
 										
 										</div>
 									</td>
-									<th>:الصور</th>
+									<td><strong>:الصور</strong></td>
 								</tr>
 
 
 
 								<tr>
 									<td>{{ $unit->comments }}</td>
-									<th>:التعليقات</th>
+									<td><strong>:التعليقات</strong></td>
 								</tr>
 
 								<tr>
-									<td>{{ $unit->creator->name }}</td>
-									<th>:إنشاء من قبل المستخدم</th>
+									<td>
+										@if($unit->creator)
+											{{ $unit->creator->name }}
+										@endif
+									</td>
+									<td><strong>:إنشاء من قبل المستخدم</strong></td>
 								</tr>
 
 								<tr>
 									<td>{{ $unit->created_at }}</td>
-									<th>:تاريخ و وقت الإنشاء</th>
+									<td><strong>:تاريخ و وقت الإنشاء</strong></td>
 								</tr>	
 
 								<tr>
 									<td>{{ $unit->updated_at }}</td>
-									<th>:تاريخ و وقت التعديل</th>
+									<td><strong>:تاريخ و وقت التعديل</strong></td>
 								</tr>					
 								
 								@if(in_array('update_units', $permissions))
 									<tr>
 										<td><a href="{{action('UnitsController@edit',['id'=>$unit->id])  }}">تعديل</a></td>
-										<th>:تعديل</th>
+										<td><strong>:تعديل</strong></td>
 									</tr>
 								@endif
 								@if(in_array('delete_units', $permissions))
 									<tr>
 										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
-										<th>:حذف</th>
+										<td><strong>:حذف</strong></td>
 									</tr>
 								@endif
 							

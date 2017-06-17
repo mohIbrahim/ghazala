@@ -168,7 +168,14 @@ class EntryStickersForCarsController extends Controller
                                     <td>'. $entrySticker->type .'</td>
                                     <td>'. $entrySticker->the_manufacture_company .'</td>
                                     <td>'. $entrySticker->plate_number .'</td>
-                                    <td>'. $entrySticker->release_date .'</td>
+
+                                    <td>';
+                                        if($entrySticker->release_date)
+                                        {
+                                            $tableBody .= $entrySticker->release_date->format('Y');
+
+                                        }
+                                    $tableBody .= '</td>
                                     <td>'. $entrySticker->car_owner.'</td>
                                     <td>';
                                         if($entrySticker->owner){

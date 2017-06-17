@@ -47,7 +47,11 @@
                                 <tr>
                                     <td>{{$membershipCard->updated_at}}</td>
                                     <td>{{$membershipCard->created_at}}</td>
-                                    <td>{{$membershipCard->creator->name}}</td>
+                                    <td>
+                                        @if($membershipCard->creator)
+                                            {{$membershipCard->creator->name}}
+                                        @endif
+                                    </td>
                                     <td>{{($membershipCard->delivered_date)? $membershipCard->delivered_date->format('d-m-Y') : ""}}</td>
                                     <td>{{($membershipCard->delivered)? "نعم":"لا"}}</td>
                                     <td>{!!($membershipCard->status)? "فعال":"<span style='color:red'>موقوف</span>"!!}</td>

@@ -40,4 +40,6 @@ Route::get('/clear-cache', function() {
  //Entry Stickers For Cars
  	Route::resource('entry_stickers_for_cars', 'EntryStickersForCarsController');
  	Route::get('entry_stickers_for_cars_index_ajax', 'EntryStickersForCarsController@indexAjax')->name('entry_stickers_for_cars_index_ajax');
+ //Renters
+ 	Route::resource('renters', 'RentersController');
  	

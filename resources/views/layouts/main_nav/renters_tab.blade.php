@@ -1,0 +1,23 @@
+@if(in_array('view_renters', $permissions) || in_array('view_renters', $permissions))
+    <li class="dropdown">
+        @if(in_array('view_renters',$permissions))
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+           <strong>المستأجرين</strong>
+            <span class="caret"></span>
+        </a>
+        @endif
+
+        <ul class="dropdown-menu">
+            @if(in_array('view_renters', $permissions))
+                <li class="dropdown-header text-center"><h4>المستأجرين</h4></li>
+                <li><a href="{{ action('RentersController@index') }}" class="text-center">عرض كل المستأجرين</a></li>
+                @if(in_array('create_renters', $permissions))
+                    <li><a href="{{ action('RentersController@create') }}" class="text-center">إضافة مستأجر جديد</a></li>
+                @endif
+            @endif            
+           <li role="separator" class="divider"></li> 
+        </ul>
+        
+    </li>
+@endif
+

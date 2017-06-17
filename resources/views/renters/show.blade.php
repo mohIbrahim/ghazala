@@ -124,11 +124,7 @@
 										</tr>
 										
 										<tr>
-											<td>
-												@if($owner->creator)
-													{{ $owner->creator->name }}
-												@endif
-											</td>
+											<td>{{ $owner->creator->name }}</td>
 											<td><strong>: اسم منشئ المحتوى</strong></td>
 										</tr>
 

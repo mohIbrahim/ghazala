@@ -21,6 +21,7 @@ class PermissionSeeder extends Seeder
         $this->ownersFamilyMembers();
         $this->membershipCardsForIndividuals();
         $this->entryStickersForCars();
+        $this->renters();
 
     }
 
@@ -292,6 +293,36 @@ class PermissionSeeder extends Seeder
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }
+
+
+    private function renters()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_renters",
+            "slug"              =>"view-renters",
+            "descriptions"      =>"view renters",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_renters",
+            "slug"              =>"create-renters",
+            "descriptions"      =>"create renters",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_renters",
+            "slug"              =>"update-renters",
+            "descriptions"      =>"update renters",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_renters",
+            "slug"              =>"delete-renters",
+            "descriptions"      =>"delete renters",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
 
 
 

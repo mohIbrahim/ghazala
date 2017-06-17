@@ -35,8 +35,16 @@
 									</td>
 									<td>{{ $member->updated_at }}</td>
 									<td>{{ $member->created_at }}</td>
-									<td>{{ $member->creator->name }}</td>									
-									<td>{{ $member->date_of_birth->age }}</td>
+									<td>
+										@if($member->creator)
+											{{ $member->creator->name }}
+										@endif
+									</td>									
+									<td>
+										@if($member->date_of_birth)
+											{{ $member->date_of_birth->age }}
+										@endif
+									</td>
 									<td>
 										<a href="{{ action('OwnersController@show', ['slug'=>$member->owner->slug]) }}" target="_blank">{{ $member->owner->name }}</a>
 									</td>									
