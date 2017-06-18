@@ -93,14 +93,19 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h3 class="text-center"> عرض الوحدة للإيجار</h3>
-			<span style="color:red">.فى حالة عرض الوحدة للإيجار قم بملء هذة الحقول</span>
+			<h3 class="text-center"> عرض الوحدة للإيجار أو مستأجرة بالفعل</h3>
+			<span style="color:red">.فى حالة عرض الوحدة للإيجار أو تكون مستأجرة بالفعل قم بملء هذة الحقول</span>
 			<div class="form-group">
 				{!! Form::label('for_rent', 'هل الوحدة معروضة للإيجار؟') !!}
 				{!! Form::select('for_rent', [
 					1 =>'نعم',
 					0 =>'لا']
 					, null, ['class'=>'form-control ', 'placeholder'=>'أختار نعم أو لا']) !!}
+			</div>
+
+			<div class="form-group">
+				{!! Form::label('renter_id', 'اسم المستأجر') !!}
+				{!! Form::select('renter_id', $rentersIDs , null, ['class'=>'form-control', 'placeholder'=>'أختر اسم المستأجر']) !!}
 			</div>
 
 			<div class="form-group">

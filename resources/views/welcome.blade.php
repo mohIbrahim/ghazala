@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -77,8 +78,11 @@
                 </div>
             @endif
 
-            <div class="content">                   
-                <img src="{{ asset('images/helper_images/ghazala-bay.png') }}" class="img-responsive" alt="Image">
+            <div class="content"> 
+                <img src="{{ asset('images/helper_images/ghazala-bay.png') }}" class="img-responsive" alt="Image" width="400px">
+                <span style="color: black;font-family: 'Aref Ruqaa', serif;font-size: 1.5em; position: relative; top:-50px">
+                    <h1>البرنامج الإداري لقرية خليج غزالة</h1>                            
+                </span>
             </div>
         </div>
     </body>

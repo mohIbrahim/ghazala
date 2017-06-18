@@ -10,7 +10,8 @@ class Unit extends Model
     protected $table = "units";
 
     protected $fillable = ['code',
-    						'model_id', 
+                            'model_id', 
+    						'renter_id', 
     						'for_sale',
     						'sale_details',
     						'sale_price',
@@ -87,6 +88,15 @@ class Unit extends Model
     public function owners()
     {
         return $this->belongsToMany('\App\Owner', 'owner_unit');
+    }
+
+    /**
+     * [renter description]
+     * @return [type] [description]
+     */
+    public function renter()
+    {
+        return $this->belongsTo('\App\Renter', 'renter_id');
     }
 
 }

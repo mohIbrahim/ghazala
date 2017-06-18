@@ -19,6 +19,7 @@ class CreateUnitsTable extends Migration
             $table->increments('id');
             $table->string('code')->unique();
             $table->integer('model_id')->unsigned();
+            $table->integer('renter_id')->unsigned()->nullable();
 
             $table->boolean('for_sale')->nullable()->nullable();
             $table->text('sale_details')->nullable();

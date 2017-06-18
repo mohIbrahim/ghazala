@@ -26,8 +26,7 @@ class RentersController extends Controller
      */
     public function create()
     {
-        $unitsIDs = Unit::latest()->pluck('code', 'id');
-        return view('renters.create', compact('unitsIDs'));
+        return view('renters.create');
     }
 
     /**
@@ -38,7 +37,12 @@ class RentersController extends Controller
      */
     public function store(RentersRequest $request)
     {
-        //
+        $arr = $request->all();
+        $arr['slug'] = str_slug($request->name);
+        
+        $renter = Renter::create($arr);
+        flash()->success('تم إضافة مستأجر جديد بنجاح')->important();
+        return redirect()->action('RentersController@show', ['slug'=>$renter->slug]);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Requests\UnitsRequest;
 use App\Unit;
 use App\UnitModel;
 use App\UnitImage;
+use App\Renter;
 
 class UnitsController extends Controller
 {
@@ -36,7 +37,8 @@ class UnitsController extends Controller
     public function create()
     {
         $modelsNames = UnitModel::latest()->pluck('name', 'id');
-        return view('units.create', compact('modelsNames'));
+        $rentersIDs = Renter::latest()->pluck('name', 'id');
+        return view('units.create', compact('modelsNames', 'rentersIDs'));
     }
 
     /**
