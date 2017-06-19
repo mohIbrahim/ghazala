@@ -25,12 +25,11 @@ class RentersRequest extends FormRequest
     {
         return [
             'name'=>'required|unique:renters,name,'.$this->renter,
-            'units_ids'=>'required',
+            
             'mobile_1'=>'required|numeric',
             'mobile_2'=>'numeric|nullable',
             'telephone'=>'numeric|nullable',
             'email'=>'email|nullable',
-
         ];
     }
 
@@ -38,8 +37,7 @@ class RentersRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'=>'برجاء إدخال اسم المالك',
-            'units_ids.required'=>'برجاء إختيار كود الوحدة',
+            'name.required'=>'برجاء إدخال اسم المستأجر',
             'name.unique'=>'هذا الاسم تم إدخاله من قبل برجاء أختيار اسم آخر',
 
             'mobile_1.required'=>'برجاء إدخال رقم التليفون المحمول للخط الأول',

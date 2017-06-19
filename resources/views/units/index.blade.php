@@ -10,11 +10,21 @@
 				<h3 class="panel-title text-center"><strong>عرض كل الوحدات</strong></h3>
 			</div>
 			<div class="panel-body">
+			<div class="row">            
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right text-right">
+                    <div class="form-group">
+                        <h4>{!! Form::label('op', 'بحــــث') !!}</h4>
+                        {!! Form::text('op', null, ['class'=>'form-control', 'id'=>'op']) !!}
+                    </div>
+                </div>
+            </div>
+            
+            <div id="search_results">
+               {{-- resutls --}}
 				<div class="table-responsive">
 					<table class="table table-hover">
 						<thead>
 							<tr>								
-								<th>تعديل</th>
 								<th>تاريخ و وقت التعديل</th>
 								<th>تاريخ و وقت الإنشاء</th>
 								<th>إنشاء من قبل المستخدم</th>
@@ -36,11 +46,6 @@
 						<tbody>
 							@foreach($units as $unit)
 								<tr>
-									<td>
-										@if(in_array('update_units', $permissions))
-											<a href="{{action('UnitsController@edit',['id'=>$unit->id])  }}">تعديل</a>
-										@endif
-									</td>
 									<td>{{ $unit->updated_at }}</td>
 									<td>{{ $unit->created_at }}</td>
 									<td>{{ $unit->creator->name }}</td>
@@ -70,10 +75,36 @@
 					</table>
 				</div>
 						{{ $units->links() }}
-			</div>
+		
 		</div>
 		
 	</div>
-
+	</div>
+	
+</div>
 	 
+@endsection
+
+
+@section('jsFooter')
+    <script>
+        $(document).ready(function(){
+            $('#op').on('keyup',function(){
+                var key = $('#op').val();
+                $.ajax({
+                    url:"{{action('UnitsController@indexAjax')}}",
+                    type:"GET",
+                    data:"key="+key,
+                    dataType:'script',
+                    timeout: 3000,
+                    beforeSend:function(http){
+                        $('#search_results').html('Loading..');
+                    },
+                    success:function (response, status, http) {
+                        $('#search_results').html(response);
+                    },
+                });
+            });
+        });
+    </script>
 @endsection

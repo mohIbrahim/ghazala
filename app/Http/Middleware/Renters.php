@@ -57,7 +57,11 @@ class Renters
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'renters.show'       && in_array('view_renters', $permissions)){
+        if($request->route()->getName() == 'renters.destroy'       && in_array('delete_renters', $permissions)){
+       
+            $response = $next($request); 
+        }else
+        if($request->route()->getName() == 'renters_index_ajax'       && in_array('view_renters', $permissions)){
        
             $response = $next($request); 
         }else

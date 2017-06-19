@@ -27,8 +27,9 @@ Route::get('/clear-cache', function() {
 	Route::resource('role_user', 'RoleUserController');
 //Unit Models
  	Route::resource('unit_models', 'UnitModelsController');
- //Unit Models
+ //Unit
  	Route::resource('units', 'UnitsController');
+ 	Route::get('units_index_ajax', 'UnitsController@indexAjax')->name('units_index_ajax');
  //Owner
  	Route::resource('owners', 'OwnersController');
  	Route::get('owners_index_ajax', 'OwnersController@indexAjax')->name('owners_index_ajax');
@@ -42,4 +43,5 @@ Route::get('/clear-cache', function() {
  	Route::get('entry_stickers_for_cars_index_ajax', 'EntryStickersForCarsController@indexAjax')->name('entry_stickers_for_cars_index_ajax');
  //Renters
  	Route::resource('renters', 'RentersController');
+ 	Route::get('renters_index_ajax', 'RentersController@indexAjax')->name('renters_index_ajax');
  	

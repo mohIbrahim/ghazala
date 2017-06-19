@@ -38,6 +38,7 @@ class UnitsController extends Controller
     {
         $modelsNames = UnitModel::latest()->pluck('name', 'id');
         $rentersIDs = Renter::latest()->pluck('name', 'id');
+        $rentersIDs = array_add($rentersIDs, '', '-None-');
         return view('units.create', compact('modelsNames', 'rentersIDs'));
     }
 
@@ -89,7 +90,9 @@ class UnitsController extends Controller
     {
         $unit = Unit::findOrFail($id);
         $modelsNames = UnitModel::latest()->pluck('name', 'id');
-        return view('units.edit', compact('unit', 'modelsNames'));
+        $rentersIDs = Renter::latest()->pluck('name', 'id');
+        $rentersIDs = array_add($rentersIDs, '', '-None-');
+        return view('units.edit', compact('unit', 'modelsNames', 'rentersIDs'));
     }
 
     /**
@@ -164,5 +167,89 @@ class UnitsController extends Controller
                 return $e->getMessage();
             }
         }    
+    }
+
+
+
+
+    public function indexAjax()
+    {
+        $key = request()->key;
+
+       $startTable = '<div class="table-responsive"><table class="table table-condensed table-hover table-bordered text-center">';
+       $tHead = '<thead>
+                       <tr>
+                            <th>تاريخ و وقت التعديل</th>
+                            <th>تاريخ و وقت الإنشاء</th>
+                            <th>إنشاء من قبل المستخدم</th>
+
+                            
+                            <th>هل الوحدة معروضة للإيجار؟</th>
+                            <th>هل الوحدة للبيع؟</th>
+                            <th>رقم عداد الكهرباء</th>
+
+                            <th>رقم الدور</th>
+
+                            <th>العنوان</th>
+                            
+                            <th>كود حساب الوحدة</th>
+
+                            <th>نوع النموذج</th>
+                            <th>أسماء المُلاَّك</th>
+                            <th>كود الوحدة</th>                           
+                       </tr>
+                </thead>';
+        $tableBody = '<tbody>';
+        
+
+        
+
+        $units = Unit::where('code', 'like', '%'.$key.'%')
+                            ->orWhere('unit_account_code', 'like', '%'.$key.'%')
+                            ->orWhereHas('owners', function($query) use($key) {
+                                $query->where('name', 'like', '%'.$key.'%');
+                            })->paginate(30);
+        foreach ($units as $key => $unit) 
+        {
+
+            $ownersNames = '';
+            foreach ($unit->owners as $key => $owner) {
+                $ownersNames .= '-<a href="'.action('OwnersController@show',['slug'=>$owner->slug]).'" target="_blank">'.$owner->name.'</a><br>';
+            }
+
+
+            $tableBody .= '<tr>          
+
+                                <td>'.$unit->updated_at.'</td>
+                                <td>'.$unit->created_at.'</td>
+                                <td>';
+
+                                if($unit->creator)
+                                    $tableBody .= $unit->creator->name;
+
+                                $tableBody.= '</td>
+
+                                <td>'.(($unit->for_rent)? "نعم":"لا").'</td>
+                                <td>'.(($unit->for_sale)? "نعم":"لا").'</td>
+                                <td>'.$unit->electricity_meter_number.'</td>
+                                <td>'.$unit->floor_number.'</td>
+                                <td>'.$unit->address.'</td>
+                                <td>'.$unit->unit_account_code.'</td>
+                                <td>';
+
+                                if($unit->model)                                
+                                  $tableBody  .= $unit->model->name;
+                                    
+                                
+                                $tableBody .= '</td>
+                                <td>'.$ownersNames.'</td>                                
+                                <td><a href="'.action("UnitsController@show",["id"=>$unit->id]).'" target="_blank">'.$unit->code.'</a>
+                                </td>                                
+                        </tr>';
+            $ownersNames = '';
+        }
+        $endTable = '</table></div>';
+        
+            return $startTable.$tHead.$tableBody.$endTable;
     }
 }

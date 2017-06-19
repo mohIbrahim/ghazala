@@ -63,7 +63,7 @@ class Owners
         }
 
         else
-        if($request->route()->getName() == 'owners.show'       && in_array('view_owners', $permissions)){
+        if($request->route()->getName() == 'owners.destroy'       && in_array('delete_owners', $permissions)){
        
         $response = $next($request);
         }else

@@ -16,7 +16,7 @@
             <div class="row">            
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right text-right">
                     <div class="form-group">
-                        <h4>{!! Form::label('op', 'بحــــث') !!}</h3>
+                        <h4>{!! Form::label('op', 'بحــــث') !!}</h4>
                         {!! Form::text('op', null, ['class'=>'form-control', 'id'=>'op']) !!}
                     </div>
                 </div>

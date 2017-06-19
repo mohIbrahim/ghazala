@@ -81,6 +81,17 @@
 								</tr>
 
 								<tr>
+									<td>
+										@if($unit->renter)
+											<a href="{{ action('RentersController@show', ['slug'=>$unit->renter->slug])}}">
+												{{ $unit->renter->name }}
+											</a> 
+										@endif
+									</td>
+									<td><strong>اسم المستأجر</strong></td>
+								</tr>
+
+								<tr>
 									<td>{{ isset($unit->rent_from)? $unit->rent_from->format('d-m-Y'):"" }}</td>
 									<td><strong>:بداية المدة المحددة للإيجار</strong></td>
 								</tr>

@@ -27,7 +27,16 @@ class Renter extends Model
 	 */
 	public function units()
 	{
-		return $this->hasMany('\App\Unit', 'unit_id');
+		return $this->hasMany('\App\Unit', 'renter_id');
+	}
+
+	/**
+	 * [creator description]
+	 * @return [type] [description]
+	 */
+	public function creator()
+	{
+		return $this->belongsTo('\App\User', 'creator_user_id');
 	}
 
 	

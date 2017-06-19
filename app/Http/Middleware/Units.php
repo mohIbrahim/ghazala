@@ -56,6 +56,10 @@ class Units
             
             $response = $next($request);
         }else
+        if($request->route()->getName() == 'units_index_ajax'     && in_array('view_units', $permissions)){
+            
+            $response = $next($request);
+        }else
 
         if($request->route()->getName() == 'units.destroy'    && in_array('delete_units', $permissions)){
 

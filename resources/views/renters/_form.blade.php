@@ -2,7 +2,7 @@
 	@include('errors.list')
 	<div class="form-group">
 		{!! Form::label('name', ' الاسم ') !!}<span style="color: red"> *</span>
-		{!! Form::text('name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم المالك']) !!}
+		{!! Form::text('name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم المستأجر']) !!}
 	</div>
 
 	<div class="form-group">
