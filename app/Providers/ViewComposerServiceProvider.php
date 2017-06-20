@@ -57,6 +57,9 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 'renters.show',
                 'renters.index',
+
+                'renting_contracts.show',
+                'renting_contracts.index',
             ];
 
         view()->composer($v, function($view){

@@ -44,4 +44,7 @@ Route::get('/clear-cache', function() {
  //Renters
  	Route::resource('renters', 'RentersController');
  	Route::get('renters_index_ajax', 'RentersController@indexAjax')->name('renters_index_ajax');
+ //Renting Contracts
+ 	Route::resource('renting_contracts', 'RentingContractsController');
+ 	Route::get('renting_contracts_index_ajax', 'RentingContractsController@indexAjax')->name('renting_contracts_index_ajax');
  	
