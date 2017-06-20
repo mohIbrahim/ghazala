@@ -10,7 +10,7 @@
 			</div>
 			<div class="panel-body">				
 				{!! Form::open(['method'=>'POST', 'action'=>'OwnersFamilyMembersController@store']) !!}
-					@include('Owners_family_members._form')
+					@include('owners_family_members._form')
 				{!! Form::close() !!}				
 			</div>
 		</div>

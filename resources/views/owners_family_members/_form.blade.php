@@ -7,10 +7,9 @@
 
 	<div class="form-group">
 		{!! Form::label('owner_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
-		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
+		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control selectpicker', 'placeholder'=>'أختار اسم مالك الوحدة', 'data-live-search'=>'true']) !!}
 	</div>
 
-	
 	<div class="form-group">
 		{!! Form::label('date_of_birth', 'تاريخ الميلاد') !!}
 		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
@@ -18,10 +17,6 @@
 		 				isset($member->date_of_birth)? $member->date_of_birth->format('m/d/Y'):null,
 		 ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الميلاد']) !!}
 	</div>
-
-
-	
-
 	
 	<button type="submit" class="btn btn-primary">حفظ</button>
 </div>

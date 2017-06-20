@@ -7,7 +7,7 @@
 
 	<div class="form-group">
 		{!! Form::label('model_id', 'نوع النموذج') !!}
-		{!! Form::select('model_id', $modelsNames , null, ['class'=>'form-control', 'placeholder'=>'أختر نوع النموذج']) !!}
+		{!! Form::select('model_id', $modelsNames , null, ['class'=>'form-control selectpicker', 'placeholder'=>'أختر نوع النموذج','data-live-search'=>'true']) !!}
 	</div>
 
 	<div class="form-group">
@@ -63,7 +63,6 @@
 			</div>
 		</div>
 	@endif
-
 	
 	<div class="jumbotron">
 		<div class="container">
@@ -105,7 +104,7 @@
 
 			<div class="form-group">
 				{!! Form::label('renter_id', 'اسم المستأجر') !!}
-				{!! Form::select('renter_id', $rentersIDs , null, ['class'=>'form-control', 'placeholder'=>'أختر اسم المستأجر']) !!}
+				{!! Form::select('renter_id', $rentersIDs , null, ['class'=>'form-control selectpicker', 'placeholder'=>'أختر اسم المستأجر', 'data-live-search'=>'true']) !!}
 			</div>
 
 			<div class="form-group">
@@ -123,12 +122,11 @@
 				{!! Form::text('rent_price', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل سعر الإيجار']) !!}
 			</div>
 
-
 			<div class="form-group">
 				{!! Form::label('rent_details', 'تفاصيل الإيجار') !!}
 				{!! Form::textarea('rent_details', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل تفاصيل الإيجار']) !!}
 			</div>
-			
+
 		</div>
 	</div>
 

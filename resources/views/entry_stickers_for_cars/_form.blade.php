@@ -6,18 +6,15 @@
 		{!! Form::text('code', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل كود الملصق الخاص بالسيارة']) !!}
 	</div>
 
-
 	<div class="form-group">
 		{!! Form::label('owner_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
-		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
+		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control selectpicker', 'placeholder'=>'أختار اسم مالك الوحدة', 'data-live-search'=>'true']) !!}
 	</div>
-
 
 	<div class="form-group">
 		{!! Form::label('car_owner', 'اسم المالك الفعلي للسيارة') !!}<span style="color: red"> *</span>
 		{!! Form::text('car_owner', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم المالك الفعلي للسيارة']) !!}
 	</div>
-
 
 	<div class="form-group">
 		{!! Form::label('release_date', 'تاريخ الإصدار') !!}<span style="color: red"> *</span>
@@ -31,7 +28,6 @@
 		{!! Form::label('plate_number', 'رقم لوحة السيارة') !!}<span style="color: red"> *</span>
 		{!! Form::text('plate_number', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم لوحة السيارة']) !!}
 	</div>
-
 
 	<div class="form-group">
 		{!! Form::label('the_manufacture_company', 'اسم الشركة المصنعة للسيارة') !!}<span style="color: red"> *</span>
@@ -48,7 +44,6 @@
 								] , null, [ 'class'=>'form-control', 'placeholder'=>'أختار تصنيف السيارة']) !!}
 	</div>
 
-
 	<div class="form-group">
 		{!! Form::label('model', 'موديل السيارة') !!}
 		{!! Form::text('model', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل موديل السيارة']) !!}
@@ -64,13 +59,10 @@
 		{!! Form::select('status',[1=>'مسموح', 0=> 'غير مسموح'] , null, [ 'class'=>'form-control', 'placeholder'=>'أختار السماح او عدم السماح دخول السيارة']) !!}
 	</div>
 
-
 	<div class="form-group">
 		{!! Form::label('comments', 'التعليقات') !!}
 		{!! Form::textarea('comments', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل تعليقاً']) !!}
 	</div>
-	
-
 	
 	<button type="submit" class="btn btn-primary">حفظ</button>
 </div>

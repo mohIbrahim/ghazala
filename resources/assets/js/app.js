@@ -9,6 +9,7 @@ require('./bootstrap');
 require('./jquery-ui.min');
 require('./jquery.dataTables.min.js');
 
+
 window.Vue = require('vue');
 
 /**
@@ -79,4 +80,4 @@ $( document ).ready(function() {
 	    })
 	});
 
-// Data table options
+// bootstrap-select

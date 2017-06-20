@@ -9,13 +9,18 @@
 
 	<div class="form-group">
 		{!! Form::label('owner_id', 'اسم مالك الوحدة') !!}<span style="color: red"> *</span>
-		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار اسم مالك الوحدة']) !!}
+		{!! Form::select('owner_id', $ownersIDs, null, [ 'class'=>'form-control selectpicker', 'placeholder'=>'أختار اسم مالك الوحدة', 'data-live-search'=>'true']) !!}
 	</div>
+	
+
 	<div class="form-group">
 		{!! Form::label('unit_id', 'كود الوحدة') !!}<span style="color: red"> *</span>
 		<p>فى حالة أن المالك يمكن أن يملك أكثر من وحدة برجاء أختيار الوحدة بشكل صحيح</p>
-		{!! Form::select('unit_id', $unitsIDs, null, [ 'class'=>'form-control', 'placeholder'=>'أختار كود الوحدة']) !!}
+		{!! Form::select('unit_id', $unitsIDs, null, [ 'class'=>'form-control selectpicker', 'placeholder'=>'أختار كود الوحدة', 'data-live-search'=>'true']) !!}
 	</div>
+
+	
+
 
 
 	<div class="form-group">
