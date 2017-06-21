@@ -8,19 +8,20 @@
 		
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title text-center"><strong> {{$membershipCard->serial}} :الكارت</strong></h3>
+				<h3 class="panel-title text-center arabic-direction"><strong> الكارت:{{$membershipCard->serial}} </strong></h3>
 			</div>
 			<div class="panel-body">					
 						
-				<div class="table-responsive ">
+				<div class="table-responsive arabic-direction">
 					<table class="table table-striped table-condensed table-hover">
 						<tbody class="text-right">
 								<tr>
+									<td><strong>الكود الكارت:</strong></td>
 									<td>{{ $membershipCard->serial }}</td>
-									<td><strong>:الكود الكارت</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>كود الوحدة:</strong></td>
 									<td>
 										@if($membershipCard->unit)
 											<a href="{{ action('UnitsController@show', ['id'=>$membershipCard->unit->id]) }}" target="_blank"> 
@@ -28,10 +29,10 @@
 											</a>
 										@endif
 									</td>
-									<td><strong>:كود الوحدة</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>اسم مالك الوحدة:</strong></td>
 									<td>
 										@if($membershipCard->owner)
 											<a href="{{ action('OwnersController@show', ['slug'=>$membershipCard->owner->slug]) }}" target="_blandk"> 
@@ -39,52 +40,51 @@
 											</a>
 										@endif
 									</td>
-									<td><strong>:اسم مالك الوحدة</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>نوع الكارت:</strong></td>
 									<td>{{ $membershipCard->type }}</td>
-									<td><strong>:نوع الكارت</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>تاريخ الإصدار:</strong></td>
 									<td>{{ ($membershipCard->release_date)?$membershipCard->release_date->format('d-m-Y') : "" }}</td>
-									<td><strong>:تاريخ الإصدار</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>حالة الكارت:</strong></td>
 									<td>{{ ($membershipCard->status)? "فعّال":"غير فعّال" }}</td>
-									<td><strong>:حالة الكارت</strong></td>
 								</tr>
 
 								<tr>
-									<td>{{ ($membershipCard->delivered)? "نعم" : "لا" }}</td>
 									<td><strong>هل تم تسليم الكارت؟</strong></td>
+									<td>{{ ($membershipCard->delivered)? "نعم" : "لا" }}</td>
 								</tr>
 
 								<tr>
+									<td><strong>تاريخ تسليم الكارت:</strong></td>
 									<td>{{ ($membershipCard->delivered_date)? $membershipCard->delivered_date->format('d-m-Y'): '' }}</td>
-									<td><strong>:تاريخ تسليم الكارت</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>التعليقات:</strong></td>
 									<td>{{ $membershipCard->comments }}</td>
-									<td><strong>:التعليقات</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>إنشاء من قبل المستخدم:</strong></td>
 									<td>{{ $membershipCard->creator->name }}</td>
-									<td><strong>:إنشاء من قبل المستخدم</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>تاريخ و وقت الإنشاء:</strong></td>
 									<td>{{ $membershipCard->created_at }}</td>
-									<td><strong>:تاريخ و وقت الإنشاء</strong></td>
 								</tr>
 
 								<tr>
+									<td><strong>تاريخ و وقت التعديل:</strong></td>
 									<td>{{ $membershipCard->updated_at }}</td>
-									<td><strong>:تاريخ و وقت التعديل</strong></td>
 								</tr>
 
 
@@ -95,14 +95,14 @@
 								
 								@if(in_array('update_membership_cards_for_individuals', $permissions))
 									<tr>
+										<td><strong>تعديل:</strong></td>
 										<td><a href="{{action('MembershipCardsForIndividualsController@edit',['id'=>$membershipCard->id])  }}">تعديل</a></td>
-										<td><strong>:تعديل</strong></td>
 									</tr>
 								@endif
 								@if(in_array('delete_membership_cards_for_individuals', $permissions))
 									<tr>
+										<td><strong>حذف:</strong></td>
 										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
-										<td><strong>:حذف</strong></td>
 									</tr>
 								@endif
 							

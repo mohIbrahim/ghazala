@@ -17,6 +17,8 @@
 
 /public/images/owner_contracts_images/*.pdf
 
+ /public/images/renting_contracts_images/*.pdf
+
 Homestead.json
 Homestead.yaml
 npm-debug.log

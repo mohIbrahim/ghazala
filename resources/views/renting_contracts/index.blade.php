@@ -1,15 +1,12 @@
 @extends('layouts.app')
 @section('title')
-    عرض المُلاَّك 
+    عرض عقود الإيجار 
 @endsection
-@section('content')
-
-    
-    
+@section('content')    
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title text-center"><strong>عرض المُلاَّك</strong></h3>
+            <h3 class="panel-title text-center"><strong>عرض عقود الإيجار</strong></h3>
         </div>
         <div class="panel-body">
 
@@ -28,50 +25,53 @@
                     <table class="table table-condensed table-hover table-bordered text-center">
                        <thead>
                             <tr>                            
-                                <td><strong>حالة المالك</strong></td>
-                                <td><strong>المهنة</strong></td>
-                                <td><strong>العنوان</strong></td>
-                                <td><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                                <td><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                                <td><strong>الايميل الخاص بالعمل</strong></td>
-                                <td><strong>الايميل الشخصى</strong></td>
-                                <td><strong>التليفون الارضي</strong></td>
-                                <td><strong>موبيل 2</strong></td>
-                                <td><strong>موبيل 1</strong></td>
-                                <td><strong>السن</strong></td>
-                                <td><strong>رقم البطاقة</strong></td>
-                                <td><strong>أرقام الوحدات</strong></td>
-                                <td><strong>الاسم</strong></td>
-                                <td><strong>الصورة الشخصية</strong></td>
-                                <td><strong>الرقم</strong></td>
+                                <td><strong>وقت و تاريخ التعديل</strong></td>
+                                <td><strong>وقت و تاريخ الإنشاء</strong></td>
+                                <td><strong>اسم منشئ المحتوى</strong></td>
+                                <td><strong>تاريخ نهاية العقد</strong></td>
+                                <td><strong>تاريخ بداية العقد</strong></td>
+                                <td><strong>اسم المستأجر</strong></td>
+                                <td><strong>كود الوحدة</strong></td>
+                                <td><strong>المسلسل</strong></td>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach($owners as $key=>$owner)
+                            @foreach($rentingContracts as $key=>$rentingContract)
                                 <tr>
-                                    <td>{{$owner->owner_status}}</td>
-                                    <td>{{$owner->occupation}}</td>
-                                    <td>{{$owner->address}}</td>
-                                    <td>{{$owner->contact_person_phone}}</td>
-                                    <td>{{$owner->contact_person_name}}</td>
-                                    <td>{{$owner->work_email}}</td>
-                                    <td>{{$owner->email}}</td>
-                                    <td>{{$owner->telephone}}</td>
-                                    <td>{{$owner->mobile_2}}</td>
-                                    <td>{{$owner->mobile_1}}</td>
-                                    <td>{{$owner->date_of_birth->age}}</td>
-                                    <td>{{$owner->ssn}}</td>
+                                    <td>{{ $rentingContract->updated_at }}</td>
+                                    <td>{{ $rentingContract->created_at }}</td>
+
                                     <td>
-                                        @foreach($owner->units as $unit)
-                                            <p><a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}"> {{ $unit->code }} </a></p>
-                                        @endforeach
+                                        @if($rentingContract->creator)
+                                            {{ $rentingContract->creator->name }}
+                                        @endif
                                     </td>
-                                    <td><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{$owner->name}}</a></td>
                                     <td>
-                                        <img src="{{ asset("images/owner_images/".$owner->personal_image) }}" class="img-responsive" alt="Image" width="30px">
+                                        @if($rentingContract->to)
+                                            {{ $rentingContract->to->format('d-m-Y') }}
+                                        @endif
                                     </td>
-                                    <td>{{$owner->id}}</td>
+                                    <td>
+                                        @if($rentingContract->from)
+                                            {{ $rentingContract->from->format('d-m-Y') }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($rentingContract->renter)
+                                            <a href="{{ action('RentersController@show', ['slug'=>$rentingContract->renter->slug]) }}" target="_blank">
+                                                {{ $rentingContract->renter->name }}
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($rentingContract->unit)
+                                            <a href="{{ action('UnitsController@show', ['id'=>$rentingContract->unit->id]) }}" target="_blank">
+                                                {{ $rentingContract->unit->code }}
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td>{{$rentingContract->id}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -79,7 +79,7 @@
                 </div>
 
             </div>
-            {{ $owners->links() }}
+            {{ $rentingContracts->links() }}
 
         </div>
     </div>
@@ -94,7 +94,7 @@
             $('#op').on('keyup',function(){
                 var key = $('#op').val();
                 $.ajax({
-                    url:"{{action('OwnersController@indexAjax')}}",
+                    url:"{{action('RentingContractsController@indexAjax')}}",
                     type:"GET",
                     data:"key="+key,
                     dataType:'script',

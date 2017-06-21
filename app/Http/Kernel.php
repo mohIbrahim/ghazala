@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'membership_cards_for_individuals'      =>  \App\Http\Middleware\MembershipCardsForIndividuals::class,
         'entry_stickers_for_cars'               =>  \App\Http\Middleware\EntryStickersForCars::class,
         'renters'                               =>  \App\Http\Middleware\Renters::class,
+        'renting_contracts'                     =>  \App\Http\Middleware\RentingContracts::class,
     ];
 }

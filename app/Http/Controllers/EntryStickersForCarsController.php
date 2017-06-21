@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Http\Requests\EnteryStickersForCarsRequest;
 use App\Owner;
 use App\EntryStickerForCar;

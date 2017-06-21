@@ -13,7 +13,7 @@ class RentingContractsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class RentingContractsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return  [
+                    'renter_id'=>'required',
+                    'unit_id'=>'required',
+                    'soft_copy'=>'mimes:pdf',            
+                ];
+    }
+
+
+    public function messages()
+    {
+        return  [
+                    'renter_id.required'=>'برجاء أختيار اسم المستأجر', 
+                    'unit_id.required'=>'برجاء ختيار كود الوحدة',
+                    'soft_copy.mimes'=>'pdf برجاء أختيار ملف مناسب لصورة العقد من أمتداد',
+                ];
     }
 }

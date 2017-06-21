@@ -13,7 +13,9 @@ class RentingContract extends Model
 								"to",
 								"soft_copy",
 								"comments",
-								"creator_user_id",
+                                "creator_user_id",
+                                "renter_id",
+								"unit_id",
     						];
     protected $dates = ['from', 'to'];
 
@@ -38,6 +40,33 @@ class RentingContract extends Model
             $this->attributes['to'] = Carbon::parse($date);
         else
             $this->attributes['to'] = null;
+    }
+
+    /**
+     * [creator description]
+     * @return [type] [description]
+     */
+    public function creator()
+    {
+        return $this->belongsTo('\App\User', 'creator_user_id', 'id');
+    }
+
+    /**
+     * [unit description]
+     * @return [type] [description]
+     */
+    public function unit()
+    {
+        return $this->hasOne('\App\Unit', 'id', 'unit_id');
+    }
+
+    /**
+     * [renter description]
+     * @return [type] [description]
+     */
+    public function renter()
+    {
+        return $this->hasOne('\App\Renter', 'id', 'renter_id');
     }
 
 }
