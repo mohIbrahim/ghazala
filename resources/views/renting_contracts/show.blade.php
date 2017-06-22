@@ -123,7 +123,7 @@
 
 
 @include('partial.deleteConfirm',['name'=>$rentingContract->id,
-										'id'=>$rentingContract->rentingContract,
+										'id'=>$rentingContract->id,
 										'message'=>'هل انت متأكد تريد حذف العقد رقم',
 										'route'=>'RentingContractsController@destroy'])
 	 

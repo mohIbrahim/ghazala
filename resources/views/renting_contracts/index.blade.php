@@ -71,7 +71,11 @@
                                             </a>
                                         @endif
                                     </td>
-                                    <td>{{$rentingContract->id}}</td>
+                                    <td>
+                                        <a href="{{ action('RentingContractsController@show', ['id'=>$rentingContract->id]) }}" target="_blank"> 
+                                            {{$rentingContract->id}}
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

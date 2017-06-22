@@ -55,11 +55,11 @@ class RentingContractsController extends Controller
             $newArray['soft_copy'] = $pdfNewName;
         }
         
-        $rentignContract = RentingContract::create($newArray);
+        $rentingContract = RentingContract::create($newArray);
         
 
         flash()->success('تم إضافة عقد إيجار جديد بنجاح')->important();
-        return redirect()->action('RentingContractsController@show', ['id'=>$rentignContract->id]);
+        return redirect()->action('RentingContractsController@show', ['id'=>$rentingContract->id]);
     }
 
     /**
@@ -82,7 +82,10 @@ class RentingContractsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rentingContract = RentingContract::findOrFail($id);
+        $rentersNames = Renter::latest()->pluck('name', 'id');
+        $unitsCodes = Unit::latest()->pluck('code', 'id');
+        return view('renting_contracts.edit', compact('rentingContract', 'rentersNames', 'unitsCodes'));
     }
 
     /**
@@ -94,7 +97,28 @@ class RentingContractsController extends Controller
      */
     public function update(RentingContractsRequest $request, $id)
     {
-        //
+        $rentingContract = RentingContract::findOrFail($id);
+        $newArray  = $request->all();
+        // if we need to delete old soft copy
+        if(isset($request->contractToDelete))
+        {
+            $this->deleteFile('images/renting_contracts_images/'.$request->contractToDelete); 
+            $rentingContract->soft_copy = null;
+        }
+        // update new soft copy if uploaded
+        if ($request->hasFile('soft_copy') && 
+            $request->file('soft_copy')->isValid()) 
+        {
+            $pdf = $request->file('soft_copy');
+            $pdfNewName = str_random(64).'.'.$pdf->guessExtension();
+            $pdf->move('images/renting_contracts_images', $pdfNewName);
+            $newArray['soft_copy'] = $pdfNewName;
+            if($rentingContract->soft_copy)
+                $this->deleteFile('images/renting_contracts_images/'.$rentingContract->soft_copy);
+        }
+        $rentingContract->update($newArray);
+        flash()->success('تم تعديل عقد الإيجار')->important();
+        return redirect()->action('RentingContractsController@show', ['id'=>$rentingContract->id]); 
     }
 
     /**
@@ -105,7 +129,12 @@ class RentingContractsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rentingContract = RentingContract::findOrFail($id);
+        if($rentingContract->soft_copy)
+            $this->deleteFile('images/renting_contracts_images/'.$rentingContract->soft_copy);
+        $rentingContract->delete();
+        flash()->success('تم حذف عقد الإيجار بنجاح')->important();
+        return redirect()->action('RentingContractsController@index');
     }
 
     private function deleteFile($source){        
@@ -132,53 +161,61 @@ class RentingContractsController extends Controller
                        </tr>
                 </thead>';
         $tableBody = '<tbody>';
-        $rentingContracts = RentingContract::whereHas('renter', function($query) use($key) {
-                                                        $query->where('name', 'like', '%'.$key.'%');
-                                                })
-                                    ->orWhereHas('unit', function($query) use($key) {
-                                                        $query->where('code', 'like', '%'.$key.'%');
-                                                })->paginate(30);
+
+        $rentingContracts = RentingContract::where('id', 'like', '%'.$key.'%')
+                                            ->orWhereHas('renter', function($query) use($key) 
+                                                                {
+                                                                    $query->where('name', 'like', '%'.$key.'%');
+                                                                })
+                                            ->orWhereHas('unit', function($query) use($key) 
+                                                                {
+                                                                    $query->where('code', 'like', '%'.$key.'%');
+                                                                })->paginate(30);
 
                                     
         foreach ($rentingContracts as $key => $rentingContract) 
         {
             $tableBody .= '<tr>
-                                    <td>'. $rentingContract->updated_at .'</td>
-                                    <td>'. $rentingContract->created_at .'</td>
+                                <td>'. $rentingContract->updated_at .'</td>
+                                <td>'. $rentingContract->created_at .'</td>
 
-                                    <td>'.
-                                        (($rentingContract->creator)? $rentingContract->creator->name : "").'                                        
-                                    </td>
-                                    <td>'.
-                                        (($rentingContract->to) ? $rentingContract->to->format("d-m-Y") : "") .'
-                                        
-                                    </td>
-                                    <td>'.
-                                        (($rentingContract->from)? $rentingContract->from->format("d-m-Y"): "").'
-                                        
-                                    </td>
-                                    <td>';
-                                        if($rentingContract->renter)
-                                        {
-                                          $tableBody .=  
-                                            '<a href="'.action("RentersController@show", ["slug"=>$rentingContract->renter->slug]) .'" target="_blank">
-                                                '. $rentingContract->renter->name .'
-                                            </a>';                                            
-                                        }
-                                        
-                                    $tableBody .= '</td>
-                                    <td>';
-                                        if($rentingContract->unit)
-                                        {
-                                            $tableBody .=
-                                            '<a href="'.action("UnitsController@show", ['id'=>$rentingContract->unit->id]) .'" target="_blank">
-                                                '.$rentingContract->unit->code .'
-                                            </a>';
-                                        }
-                                        
-                                    $tableBody .= '</td>
-                                    <td>'.$rentingContract->id.'</td>
-                                </tr>';
+                                <td>'.
+                                    (($rentingContract->creator)? $rentingContract->creator->name : "").'                                        
+                                </td>
+                                <td>'.
+                                    (($rentingContract->to) ? $rentingContract->to->format("d-m-Y") : "") .'
+                                    
+                                </td>
+                                <td>'.
+                                    (($rentingContract->from)? $rentingContract->from->format("d-m-Y"): "").'
+                                    
+                                </td>
+                                <td>';
+                                    if($rentingContract->renter)
+                                    {
+                                      $tableBody .=  
+                                        '<a href="'.action("RentersController@show", ["slug"=>$rentingContract->renter->slug]) .'" target="_blank">
+                                            '. $rentingContract->renter->name .'
+                                        </a>';                                            
+                                    }
+                                    
+                                $tableBody .= '</td>
+                                <td>';
+                                    if($rentingContract->unit)
+                                    {
+                                        $tableBody .=
+                                        '<a href="'.action("UnitsController@show", ['id'=>$rentingContract->unit->id]) .'" target="_blank">
+                                            '.$rentingContract->unit->code .'
+                                        </a>';
+                                    }
+                                    
+                                $tableBody .= '</td>
+                                <td>
+                                    <a href="'.action("RentingContractsController@show", ['id'=>$rentingContract->id]).'" target="_blank"> 
+                                        '.$rentingContract->id.'
+                                    </a>
+                                </td>
+                            </tr>';
         }
         $endTable = '</table></div>';
         
