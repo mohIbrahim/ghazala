@@ -85,6 +85,12 @@ class Owner extends Model
     }
 
 
+    public function membershipCardsForIndividual($value='')
+    {
+        return $this->hasMany('\App\MembershipCardForIndividual', 'owner_id', 'id');
+    }
+
+
 
     
 

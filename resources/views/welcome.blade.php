@@ -79,6 +79,9 @@
             @endif
 
             <div class="content"> 
+                <div class="col-md-8 col-md-offset-2">
+                    @include('flash::message')
+                </div>
                 <img src="{{ asset('images/helper_images/ghazala-bay.png') }}" class="img-responsive" alt="Image" width="400px">
                 <span style="color: black;font-family: 'Aref Ruqaa', serif;font-size: 1.5em; position: relative; top:-50px">
                     <h1>البرنامج الإداري لقرية خليج غزالة</h1>                            

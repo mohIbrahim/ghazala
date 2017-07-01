@@ -103,7 +103,7 @@
 			</div>
 
 			<div class="form-group">
-				{!! Form::label('renter_id', 'اسم المستأجر') !!}
+				{!! Form::label('renter_id', 'اسم المستأجر الحالى') !!}
 				{!! Form::select('renter_id', $rentersIDs , null, ['class'=>'form-control selectpicker', 'placeholder'=>'أختر اسم المستأجر', 'data-live-search'=>'true']) !!}
 			</div>
 

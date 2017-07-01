@@ -76,7 +76,7 @@ class UnitsController extends Controller
     public function show($id)
     {
         $unit = Unit::findOrFail($id);
-        return view('units.show',compact('unit'));
+        return view('units.show2',compact('unit'));
     }
 
     /**
