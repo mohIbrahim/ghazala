@@ -90,6 +90,11 @@ class Owner extends Model
         return $this->hasMany('\App\MembershipCardForIndividual', 'owner_id', 'id');
     }
 
+    public function entryStickersForCars($value='')
+    {
+        return $this->hasMany('\App\EntryStickerForCar', 'owner_id', 'id');
+    }
+
 
 
     
