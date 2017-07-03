@@ -19,6 +19,8 @@
 
 /public/images/renting_contracts_images/*.pdf
 
+/public/excel/*.xlsx
+
 Homestead.json
 Homestead.yaml
 npm-debug.log

@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Excel::load('excel/book.xlsx', function($reader) {
+
+   foreach ($reader->get() as $key => $sheet) {
+   		dd($sheet['b']);
+   		dd($sheet['a']);
+   }
+
+});
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
     // return what you want

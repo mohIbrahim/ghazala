@@ -181,6 +181,7 @@ return [
         App\Providers\ViewComposerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,// excel laravel
        
 
     ],
@@ -236,6 +237,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
         
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
