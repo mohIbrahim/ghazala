@@ -36,7 +36,11 @@
 									</td>
 									<td>{{ $model->updated_at }}</td>
 									<td>{{ $model->created_at }}</td>
-									<td>{{ $model->creator->name }}</td>
+									<td>
+										@if($model->creator)
+											{{ $model->creator->name }}
+										@endif
+									</td>
 									<td>{{ $model->number_of_rooms }}</td>
 									<td>{{ $model->net_area }} m<sup>2</sup> </td>
 									<td>{{ $model->total_area }} m<sup>2</sup> </td> 

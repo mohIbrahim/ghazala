@@ -48,7 +48,11 @@
 								<tr>
 									<td>{{ $unit->updated_at }}</td>
 									<td>{{ $unit->created_at }}</td>
-									<td>{{ $unit->creator->name }}</td>
+									<td>
+										@if($unit->creator)
+											{{ $unit->creator->name }}
+										@endif
+									</td>
 									<td>{{ ($unit->for_rent)? "نعم":"لا" }}</td>
 									<td>{{ ($unit->for_sale)? "نعم":"لا" }}</td>
 									<td>{{ $unit->electricity_meter_number }}</td>

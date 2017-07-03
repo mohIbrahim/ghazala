@@ -263,7 +263,7 @@ class OwnersController extends Controller
                                 <td>'.$owner->telephone.'</td>
                                 <td>'.$owner->mobile_2.'</td>
                                 <td>'.$owner->mobile_1.'</td>
-                                <td>'.$owner->date_of_birth->age.'</td>
+                                <td>'.(($owner->date_of_birth)?$owner->date_of_birth->age:'').'</td>
                                 <td>'.$owner->ssn.'</td>
                                 <td>'.$unitsCodes.'</td>
                                 <td><a href="'.action("OwnersController@show",["slug"=>$owner->slug]).'" target="_blank">'.$owner->name.'</a></td>

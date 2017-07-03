@@ -27,13 +27,13 @@ class UnitModelsRequest extends FormRequest
         return [
             "name"=>"required|unique:unit_models,name,".$this->unit_model,
             "type"=>"required",
-            "total_area"=>"integer",
-            "net_area"=>"integer",
-            "number_of_rooms"=>"integer",
-            "number_of_floors"=>"integer",
-            "number_of_toilets"=>"integer",
-            "number_of_balconies"=>"integer",
-            "number_of_kitchens"=>"integer",
+            "total_area"=>"integer|nullable",
+            "net_area"=>"integer|nullable",
+            "number_of_rooms"=>"integer|nullable",
+            "number_of_floors"=>"integer|nullable",
+            "number_of_toilets"=>"integer|nullable",
+            "number_of_balconies"=>"integer|nullable",
+            "number_of_kitchens"=>"integer|nullable",
             "finishing_type"=>"required",
         ];
     }

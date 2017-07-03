@@ -92,7 +92,11 @@
 
 
 								<tr>
-									<td>{{ $unitModel->creator->name }}</td>
+									<td>
+										@if($unitModel->creator)
+											{{ $unitModel->creator->name }}
+										@endif
+									</td>
 									<th>إنشاء من قبل</th>
 								</tr>
 								

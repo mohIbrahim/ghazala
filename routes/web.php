@@ -11,14 +11,9 @@
 |
 */
 
-Excel::load('excel/book.xlsx', function($reader) {
 
-   foreach ($reader->get() as $key => $sheet) {
-   		dd($sheet['b']);
-   		dd($sheet['a']);
-   }
 
-});
+
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
     // return what you want
@@ -56,4 +51,8 @@ Route::get('/clear-cache', function() {
  //Renting Contracts
  	Route::resource('renting_contracts', 'RentingContractsController');
  	Route::get('renting_contracts_index_ajax', 'RentingContractsController@indexAjax')->name('renting_contracts_index_ajax');
- 	
+ //Data Entry
+ 	Route::resource('data_entry', 'DataEntryController');
+
+
+
