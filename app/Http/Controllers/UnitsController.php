@@ -207,7 +207,7 @@ class UnitsController extends Controller
                             ->orWhere('unit_account_code', 'like', '%'.$key.'%')
                             ->orWhereHas('owners', function($query) use($key) {
                                 $query->where('name', 'like', '%'.$key.'%');
-                            })->paginate(30);
+                            })->get();
         foreach ($units as $key => $unit) 
         {
 
