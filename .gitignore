@@ -21,6 +21,7 @@
 
 /public/excel/*.xlsx
 !/public/excel/book1.xlsx
+!/public/excel/membershipCards.xlsx
 
 Homestead.json
 Homestead.yaml

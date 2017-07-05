@@ -57,10 +57,7 @@ class DataEntryController extends Controller
 
         });
 
-        Excel::load('excel/book1.xlsx', function($reader)
-        {
 
-        });
     }
 
     /**
@@ -70,7 +67,31 @@ class DataEntryController extends Controller
      */
     public function create()
     {
-        //
+        Excel::load('excel/membershipCards.xlsx', function($readerAA)
+        {
+            foreach ($readerAA->get() as $key => $sheets)
+           {
+                             
+                foreach ($sheets as $key => $table) 
+                {                            
+                    $unit_code = $table->a;
+                    $unit_id = ( \App\Unit::where('code', $unit_code)->first())?  \App\Unit::where('code', $unit_code)->first()->id : null;
+                    
+                    $owner_name = $table->b;
+                    $owner_id = (\App\Owner::where('name', $owner_name)->first())? \App\Owner::where('name', $owner_name)->first()->id :null;
+
+                    $type = $table->c;
+                    $serial = $table->d;
+                    $status = 1;
+                    $release_date = \Carbon\Carbon::now();
+                    $creator_user =  auth()->user()->id;
+
+                    $membershipCard = \App\MembershipCardForIndividual::create(['unit_id'=>$unit_id, 'owner_id'=>$owner_id, 'type'=>$type, 'serial'=>$serial, 'status'=>1, 'release_date'=>$release_date, 'creator_user_id'=>$creator_user]);
+                }
+
+           }
+
+        });
     }
 
     /**
