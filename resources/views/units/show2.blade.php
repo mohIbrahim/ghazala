@@ -16,6 +16,9 @@
 
 
 			<ul class="nav nav-pills pull-right">
+				@if(in_array('create_units', $permissions))
+					<li><a data-toggle="pill" href="#menu5"><strong>الحسبات</strong></a></li>
+				@endif
 				<li><a data-toggle="pill" href="#menu4"><strong>المستأجرين</strong></a></li>
 				<li><a data-toggle="pill" href="#menu3"><strong>ملصقات الدخول</strong></a></li>
 				<li><a data-toggle="pill" href="#menu2"><strong>كروت الدخول</strong></a></li>
@@ -41,7 +44,7 @@
 							</span>
 							<div class="panel-body">
 								<div class="table-responsive ">
-									<table class="table table-striped  table-condensed text-center">
+									<table class="table table-striped table-hover table-condensed text-center">
 										<tbody>
 
 											<tr>
@@ -116,7 +119,7 @@
 													</a> 
 													@endif
 												</td>
-												<td><strong>اسم المستأجر</strong></td>
+												<td><strong>:اسم المستأجر الحالي</strong></td>
 											</tr>
 
 											<tr>
@@ -399,7 +402,7 @@
 
 								<div class="panel-body">					
 									@foreach($unit->owners as $owner)
-										@foreach($owner->membershipCardsForIndividual as $key=>$membershipCard)
+										@foreach($owner->membershipCardsForIndividual()->latest()->get() as $key=>$membershipCard)
 
 											<div class="table-responsive arabic-direction">
 												<table class="table table-striped table-condensed table-hover">
@@ -491,8 +494,10 @@
 
 													</tbody>
 												</table>
-											</div>						
+											</div>
+
 										@endforeach
+												
 									@endforeach
 								</div>								
 							</div>
@@ -690,6 +695,38 @@
 							</div>
 						</div>
 					</div>
+
+
+				
+					@if(in_array('create_units', $permissions))
+						<div id="menu5" class="tab-pane fade">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<span class="arabic-direction">
+										<h2> الحسبات </h2>
+									</span>
+									<div class="panel-body">
+									<div class="table-responsive ">
+										<table class="table table-striped table-hover table-condensed text-center">
+											<tbody>
+
+												<tr>
+													<td>{{ $unit->the_current_unit_debt }} EGP</td>
+													<td><strong>:مديونية الوحدة الحالية</strong></td>
+												</tr>
+
+												<tr>
+													<td>{{ $unit->date_of_indebtedness->format('d/M/Y') }}</td>
+													<td><strong>:تاريخ المديونية</strong></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					@endif
 
 
 

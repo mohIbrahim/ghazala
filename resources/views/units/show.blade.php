@@ -88,7 +88,7 @@
 											</a> 
 										@endif
 									</td>
-									<td><strong>اسم المستأجر</strong></td>
+									<td><strong>اسم المستأجر الحالي</strong></td>
 								</tr>
 
 								<tr>

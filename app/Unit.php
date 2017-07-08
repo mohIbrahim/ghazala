@@ -25,11 +25,13 @@ class Unit extends Model
     						'floor_number',
                             'electricity_meter_number',
     						'address',
+                            'the_current_unit_debt',
+                            'date_of_indebtedness',
     						'comments',
     						'creator_user_id',
     						];
 
-    protected $dates = ['rent_from', 'rent_to'];
+    protected $dates = ['rent_from', 'rent_to', 'date_of_indebtedness'];
 
     /**
      * [setRentFromAttribute description]
@@ -53,6 +55,18 @@ class Unit extends Model
             $this->attributes['rent_to'] = Carbon::parse($date);
         else
             $this->attributes['rent_to'] = null;
+    }
+
+    /**
+     * [setDateOfIndebtednessAttribute description]
+     * @param [type] $date [description]
+     */
+    public function setDateOfIndebtednessAttribute($date)
+    {
+        if($date != "")
+            $this->attributes['date_of_indebtedness'] = Carbon::parse($date);
+        else
+            $this->attributes['date_of_indebtedness'] = null;
     }
 
     /**

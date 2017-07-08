@@ -116,12 +116,11 @@ class MembershipCardsForIndividualsController extends Controller
     public function indexAjax()
     {
        $key = request()->key;
-       $startTable = '<div class="table-responsive"><table class="table table-condensed table-hover table-bordered text-center">';
+       $startTable = '<div class="table-responsive"><table id="units" class="table table-condensed table-hover table-bordered text-center">';
        $tHead = '<thead>
                        <tr>                           
                             <td><strong>تاريخ و وقت التعديل</strong></td>
-                            <td><strong>تاريخ و وقت الإنشاء</strong></td>
-                            <td><strong>إنشاء من قبل المستخدم</strong></td>
+                            
                             <td><strong>تاريخ تسليم الكارت</strong></td>
                             <td><strong>هل تم تسليم الكارت؟</strong></td>
                             <td><strong>حالة الكارت</strong></td>
@@ -139,20 +138,12 @@ class MembershipCardsForIndividualsController extends Controller
                                                 })
                                     ->orWhereHas('unit', function($query) use($key) {
                                                         $query->where('code', 'like', '%'.$key.'%');
-                                                })->paginate(30);
+                                                })->paginate(100);
         foreach ($membershipCards as $key => $membershipCard) 
         {
             $tableBody .= '<tr>
                                 <td>'.$membershipCard->updated_at.'</td>
-                                <td>'.$membershipCard->created_at.'</td>
-                                <td>';
-                                if($membershipCard->creator)
-                                {
-
-                                    $tableBody .= $membershipCard->creator->name;
-
-                                }
-                                $tableBody .='</td>
+                               
                                 <td>'.(($membershipCard->delivered_date)? $membershipCard->delivered_date->format('d-m-Y') : "").'</td>
                                 <td>'.(($membershipCard->delivered)? "نعم":"لا").'</td>
                                 <td>'.(($membershipCard->status)? "فعال":"<span style='color:red'>موقوف</span>").'</td>
@@ -165,7 +156,25 @@ class MembershipCardsForIndividualsController extends Controller
                                 <td><a href="'.action('MembershipCardsForIndividualsController@show', ['id'=>$membershipCard->id]).'" target="_blank">'.$membershipCard->serial.'</a></td>
                         </tr>';
         }
-        $endTable = '</table></div>';
+        $endTable = '</table></div>
+    <script>
+        $("#units").dataTable( {
+                "paging": false,
+                "searching": false,
+                dom: "Bfrtip",
+                buttons: [
+                ';
+                
+                if(in_array('create_membership_cards_for_individuals', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray()))
+                {
+                  $endTable .=  '"copy", "csv", "excel", "print"';
+                }
+                $endTable .='
+
+                ]
+            } );
+    </script>
+        ';
         
             return $startTable.$tHead.$tableBody.$endTable;
     }

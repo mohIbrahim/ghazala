@@ -109,12 +109,16 @@
 
 			<div class="form-group">
 				{!! Form::label('rent_from', 'بداية المدة المحددة للإيجار') !!}
-				{!! Form::text('rent_from', null, ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>'إدخل تاريخ بدء تأجير الوحدة']) !!}
+				{!! Form::text('rent_from', 
+					isset($unit->rent_from)? $unit->rent_from->format('m/d/Y'):null,
+					['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>'إدخل تاريخ بدء تأجير الوحدة']) !!}
 			</div>
 
 			<div class="form-group">
 				{!! Form::label('rent_to', 'نهاية المدة المحددة للإيجار') !!}
-				{!! Form::text('rent_to', null, ['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>'إدخل تاريخ نهاية تأجير الوحدة']) !!}
+				{!! Form::text('rent_to', 
+						isset($unit->rent_to)? $unit->rent_to->format('m/d/Y'):null,
+				 ['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>'إدخل تاريخ نهاية تأجير الوحدة']) !!}
 			</div>
 
 			<div class="form-group">
@@ -128,6 +132,19 @@
 			</div>
 
 		</div>
+	</div>
+
+	<div class="form-group">
+		{!! Form::label('the_current_unit_debt', 'مديونية الوحدة الحالية') !!}
+		{!! Form::text('the_current_unit_debt', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مديونية الوحدة الحالية']) !!}
+	</div>
+	
+	<div class="form-group">
+		{!! Form::label('date_of_indebtedness', 'تاريخ المديونية') !!}
+		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
+		{!! Form::text('date_of_indebtedness',
+		 				isset($unit->date_of_indebtedness)? $unit->date_of_indebtedness->format('m/d/Y'):null,
+		 ['id'=>'datepicker3', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ المديونية']) !!}
 	</div>
 
 	<div class="form-group">

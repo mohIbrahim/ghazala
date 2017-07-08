@@ -2,6 +2,10 @@
 @section('title')
 	عرض كل الوحدات
 @endsection
+@section('head')
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
+@endsection
 @section('content')
 	<div class="">
 		
@@ -22,24 +26,24 @@
             <div id="search_results">
                {{-- resutls --}}
 				<div class="table-responsive">
-					<table class="table table-hover">
+					<table id="units" class="table table-hover text-center">
 						<thead>
 							<tr>								
-								<th>تاريخ و وقت التعديل</th>
-								<th>تاريخ و وقت الإنشاء</th>
-								<th>إنشاء من قبل المستخدم</th>
+								<td><strong>تاريخ و وقت التعديل</strong></td>
+								{{-- <td><strong>تاريخ و وقت الإنشاء</strong></td>
+								<td><strong>إنشاء من قبل المستخدم</td</strong>> --}}
 
 								
-								<th>هل الوحدة معروضة للإيجار؟</th>
-								<th>هل الوحدة للبيع؟</th>
-								<th>رقم عداد الكهرباء</th>
-								<th>رقم الدور</th>
-								<th>العنوان</th>
+								<td><strong>هل الوحدة معروضة للإيجار؟</strong></td>
+								<td><strong>هل الوحدة للبيع؟</strong></td>
+								<td><strong>رقم عداد الكهرباء</strong></td>
+								<td><strong>رقم الدور</strong></td>
+								<td><strong>العنوان</strong></td>
 								
-								<th>كود حساب الوحدة</th>
-								<th>نوع النموذج</th>
-								<th>أسماء المُلاَّك</th>
-								<th>كود الوحدة</th>
+								<td><strong>كود حساب الوحدة</strong></td>
+								<td><strong>نوع النموذج</strong></td>
+								<td><strong>أسماء المُلاَّك</strong></td>
+								<td><strong>كود الوحدة</strong></td>
 							</tr>
 							
 						</thead>
@@ -47,12 +51,12 @@
 							@foreach($units as $unit)
 								<tr>
 									<td>{{ $unit->updated_at }}</td>
-									<td>{{ $unit->created_at }}</td>
+									{{-- <td>{{ $unit->created_at }}</td>
 									<td>
 										@if($unit->creator)
 											{{ $unit->creator->name }}
 										@endif
-									</td>
+									</td> --}}
 									<td>{{ ($unit->for_rent)? "نعم":"لا" }}</td>
 									<td>{{ ($unit->for_sale)? "نعم":"لا" }}</td>
 									<td>{{ $unit->electricity_meter_number }}</td>
@@ -91,6 +95,15 @@
 
 
 @section('jsFooter')
+
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	
+	<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+
     <script>
         $(document).ready(function(){
             $('#op').on('keyup',function(){
@@ -109,6 +122,23 @@
                     },
                 });
             });
+
+
+
+         
+	    	$("#units").dataTable( {
+	            "paging": false,
+	            "searching": false,
+	            dom: 'Bfrtip',
+		        buttons: [
+		        @if(in_array('create_units', $permissions))
+		            'copy', 'csv', 'excel', 'print'
+		        @endif
+		        ]
+	        } );
+
+
+
         });
     </script>
 @endsection

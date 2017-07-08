@@ -36,6 +36,8 @@ class CreateUnitsTable extends Migration
             $table->string('floor_number')->nullable();
             $table->text('address')->nullable();
             $table->string('electricity_meter_number')->unique()->nullable();
+            $table->string('the_current_unit_debt')->nullable();
+            $table->timestamp('date_of_indebtedness')->nullable();
             $table->text('comments')->nullable();
             $table->integer('creator_user_id')->unsigned();
             

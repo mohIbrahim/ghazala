@@ -175,27 +175,21 @@ class UnitsController extends Controller
     {
         $key = request()->key;
 
-       $startTable = '<div class="table-responsive"><table class="table table-condensed table-hover table-bordered text-center">';
+       $startTable = '<div class="table-responsive"><table id="units" class="table table-condensed table-hover table-bordered text-center">';
        $tHead = '<thead>
                        <tr>
-                            <th>تاريخ و وقت التعديل</th>
-                            <th>تاريخ و وقت الإنشاء</th>
-                            <th>إنشاء من قبل المستخدم</th>
-
+                            <td><strong>تاريخ و وقت التعديل</strong></td>
                             
-                            <th>هل الوحدة معروضة للإيجار؟</th>
-                            <th>هل الوحدة للبيع؟</th>
-                            <th>رقم عداد الكهرباء</th>
-
-                            <th>رقم الدور</th>
-
-                            <th>العنوان</th>
+                            <td><strong>هل الوحدة معروضة للإيجار؟</strong></td>
+                            <td><strong>هل الوحدة للبيع؟</strong></td>
+                            <td><strong>رقم عداد الكهرباء</strong></td>
+                            <td><strong>رقم الدور</strong></td>
+                            <td><strong>العنوان</strong></td>
                             
-                            <th>كود حساب الوحدة</th>
-
-                            <th>نوع النموذج</th>
-                            <th>أسماء المُلاَّك</th>
-                            <th>كود الوحدة</th>                           
+                            <td><strong>كود حساب الوحدة</strong></td>
+                            <td><strong>نوع النموذج</strong></td>
+                            <td><strong>أسماء المُلاَّك</strong></td>
+                            <td><strong>كود الوحدة</strong></td>                          
                        </tr>
                 </thead>';
         $tableBody = '<tbody>';
@@ -220,14 +214,6 @@ class UnitsController extends Controller
             $tableBody .= '<tr>          
 
                                 <td>'.$unit->updated_at.'</td>
-                                <td>'.$unit->created_at.'</td>
-                                <td>';
-
-                                if($unit->creator)
-                                    $tableBody .= $unit->creator->name;
-
-                                $tableBody.= '</td>
-
                                 <td>'.(($unit->for_rent)? "نعم":"لا").'</td>
                                 <td>'.(($unit->for_sale)? "نعم":"لا").'</td>
                                 <td>'.$unit->electricity_meter_number.'</td>
@@ -247,7 +233,26 @@ class UnitsController extends Controller
                         </tr>';
             $ownersNames = '';
         }
-        $endTable = '</table></div>';
+        $endTable = '</table></div>
+
+    <script>
+        $("#units").dataTable( {
+                "paging": false,
+                "searching": false,
+                dom: "Bfrtip",
+                buttons: [
+                ';
+                
+                if(in_array('create_units', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray()))
+                {
+                  $endTable .=  '"copy", "csv", "excel", "print"';
+                }
+                $endTable .='
+
+                ]
+            } );
+    </script>
+';
         
             return $startTable.$tHead.$tableBody.$endTable;
     }

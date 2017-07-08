@@ -23,7 +23,7 @@ class DataEntryController extends Controller
 
             $model4 = \App\UnitModel::create(['name'=>'دَ ب', 'slug'=>str_slug('دَ ب'), 'type'=>'شقة دوبليكس', 'finishing_type'=>'سوبر لوكس', 'creator_user_id'=> auth()->user()->id, ]);
 
-            $model5 = \App\UnitModel::create(['name'=>'د شدة', 'slug'=>str_slug('د شدة'), 'type'=>'شقة دوبليكس', 'finishing_type'=>'سوبر لوكس', 'creator_user_id'=> auth()->user()->id, ]);
+            $model5 = \App\UnitModel::create(['name'=>'د معدل', 'slug'=>str_slug('د شدة'), 'type'=>'شقة دوبليكس', 'finishing_type'=>'سوبر لوكس', 'creator_user_id'=> auth()->user()->id, ]);
 
             $model6 = \App\UnitModel::create(['name'=>'ج', 'slug'=>str_slug('ج'), 'type'=>'شقة دوبليكس', 'finishing_type'=>'سوبر لوكس', 'creator_user_id'=> auth()->user()->id, ]);
 
@@ -82,11 +82,11 @@ class DataEntryController extends Controller
 
                     $type = $table->c;
                     $serial = $table->d;
-                    $status = 1;
+                    $status = 0;
                     $release_date = \Carbon\Carbon::now();
                     $creator_user =  auth()->user()->id;
 
-                    $membershipCard = \App\MembershipCardForIndividual::create(['unit_id'=>$unit_id, 'owner_id'=>$owner_id, 'type'=>$type, 'serial'=>$serial, 'status'=>1, 'release_date'=>$release_date, 'creator_user_id'=>$creator_user]);
+                    $membershipCard = \App\MembershipCardForIndividual::create(['unit_id'=>$unit_id, 'owner_id'=>$owner_id, 'type'=>$type, 'serial'=>$serial, 'status'=>$status, 'release_date'=>$release_date, 'creator_user_id'=>$creator_user]);
                 }
 
            }

@@ -211,7 +211,7 @@ class OwnersController extends Controller
     {
        $key = request()->key;
 
-       $startTable = '<div class="table-responsive"><table class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
+       $startTable = '<div class="table-responsive"><table id="owners" class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
        $tHead = '<thead>
                        <tr>
                            
@@ -242,7 +242,7 @@ class OwnersController extends Controller
                             ->orWhere('owner_status', 'like', '%'.$key.'%')
                              ->orWhereHas('units', function($query) use($key) {
                             $query->where('code', 'like', '%'.$key.'%');
-                            })->paginate(30);
+                            })->get();
         foreach ($owners as $key => $owner) 
         {
 
@@ -274,7 +274,28 @@ class OwnersController extends Controller
                         </tr>';
             $unitsCodes = '';
         }
-        $endTable = '</table></div>';
+        $endTable = '</table></div>
+
+        <script>
+        $("#owners").dataTable( {
+                "paging": false,
+                "searching": false,
+                dom: "Bfrtip",
+                buttons: [
+                ';
+                
+                if(in_array('create_owners', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray()))
+                {
+                  $endTable .=  '"copy", "csv", "excel", "print"';
+                }
+                $endTable .='
+
+                ]
+            } );
+    </script>
+
+
+        ';
         
             return $startTable.$tHead.$tableBody.$endTable;
             
