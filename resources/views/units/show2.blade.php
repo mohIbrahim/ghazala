@@ -716,7 +716,11 @@
 												</tr>
 
 												<tr>
-													<td>{{ $unit->date_of_indebtedness->format('d/M/Y') }}</td>
+													<td>
+														@if($unit->date_of_indebtedness)
+															{{ $unit->date_of_indebtedness->format('d/M/Y') }}
+														@endif
+													</td>
 													<td><strong>:تاريخ المديونية</strong></td>
 												</tr>
 											</tbody>
