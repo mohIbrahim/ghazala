@@ -23,6 +23,7 @@ class PermissionSeeder extends Seeder
         $this->entryStickersForCars();
         $this->renters();
         $this->rentingContracts();
+        $this->gates();
 
     }
 
@@ -350,6 +351,35 @@ class PermissionSeeder extends Seeder
             "name"              =>"delete_renting_contracts",
             "slug"              =>"delete-renting-contracts",
             "descriptions"      =>"delete renting contracts",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+
+     private function gates()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_gates",
+            "slug"              =>"view-gates",
+            "descriptions"      =>"view gates",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_gates",
+            "slug"              =>"create-gates",
+            "descriptions"      =>"create gates",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_gates",
+            "slug"              =>"update-gates",
+            "descriptions"      =>"update gates",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_gates",
+            "slug"              =>"delete-gates",
+            "descriptions"      =>"delete gates",
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }

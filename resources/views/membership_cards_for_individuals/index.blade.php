@@ -122,7 +122,7 @@
                 "searching": false,
                 dom: 'Bfrtip',
                 buttons: [
-                @if(in_array('create_units', $permissions))
+                @if(in_array('create_membership_cards_for_individuals', $permissions))
                     'copy', 'csv', 'excel', 'print'
                 @endif
                 ]

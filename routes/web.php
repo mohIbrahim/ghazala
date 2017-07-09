@@ -53,6 +53,8 @@ Route::get('/clear-cache', function() {
  	Route::get('renting_contracts_index_ajax', 'RentingContractsController@indexAjax')->name('renting_contracts_index_ajax');
  //Data Entry
  	Route::resource('data_entry', 'DataEntryController');
-
+ //Gates
+ 	Route::resource('gates', 'GatesController');
+ 	Route::get('gates_index_ajax', 'GatesController@indexAjax')->name('gates_index_ajax');
 
 

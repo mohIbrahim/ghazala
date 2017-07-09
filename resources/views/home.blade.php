@@ -11,12 +11,22 @@
 
                 <div class="panel-body ">
                     <div class="list-group " >
-                        <a href="{{action('MembershipCardsForIndividualsController@index')}}"><button type="button" class="list-group-item">الإستعلام عن الكروت</button></a>
-                        <a href="{{action('EntryStickersForCarsController@index')}}"><button type="button" class="list-group-item">الإستعلام عن السيارات</button></a>
-                        <a href="{{action('UnitsController@index')}}"><button type="button" class="list-group-item">الإستعلام عن الوحدات</button></a>
-                        <a href="{{action('OwnersController@index')}}"><button type="button" class="list-group-item">الإستعلام عن الملاك</button></a>
-                        <a href="{{action('RentersController@index')}}"><button type="button" class="list-group-item">الإستعلام عن المستأجرين</button></a>
-                        
+                        @if(in_array('view_membership_cards_for_individuals', $permissions))
+                            <a href="{{action('MembershipCardsForIndividualsController@index')}}"><button type="
+                            button" class="list-group-item">الإستعلام عن الكروت</button></a>
+                        @endif
+                        @if(in_array('view_entry_stickers_for_cars', $permissions))
+                            <a href="{{action('EntryStickersForCarsController@index')}}"><button type="button" class="list-group-item">الإستعلام عن السيارات</button></a>
+                        @endif
+                        @if(in_array('view_units', $permissions))
+                            <a href="{{action('UnitsController@index')}}"><button type="button" class="list-group-item">الإستعلام عن الوحدات</button></a>
+                        @endif
+                        @if(in_array('view_owners', $permissions))
+                            <a href="{{action('OwnersController@index')}}"><button type="button" class="list-group-item">الإستعلام عن الملاك</button></a>
+                        @endif
+                        @if(in_array('view_renters', $permissions))
+                            <a href="{{action('RentersController@index')}}"><button type="button" class="list-group-item">الإستعلام عن المستأجرين</button></a>
+                        @endif
                     </div>
                 </div>
             </div>

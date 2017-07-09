@@ -29,6 +29,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     private function composeNavigationPrivilages()
     {
         $v = [  
+                'home',
                 'layouts.main_nav.nav',
                 'roles.show',
                 'users.show',
@@ -61,6 +62,8 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 'renting_contracts.show',
                 'renting_contracts.index',
+
+                'gates.index',
             ];
 
         view()->composer($v, function($view){

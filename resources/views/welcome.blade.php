@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet">        
 
         <!-- Styles -->
         <style>
@@ -70,7 +70,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}"><span style="font-family: 'Changa', sans-serif;"><h2>الرئيسية</h2></span></a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>

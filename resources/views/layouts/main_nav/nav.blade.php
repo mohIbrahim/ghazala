@@ -11,7 +11,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         <img src="{{asset('images/helper_images/ghazala-bay-head.png')}}" class="img-responsive" alt="Image" style="width:20px; display: inline">
                         <span style="color: black">GHAZALA BAY</span>
                     </a>
@@ -27,6 +27,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
 
+                        {{-- gate --}}
+                        @include('layouts.main_nav.gate_tab')
                         {{-- Renters --}}
                         @include('layouts.main_nav.renters_tab')
                         {{-- Owners --}}
