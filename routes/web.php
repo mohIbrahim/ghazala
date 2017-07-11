@@ -56,5 +56,7 @@ Route::get('/clear-cache', function() {
  //Gates
  	Route::resource('gates', 'GatesController');
  	Route::get('gates_index_ajax', 'GatesController@indexAjax')->name('gates_index_ajax');
+  //Jobs
+ 	Route::resource('jobs', 'JobsController');
 
 
