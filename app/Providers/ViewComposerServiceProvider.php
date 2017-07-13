@@ -43,6 +43,8 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'units.show',
                 'units.show2',
                 'units.index',
+                'units.create',
+                'units.edit',
 
                 'owners.show',
                 'owners.index',

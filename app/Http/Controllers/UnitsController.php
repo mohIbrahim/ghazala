@@ -178,9 +178,13 @@ class UnitsController extends Controller
        $startTable = '<div class="table-responsive"><table id="units" class="table table-condensed table-hover table-bordered text-center">';
        $tHead = '<thead>
                        <tr>
-                            <td><strong>تاريخ و وقت التعديل</strong></td>
-                            
-                            <td><strong>هل الوحدة معروضة للإيجار؟</strong></td>
+                            <td><strong>تاريخ و وقت التعديل</strong></td>';
+                            if(in_array('view_finance', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray())){
+
+                                  $tHead .=  '<td><strong>المديونية المستحقة</strong></td>';
+                            }
+                           
+                            $tHead .= '<td><strong>هل الوحدة معروضة للإيجار؟</strong></td>
                             <td><strong>هل الوحدة للبيع؟</strong></td>
                             <td><strong>رقم عداد الكهرباء</strong></td>
                             <td><strong>رقم الدور</strong></td>
@@ -213,12 +217,15 @@ class UnitsController extends Controller
 
             $tableBody .= '<tr>          
 
-                                <td>'.$unit->updated_at.'</td>
-                                <td>'.(($unit->for_rent)? "نعم":"لا").'</td>
+                                <td>'.$unit->updated_at.'</td>';
+                                if(in_array('view_finance', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray()))
+                                    $tableBody .= '<td>'. $unit->the_current_unit_debt .' EGP</td>';
+                                    
+                                $tableBody .= '<td>'.(($unit->for_rent)? "نعم":"لا").'</td>
                                 <td>'.(($unit->for_sale)? "نعم":"لا").'</td>
                                 <td>'.$unit->electricity_meter_number.'</td>
                                 <td>'.$unit->floor_number.'</td>
-                                <td>'.$unit->address.'</td>
+                                <td>'.(($unit->address)? str_limit($unit->address, 30) : '').'</td>
                                 <td>'.$unit->unit_account_code.'</td>
                                 <td>';
 

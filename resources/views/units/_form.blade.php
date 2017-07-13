@@ -134,18 +134,20 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		{!! Form::label('the_current_unit_debt', 'مديونية الوحدة الحالية') !!}
-		{!! Form::text('the_current_unit_debt', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مديونية الوحدة الحالية']) !!}
-	</div>
-	
-	<div class="form-group">
-		{!! Form::label('date_of_indebtedness', 'تاريخ المديونية') !!}
-		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
-		{!! Form::text('date_of_indebtedness',
-		 				isset($unit->date_of_indebtedness)? $unit->date_of_indebtedness->format('m/d/Y'):null,
-		 ['id'=>'datepicker3', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ المديونية']) !!}
-	</div>
+	@if(in_array('create_finance', $permissions) || in_array('update_finance', $permissions) )
+		<div class="form-group">
+			{!! Form::label('the_current_unit_debt', 'مديونية الوحدة الحالية') !!}
+			{!! Form::text('the_current_unit_debt', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مديونية الوحدة الحالية']) !!}
+		</div>
+		
+		<div class="form-group">
+			{!! Form::label('date_of_indebtedness', 'تاريخ المديونية') !!}
+			<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
+			{!! Form::text('date_of_indebtedness',
+			 				isset($unit->date_of_indebtedness)? $unit->date_of_indebtedness->format('m/d/Y'):null,
+			 ['id'=>'datepicker3', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ المديونية']) !!}
+		</div>
+	@endif
 
 	<div class="form-group">
 		{!! Form::label('comments', 'التعليقات') !!}

@@ -102,7 +102,7 @@ class DataEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -113,7 +113,26 @@ class DataEntryController extends Controller
      */
     public function show($id)
     {
-        //
+        Excel::load('excel/indebtedness.xlsx', function($readerAA)
+        {
+            foreach ($readerAA->get() as $key => $table)
+           {                
+                $unit_account_code = $table->a;
+                $the_current_unit_debt = $table->b;
+                $unit_code = $table->c;
+
+                    
+                if(\App\Unit::where('code', $unit_code))
+                {
+
+                    $unit = \App\Unit::where('code', $unit_code)->first()->update(['unit_account_code'=>$unit_account_code, 'the_current_unit_debt'=>$the_current_unit_debt]);
+                }else{
+
+                }
+                    
+           }
+
+        });
     }
 
     /**

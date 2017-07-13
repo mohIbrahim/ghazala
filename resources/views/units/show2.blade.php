@@ -16,7 +16,7 @@
 
 
 			<ul class="nav nav-pills pull-right">
-				@if(in_array('create_units', $permissions))
+				@if(in_array('view_finance', $permissions))
 					<li><a data-toggle="pill" href="#menu5"><strong>الحسبات</strong></a></li>
 				@endif
 				<li><a data-toggle="pill" href="#menu4"><strong>المستأجرين</strong></a></li>
@@ -158,6 +158,21 @@
 												</td>
 												<td><strong>:الصور</strong></td>
 											</tr>
+
+											<tr>
+												<td>{{ $unit->the_current_unit_debt }} EGP</td>
+												<td><strong>:المديونية المستحقة</strong></td>
+											</tr>
+
+											<tr>
+												<td>
+													@if($unit->date_of_indebtedness)
+														{{ $unit->date_of_indebtedness->format('d-m-Y') }}
+													@endif
+												</td>
+												<td><strong>:تاريخ المديونية</strong></td>
+											</tr>
+									
 
 
 
@@ -698,7 +713,7 @@
 
 
 				
-					@if(in_array('create_units', $permissions))
+					@if(in_array('view_finance', $permissions))
 						<div id="menu5" class="tab-pane fade">
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

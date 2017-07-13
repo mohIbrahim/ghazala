@@ -33,7 +33,9 @@
 								{{-- <td><strong>تاريخ و وقت الإنشاء</strong></td>
 								<td><strong>إنشاء من قبل المستخدم</td</strong>> --}}
 
-								
+								@if(in_array('view_finance', $permissions))
+									<td><strong>المديونية المستحقة</strong></td>
+								@endif
 								<td><strong>هل الوحدة معروضة للإيجار؟</strong></td>
 								<td><strong>هل الوحدة للبيع؟</strong></td>
 								<td><strong>رقم عداد الكهرباء</strong></td>
@@ -57,6 +59,9 @@
 											{{ $unit->creator->name }}
 										@endif
 									</td> --}}
+									@if(in_array('view_finance', $permissions))
+										<td>{{ $unit->the_current_unit_debt }} EGP</td>
+									@endif
 									<td>{{ ($unit->for_rent)? "نعم":"لا" }}</td>
 									<td>{{ ($unit->for_sale)? "نعم":"لا" }}</td>
 									<td>{{ $unit->electricity_meter_number }}</td>

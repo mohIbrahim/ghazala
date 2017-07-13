@@ -128,11 +128,24 @@
 									<td><strong>:الصور</strong></td>
 								</tr>
 
+								<tr>
+									<td>{{ $unit->the_current_unit_debt }}</td>
+									<td><strong>:المديونية المستحقة</strong></td>
+								</tr>
 
 
 								<tr>
-									<td>{{ $unit->comments }}</td>
-									<td><strong>:التعليقات</strong></td>
+									<td>{{ $unit->the_current_unit_debt }}</td>
+									<td><strong>:المديونية المستحقة</strong></td>
+								</tr>
+
+								<tr>
+									<td>
+										@if($unit->date_of_indebtedness)
+											{{ $unit->date_of_indebtedness->format('d-m-Y') }}
+										@endif
+									</td>
+									<td><strong>:تاريخ المديونية</strong></td>
 								</tr>
 
 								<tr>
