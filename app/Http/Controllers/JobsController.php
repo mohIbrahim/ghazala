@@ -50,7 +50,8 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        return view('jobs.show', compact('job'));
     }
 
     /**
@@ -61,7 +62,8 @@ class JobsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        return view('jobs.edit', compact('job'));
     }
 
     /**
@@ -73,7 +75,10 @@ class JobsController extends Controller
      */
     public function update(JobsRequest $request, $id)
     {
-        //
+        $job = findOrFail($id);
+        $job->update($request->all());
+        flash()->success('تم تعديل الوظيفة بنجاح')->important();
+        return redirect()->action('JobsController@show', ['id'=>$job->id]);
     }
 
     /**
