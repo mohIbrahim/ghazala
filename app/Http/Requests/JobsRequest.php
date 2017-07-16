@@ -13,7 +13,7 @@ class JobsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class JobsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required|unique:jobs,name,'.$this->job,
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required'=>'برجاء إدخال اسم الوظيفة',
+            'name.unique'=>'اسم الوظيفة تم أختاره من قبل برجاء اختيار اسم آخر',
         ];
     }
 }

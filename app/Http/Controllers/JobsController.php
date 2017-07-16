@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\JobsRequest;
-
+use App\Job;
 class JobsController extends Controller
 {
     /**
@@ -35,7 +35,11 @@ class JobsController extends Controller
      */
     public function store(JobsRequest $request)
     {
-        //
+        $arr = $request->all();
+        $arr['creator_user_id'] = auth()->user()->id;
+        $job = Job::create($arr);
+        flash()->success('تم إضافة وظيفة جديدة بنجاح')->important();
+        return redirect()->action('JobsController@show', ['id'=>$job->id]);
     }
 
     /**

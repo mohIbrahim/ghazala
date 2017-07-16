@@ -19,6 +19,7 @@ class CreateJobsTable extends Migration
             $table->string('name')->unique();
             $table->text('descriptions')->nullable();
             $table->text('comments')->nullable();
+            $table->integer('creator_user_id')->unsigned();
             $table->timestamps();
         });
     }
