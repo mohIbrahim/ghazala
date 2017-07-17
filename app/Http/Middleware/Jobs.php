@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Gates
+class Jobs
 {
     /**
      * Handle an incoming request.
@@ -28,43 +28,40 @@ class Gates
                 return $response;
         }
        
-        if($request->route()->getName() == 'gates.index'      && in_array('view_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.index'      && in_array('view_jobs', $permissions)){
             $response = $next($request);
         }else        
        
-        if($request->route()->getName() == 'gates.show'       && in_array('view_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.show'       && in_array('view_jobs', $permissions)){
            
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'gates.create'     && in_array('create_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.create'     && in_array('create_jobs', $permissions)){
 
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'gates.store'      && in_array('create_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.store'      && in_array('create_jobs', $permissions)){
 
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'gates.edit'       && in_array('update_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.edit'       && in_array('update_jobs', $permissions)){
             
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'gates.update'     && in_array('update_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.update'     && in_array('update_jobs', $permissions)){
             
             $response = $next($request);
         }else
 
-        if($request->route()->getName() == 'gates.destroy'    && in_array('delete_gates', $permissions)){
+        if($request->route()->getName() == 'jobs.destroy'    && in_array('delete_jobs', $permissions)){
 
             $response = $next($request);
         }else
-        if($request->route()->getName() == 'gates_index_ajax'     && in_array('view_gates', $permissions)){
-            
-            $response = $next($request);
-        }else
+                
         {
             flash()->warning('<h3><img src="'.asset("images/helper_images/logo-accessdenied.png").'" width="80">  Ask IT Manager for Permission!</h3>');
         }

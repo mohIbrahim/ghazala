@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title')
-	العضو  {{$member->name}}
+	الوظيفة  {{$job->name}}
 @endsection
 @section('content')
 	<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3  col-lg-6 col-lg-offset-3">
 		
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title text-center"><strong> {{$member->name}} :العضو</strong></h3>
+				<h3 class="panel-title text-center"><strong> {{$job->name}} :الوظيفة</strong></h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive ">
@@ -17,44 +17,40 @@
 						<tbody>
 
 								<tr>
-									<td>{{ $member->name }}</td>
-									<th>:اسم العضو</th>
+									<td>{{ $job->name }}</td>
+									<th>:اسم الوظيفة</th>
 								</tr>
 
 								
 
 								<tr>
-									<td>{{ $member->date_of_birth->age }}</td>
-									<th>:السن</th>
+									<td>{{ $job->descriptions }}</td>
+									<th>:وصف الوظيفة</th>
 								</tr>
 
 								<tr>
-									<td><a href="{{ action('OwnersController@show', ['slug'=>$member->owner->slug]) }}" target="_blank"> {{ $member->owner->name }}</a></td>
-									<th>:اسم مالك الوحدة التابع له</th>
+									<td>{{ $job->comments }}</td>
+									<th>:التعليقات</th>
 								</tr>
+								
 
 								<tr>
-									<td>{{ $member->creator->name }}</td>
-									<th>:إنشاء من قبل المستخدم</th>
-								</tr>
-
-								<tr>
-									<td>{{ $member->created_at }}</td>
+									<td>{{ $job->created_at }}</td>
 									<th>:تاريخ و وقت الإنشاء</th>
 								</tr>	
 
 								<tr>
-									<td>{{ $member->updated_at }}</td>
+									<td>{{ $job->updated_at }}</td>
 									<th>:تاريخ و وقت التعديل</th>
 								</tr>					
 								
-								@if(in_array('update_owners_family_members', $permissions))
+								@if(in_array('update_jobs', $permissions))
 									<tr>
-										<td><a href="{{action('OwnersFamilyMembersController@edit',['slug'=>$member->slug])  }}">تعديل</a></td>
+										<td><a href="{{action('JobsController@edit',['id'=>$job->id])  }}">تعديل</a></td>
 										<th>:تعديل</th>
 									</tr>
 								@endif
-								@if(in_array('delete_owners_family_members', $permissions))
+								@if(in_array('delete_jobs', $permissions))
 									<tr>
 										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
 										<th>:حذف</th>
@@ -71,9 +67,9 @@
 	</div>
 
 
-@include('partial.deleteConfirm',['name'=>$member->name,
-										'id'=>$member->id,
-										'message'=>'هل انت متأكد تريد حذف العضو',
-										'route'=>'OwnersFamilyMembersController@destroy'])
+@include('partial.deleteConfirm',['name'=>$job->name,
+										'id'=>$job->id,
+										'message'=>'هل انت متأكد تريد حذف الوظيفة',
+										'route'=>'JobsController@destroy'])
 	 
 @endsection

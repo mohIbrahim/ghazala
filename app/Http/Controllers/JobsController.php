@@ -8,13 +8,23 @@ use App\Job;
 class JobsController extends Controller
 {
     /**
+     * [__construct description]
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('jobs');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $jobs = Job::latest()->paginate(15);
+        return view('jobs.index', compact('jobs'));
     }
 
     /**
@@ -75,7 +85,7 @@ class JobsController extends Controller
      */
     public function update(JobsRequest $request, $id)
     {
-        $job = findOrFail($id);
+        $job = Job::findOrFail($id);
         $job->update($request->all());
         flash()->success('تم تعديل الوظيفة بنجاح')->important();
         return redirect()->action('JobsController@show', ['id'=>$job->id]);
@@ -89,6 +99,8 @@ class JobsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        $job->delete();
+        return redirect()->action('JobsController@index');
     }
 }

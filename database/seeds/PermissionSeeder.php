@@ -25,6 +25,7 @@ class PermissionSeeder extends Seeder
         $this->rentingContracts();
         $this->gates();
         $this->finance();
+        $this->jobs();
 
     }
 
@@ -410,6 +411,35 @@ class PermissionSeeder extends Seeder
             "name"              =>"delete_finance",
             "slug"              =>"delete-finance",
             "descriptions"      =>"delete finance",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+
+    private function jobs()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_jobs",
+            "slug"              =>"view-jobs",
+            "descriptions"      =>"view jobs",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_jobs",
+            "slug"              =>"create-jobs",
+            "descriptions"      =>"create jobs",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_jobs",
+            "slug"              =>"update-jobs",
+            "descriptions"      =>"update jobs",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_jobs",
+            "slug"              =>"delete-jobs",
+            "descriptions"      =>"delete jobs",
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }
