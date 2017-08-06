@@ -21,6 +21,7 @@
 								
 								<th>التعليقات</th>
 								<th>وصف الوظيفة</th>
+								<th>اسم القسم</th>
 								<th>اسم الوظيفة</th>
 							</tr>
 							
@@ -38,7 +39,8 @@
 									</td>									
 									
 									<td>{{ $job->comments }}</td>								
-									<td>{{ $job->descriptions }}</td>								
+									<td>{{ $job->descriptions }}</td>
+									<td>{{ $job->department }}</td>								
 									<td>
 										<a href="{{ action('JobsController@show', ['id'=>$job->id]) }}" target="_blank">{{ $job->name }}</a>
 									</td>

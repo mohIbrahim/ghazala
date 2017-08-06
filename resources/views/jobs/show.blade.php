@@ -21,6 +21,11 @@
 									<th>:اسم الوظيفة</th>
 								</tr>
 
+								<tr>
+									<td>{{ $job->department }}</td>
+									<th>:اسم القسم</th>
+								</tr>
+
 								
 
 								<tr>

@@ -17,6 +17,7 @@ class CreateJobsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('department')->unique();
             $table->text('descriptions')->nullable();
             $table->text('comments')->nullable();
             $table->integer('creator_user_id')->unsigned();
