@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('department', 'اسم القسم') !!}<span style="color: red"> *</span>
+		{!! Form::label('department', 'اسم القسم الذي تتبعة هذه الوظيفة') !!}<span style="color: red"> *</span>
 		{!! Form::text('department', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم القسم']) !!}
 	</div>
 

@@ -17,10 +17,11 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('ssn')->unique();
+            $table->string('phone')->nullable();
             $table->string('city')->nullable();
             $table->string('address')->nullable();
             $table->string('gender')->nullable();
-            $table->string('phone')->nullable();
             $table->dateTime('date_of_birth')->nullable();
             $table->string('personal_image')->nullable();
             $table->dateTime('date_of_hiring')->nullable();
