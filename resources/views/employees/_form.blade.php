@@ -2,7 +2,18 @@
 	@include('errors.list')
 	<div class="form-group">
 		{!! Form::label('name', ' الاسم ') !!}<span style="color: red"> *</span>
-		{!! Form::text('name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم المالك']) !!}
+		{!! Form::text('name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم الموظف']) !!}
+	</div>
+
+	<div class="form-group">
+		{!! Form::label('jobs[]', ' الوظيفة ') !!}<span style="color: red"> *</span>
+		{!! Form::select('jobs[]', $jobs, null, ['class'=>'form-control text-right', 'id'=>'select2', 'multiple']) !!}
+	</div>
+	{{(request()->name)}}
+
+	<div class="form-group">
+		{!! Form::label('phone', ' رقم التليفون') !!}<span style="color: red"> *</span>
+		{!! Form::text('phone', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم التليفون']) !!}
 	</div>
 
 	<div class="form-group">
@@ -11,99 +22,36 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('phone', ' رقم الموبيل 1 ') !!}<span style="color: red"> *</span>
-		{!! Form::text('phone', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم الموبيل 1']) !!}
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('city', ' الاسم ') !!}<span style="color: red"> *</span>
-		{!! Form::select('city', null, {{ $city }} , ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم المالك']) !!}
+		{!! Form::label('city', ' المدينة ') !!}
+		{!! Form::select('city', $cities, null, ['class'=>'form-control text-right selectpicker', 'placeholder'=>' أختر اسم المدينة', 'data-live-search'=>'true']) !!}
 	</div>
 	
 	<div class="form-group">
 		{!! Form::label('address', 'العنوان') !!}
-		{!! Form::text('address', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل العنوان']) !!}
+		{!! Form::textarea('address', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل العنوان']) !!}
 	</div>
 
-
-
-
-
-
-
+	<div class="form-group">
+		{!! Form::label('gender', ' الجنس ') !!}
+		{!! Form::select('gender',  ['male'=>'ذكر', 'female'=>'أنثى'] , null , ['class'=>'form-control text-right', 'placeholder'=>' أختر الجنس']) !!}
+	</div>
 
 	<div class="form-group">
 		{!! Form::label('date_of_birth', 'تاريخ الميلاد') !!}
 		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
 		{!! Form::text('date_of_birth',
-		 				isset($owner->date_of_birth)? $owner->date_of_birth->format('m/d/Y'):null,
+		 				isset($employee->date_of_birth)? $employee->date_of_birth->format('m/d/Y'):null,
 		 ['id'=>'datepicker', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ الميلاد']) !!}
 	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
 	<div class="form-group">
-		{!! Form::label('mobile_2', ' رقم الموبيل 2 ') !!}
-		{!! Form::text('mobile_2', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم الموبيل 2']) !!}
-	</div>
-
-
-	<div class="form-group">
-		{!! Form::label('telephone', ' رقم التليفون الارضي ') !!}
-		{!! Form::text('telephone', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم التليفون الارضي']) !!}
-	</div>
-
-
-	<div class="form-group">
-		{!! Form::label('email', ' البريد الإلكتروني الشخصي') !!}
-		{!! Form::text('email', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل البريد الإلكتروني الشخصي']) !!}
+		{!! Form::label('contact_person_name', 'اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول الموظف') !!}
+		{!! Form::text('contact_person_name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول الموظف']) !!}
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('work_email', ' البريد الإلكتروني الخاص بالعمل') !!}
-		{!! Form::text('work_email', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل البريد الإلكتروني الخاص بالعمل']) !!}
-	</div>
-
-
-	<div class="form-group">
-		{!! Form::label('contact_person_name', 'اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك') !!}
-		{!! Form::text('contact_person_name', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك']) !!}
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('contact_person_phone', 'رقم تليفون الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك') !!}
-		{!! Form::text('contact_person_phone', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم تليفون الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك']) !!}
-	</div>
-
-
-
-	<div class="form-group">
-		{!! Form::label('occupation', 'المهنة') !!}
-		{!! Form::text('occupation', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل المهنة']) !!}
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('bank_account_number', 'رقم الحساب البنكي') !!}
-		{!! Form::text('bank_account_number', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم الحساب البنكي']) !!}
+		{!! Form::label('contact_person_phone', 'رقم تليفون الشخص الذي يمكن الاتصال به فى حالة عدم الوصول الموظف') !!}
+		{!! Form::text('contact_person_phone', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم تليفون الشخص الذي يمكن الاتصال به فى حالة عدم الوصول الموظف']) !!}
 	</div>
 
 
@@ -112,15 +60,15 @@
 		{!! Form::file('personal_image', ['class'=>'form-control text-right', 'placeholder'=>' إدخل الصورة الشخصية']) !!}
 	</div>
 
-	@if(isset($owner->personal_image) && $owner->personal_image !== "no_image.png")
+	@if(isset($employee->personal_image) && $employee->personal_image !== "no_image.png")
 		<div class="form-group">
 			<div class="row">
 				
 				<div class="col-md-2">
 					<div class="checkbox">
 						<label>
-							<img src="{{asset('images/owner_images/'.$owner->personal_image)}}" class="img-responsive" alt="Image">
-							<input name="imageToDelete" type="checkbox" value="{{$owner->personal_image}}">
+							<img src="{{asset('images/employee_images/'.$employee->personal_image)}}" class="img-responsive" alt="Image">
+							<input name="imageToDelete" type="checkbox" value="{{$employee->personal_image}}">
 							قم بوضع علامة لحــذف الصورة
 						</label>
 					</div>
@@ -130,49 +78,28 @@
 		</div>
 	@endif
 
-
 	<div class="form-group">
-		{!! Form::label('contract_image', 'صورة من عقد بيع الوحدة') !!}
-		<p class="text-right">.pdf إدخل صورة من عقد البيع بالامتداد</p>
-		{!! Form::file('contract_image', ['class'=>'form-control text-right', 'placeholder'=>' إدخل صورة من عقد البيع بالامتداد PDF']) !!}
-	</div>
-
-	@if(isset($owner->contract_image))
-		<div class="form-group">
-			<div class="row">
-				
-				<div class="col-md-2">
-					<div class="checkbox">
-						<h3>
-							<a href="{{asset('images/owner_contracts_images/'.$owner->contract_image)}}"> العقد</a>
-						</h3>	
-							<input name="contractToDelete" type="checkbox" value="{{$owner->contract_image}}">
-							قم بوضع علامة لحــذف العقد
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	@endif
-
-	<div class="form-group">
-		{!! Form::label('contract_date', 'تاريخ عقد بيع الوحدة') !!}
+		{!! Form::label('date_of_hiring', 'تاريخ التعيين') !!}
 		<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
-		{!! Form::text('contract_date', 
-				isset($owner->contract_date)?$owner->contract_date->format('m/d/Y'): null,
-				['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ عقد بيع الوحدة']) !!}
+		{!! Form::text('date_of_hiring',
+		 				isset($employee->date_of_hiring)? $employee->date_of_hiring->format('m/d/Y'):null,
+		 ['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ التعيين']) !!}
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('owner_status', 'وضع المالك') !!}
-		{!! Form::select('owner_status', ['مالك حالي'=>'مالك حالي', 'مالك سابق'=>'مالك سابق'] , null, ['class'=>'form-control', 'placeholder'=>'أختر وضع المالك']) !!}
+		{!! Form::label('salary', ' قيمة الراتب ') !!}
+		{!! Form::text('salary', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل قيمة الراتب']) !!}
 	</div>
+
+	<div class="form-group">
+		{!! Form::label('status', ' الحالة الوظيفية ') !!}
+		{!! Form::select('status',  [1=>'حالي', 0=>'سابق'] , null , ['class'=>'form-control text-right', 'placeholder'=>' أختر الحالة الوظيفية']) !!}
+	</div>	
 
 	<div class="form-group">
 		{!! Form::label('comments', 'التعليقات') !!}
 		{!! Form::textarea('comments', null, ['id'=>'datepicker2', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تعليقاً']) !!}
 	</div>
-
 	
 	<button type="submit" class="btn btn-primary">حفظ</button>
 </div>
@@ -186,7 +113,7 @@
 
 		$(document).ready(function(){
 			$('#select2').select2({
-				placeholder: "أختار كود الوحدة",
+				placeholder: "أختر الوظيفة",
 			});
 		});
 		

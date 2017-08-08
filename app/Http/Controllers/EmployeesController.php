@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ghazala\PHPWorldCitiesArray\WordlCities;
+use App\Job;
+use App\Http\Requests\EmployeesRequest;
 
 class EmployeesController extends Controller
 {
@@ -26,14 +28,17 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        $res = [];
+        $cities = [];
         $wordCities = new WordlCities();
-        $cities = $wordCities->get_excerpt_array($wordCities->cities_array, ['EG'], 300);
+        $citiesObject = $wordCities->get_excerpt_array($wordCities->cities_array, ['EG'], 300);
         
-        foreach ( $cities as  $key=>$city) {                
-            $res = array_add($res, $key, $city['city']);
+        foreach ( $citiesObject as  $key=>$city) {                
+            $cities = array_add($cities, $key, $city['city']);
         }
-        return view('employees.create', compact('$res'));
+
+
+        $jobs = Job::all()->pluck('name', 'id');
+        return view('employees.create', compact('cities', 'jobs'));
         
 
     }
@@ -44,7 +49,7 @@ class EmployeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeesRequest $request)
     {
         //
     }

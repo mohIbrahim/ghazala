@@ -47,4 +47,13 @@ class Employee extends Model
         else
             $this->attributes['date_of_hiring'] = null;
     }
+
+    // /**
+    //  * Form model biding for jobs names ids 
+    //  * @return [type] [description]
+    //  */
+    // public function getJobsAttribute()
+    // {
+    //     return $this->units->pluck('id');
+    // }
 }
