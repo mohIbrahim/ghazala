@@ -18,4 +18,10 @@ class Job extends Model
     {
         return $this->belongsTo('\App\User', 'creator_user_id', 'id');
     }
+
+
+    public function employees()
+    {
+        return $this->belongsToMany('\App\Employee', 'employee_job')->withTimestamps();
+    }
 }

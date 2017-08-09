@@ -10,17 +10,21 @@ class Employee extends Model
     protected	$fillable 	=	[	
 		    						'name', 
 		    						'slug',
-		    						'ssn', 
-		    						'city',
-		    						'address',
-		    						'gender', 
+                                    'ssn', 
 		    						'phone', 
-		    						'date_of_birth',
+                                    'city',
+                                    'address',
+                                    'gender', 
+                                    'date_of_birth',
+                                    'contact_person_name',
+		    						'contact_person_phone',
 		    						'personl_image', 
 		    						'date_of_hiring',
 		    						'salary', 
 		    						'status',
-		    						'comments',
+                                    'comments',
+		    						'creator_user_id',
+
     							];
 
 	protected	$dates 		=	['date_of_birth', 'date_of_hiring'];
@@ -56,4 +60,14 @@ class Employee extends Model
     // {
     //     return $this->units->pluck('id');
     // }
+    
+    
+    /**
+     * [jobs description]
+     * @return [type] [description]
+     */
+    public function jobs()
+    {
+        return  $this->belongsToMany('\App\Job', 'employee_job')->withTimestamps();
+    }
 }

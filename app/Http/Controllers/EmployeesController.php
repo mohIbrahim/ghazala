@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ghazala\PHPWorldCitiesArray\WordlCities;
+use App\Employee;
 use App\Job;
 use App\Http\Requests\EmployeesRequest;
 
@@ -51,7 +52,21 @@ class EmployeesController extends Controller
      */
     public function store(EmployeesRequest $request)
     {
-        //
+        $formValues = $request->all();
+        $formvalues['creator_user_id'] = auth()->user()->id;
+
+        if ($request->hasFile('personal_image') && 
+            $request->file('personal_image')->isValid()) 
+        {
+            $image = $request->file('personal_image');
+            $imageNewName = str_random(64).'.'.$image->guessExtension();
+            $image->move('images/employees_images', $imageNewName);
+            $formValues['personal_image'] = $imageNewName;
+        }
+
+        $employee = Employee::create($formValues);
+        $employee->jobs()->attach($request->jobs);
+
     }
 
     /**

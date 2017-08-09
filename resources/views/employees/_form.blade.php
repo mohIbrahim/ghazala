@@ -6,11 +6,10 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('jobs[]', ' الوظيفة ') !!}<span style="color: red"> *</span>
+		{!! Form::label('jobs', ' الوظيفة ') !!}<span style="color: red"> *</span>
 		{!! Form::select('jobs[]', $jobs, null, ['class'=>'form-control text-right', 'id'=>'select2', 'multiple']) !!}
 	</div>
-	{{(request()->name)}}
-
+	
 	<div class="form-group">
 		{!! Form::label('phone', ' رقم التليفون') !!}<span style="color: red"> *</span>
 		{!! Form::text('phone', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم التليفون']) !!}
@@ -111,11 +110,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 	<script type="text/javascript">
 
-		$(document).ready(function(){
+		
 			$('#select2').select2({
 				placeholder: "أختر الوظيفة",
 			});
-		});
+	
 		
 	</script>
 @endsection
