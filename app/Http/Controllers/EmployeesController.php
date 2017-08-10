@@ -53,7 +53,9 @@ class EmployeesController extends Controller
     public function store(EmployeesRequest $request)
     {
         $formValues = $request->all();
-        $formvalues['creator_user_id'] = auth()->user()->id;
+
+        $formValues['creator_user_id'] = auth()->user()->id;
+        $formValues['slug'] = str_slug($request->input('name'));
 
         if ($request->hasFile('personal_image') && 
             $request->file('personal_image')->isValid()) 
@@ -66,6 +68,7 @@ class EmployeesController extends Controller
 
         $employee = Employee::create($formValues);
         $employee->jobs()->attach($request->jobs);
+        return $employee;
 
     }
 
@@ -75,9 +78,12 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $employee = Employee::where('slug', $slug)->first();
+
+        
+        return view('employees.show', compact('employee'));
     }
 
     /**

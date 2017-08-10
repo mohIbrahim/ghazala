@@ -6,6 +6,11 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('code', ' كود الموظف ') !!}<span style="color: red"> *</span>
+		{!! Form::text('code', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل كود الموظف']) !!}
+	</div>
+
+	<div class="form-group">
 		{!! Form::label('jobs', ' الوظيفة ') !!}<span style="color: red"> *</span>
 		{!! Form::select('jobs[]', $jobs, null, ['class'=>'form-control text-right', 'id'=>'select2', 'multiple']) !!}
 	</div>

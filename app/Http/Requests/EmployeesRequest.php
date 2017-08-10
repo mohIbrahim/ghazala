@@ -24,6 +24,7 @@ class EmployeesRequest extends FormRequest
     public function rules()
     {
         return  [
+                    'code'=>'required|unique:employees,code,'.$this->employee,
                     'name'=>'required|unique:employees,name,'.$this->employee,
                     'jobs'=>'required',
                     'phone'=>'required|numeric',
@@ -34,7 +35,9 @@ class EmployeesRequest extends FormRequest
     public function messages()
     {
         return  [
+                    'name.required'=>'برجاء إدخال كود الموظف',
                     'name.required'=>'برجاء إدخال اسم الموظف',
+                    'name.unique'=>'كود الموظف تم إدخالة من قبل برجاء اختيار كود آخر',
                     'name.unique'=>'اسم الموظف تم إدخالة من قبل برجاء اختيار اسم آخر',
                     'jobs.required'=>'برجاء أختيار الوظيفة',
                     'phone.required'=>'برجاء إدخال رقم تليفون الوظف',

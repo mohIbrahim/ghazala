@@ -1,6 +1,8 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 @import url('https://fonts.googleapis.com/css?family=Cairo');
+@import url('https://fonts.googleapis.com/css?family=Amiri');
+
 
 // Variables
 @import "variables";
@@ -12,6 +14,9 @@
 
 .arabic-font{	
 	font-family: 'Cairo', sans-serif;
+}
+.arabic-font2{
+	font-family: 'Amiri', serif;	
 }
 .arabic-direction{
 	direction: rtl;

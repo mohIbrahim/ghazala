@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Employee extends Model
 {
     protected	$table 		=	"employees";
     protected	$fillable 	=	[	
+                                    'code', 
 		    						'name', 
 		    						'slug',
                                     'ssn', 
@@ -18,7 +20,7 @@ class Employee extends Model
                                     'date_of_birth',
                                     'contact_person_name',
 		    						'contact_person_phone',
-		    						'personl_image', 
+		    						'personal_image', 
 		    						'date_of_hiring',
 		    						'salary', 
 		    						'status',
