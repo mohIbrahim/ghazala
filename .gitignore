@@ -24,6 +24,12 @@
 !/public/excel/membershipCards.xlsx
 !/public/excel/indebtedness.xlsx
 
+
+/public/images/employees_images/*.jpg
+/public/images/employees_images/*.jpeg
+/public/images/employees_images/*.png
+!/public/images/employees_images/no_image.png
+
 Homestead.json
 Homestead.yaml
 npm-debug.log

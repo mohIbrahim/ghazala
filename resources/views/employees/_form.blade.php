@@ -21,7 +21,7 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('ssn', 'رقم البطاقة') !!}
+		{!! Form::label('ssn', 'رقم البطاقة') !!}<span style="color: red"> *</span>
 		{!! Form::text('ssn', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل رقم البطاقة']) !!}
 	</div>
 

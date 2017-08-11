@@ -9,7 +9,44 @@
 @section('content')
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-7 col-lg-offset-1">
+		<div class="col-xs-10 col-xs-offset-1	col-sm-8 col-sm-offset-2	col-md-3 col-md-offset-1	col-lg-2 col-lg-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+					<div class="row">						
+						<img src="{{ asset('images/employees_images/'.$employee->personal_image)}}" width="220px" class="img-responsive img-thumbnail img-circle center-block" alt="Image">
+						<br>
+					</div>
+
+					<div class="row">						
+						<table class="table table-striped table-hover text-center arabic-direction">
+
+							<tbody>
+								<tr>
+									<td><strong>{{$employee->name}}</strong></td>									
+								</tr>
+								<tr>
+									<td>
+										<strong>
+											@if($employee->date_of_birth)
+												{{$employee->date_of_birth->age}} سنة - {{$employee->gender}}
+											@endif
+										</strong>
+									</td>
+								</tr>
+
+								<tr>
+									<td><strong>{!!(($employee->status)?"<span style='color:#2cc421'>موظف حالى فى الخدمة</span>":"موظف سابق")!!}</strong></td>									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12	col-sm-10 col-sm-offset-1	col-md-7 col-md-offset-0	col-lg-8 col-lg-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -61,99 +98,67 @@
 
 								<tr>
 									<td>المدينة</td>
-									<td>{{ $employee->phone }}</td>
+									<td>{{ $employee->city }}</td>
 								</tr>
 
 								<tr>
 									<td>العنوان</td>
-									<td>{{ $employee->phone }}</td>
+									<td>{{ $employee->address }}</td>
 								</tr>
 
 								<tr>
 									<td>تاريخ الميلاد</td>
-									<td>{{ $employee->phone }}</td>
+									<td>{{ $employee->date_of_birth }}</td>
 								</tr>
 
 								<tr>
 									<td>اسم الشخص الذي يمكن<br> الاتصال به فى حالة<br> عدم الوصول للموظف</td>
-									<td>{{ $employee->phone }}</td>
+									<td>{{ $employee->contact_person_name }}</td>
 								</tr>
 
 								<tr>
 									<td>رقم تليفون الشخص<br> الذي يمكن الاتصال به <br>فى حالة عدم الوصول للموظف</td>
-									<td>{{ $employee->phone }}</td>
+									<td>{{ $employee->contact_person_phone }}</td>
 								</tr>
 
 								<tr>
 									<td>تاريخ التعيين</td>
-									<td>{{ $employee->phone }}</td>
-								</tr>
-
-								<tr>
-									<td>قيمة الراتب</td>
-									<td>{{ $employee->phone }}</td>
-								</tr>
-
-								<tr>
-									<td>التعليقات</td>
-									<td>{{ $employee->phone }}</td>
-								</tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
-			<div class="panel panel-default">
-				<div class="panel-body">
-
-					<div class="row">						
-						<img src="{{ asset('images/employees_images/'.$employee->personal_image)}}" class="img-responsive  img-thumbnail img-circle center-block" alt="Image">
-						<br>
-					</div>
-
-					<div class="row">						
-						<table class="table table-striped table-hover text-center arabic-direction">
-
-							<tbody>
-								<tr>
-									<td><strong>{{$employee->name}}</strong></td>									
-								</tr>
-								<tr>
 									<td>
-										<strong>
-											@if($employee->date_of_birth)
-												{{$employee->date_of_birth->age}} سنة - {{$employee->gender}}
-											@endif
-										</strong>
+										@if($employee->date_of_hiring)
+											{{ $employee->date_of_hiring->format('d-m-Y') }}
+										@endif
 									</td>
 								</tr>
 
 								<tr>
-									<td><strong>{!!(($employee->status)?"<span style='color:#2cc421'>موظف حالى فى الخدمة</span>":"موظف سابق")!!}</strong></td>									
+									<td>قيمة الراتب</td>
+									<td>{{ $employee->salary }} جنية</td>
 								</tr>
+
+								<tr>
+									<td>التعليقات</td>
+									<td>{{ $employee->comments }}</td>
+								</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							</tbody>
 						</table>
 					</div>
-					
 				</div>
 			</div>
 		</div>
+
 	</div>
 @endsection

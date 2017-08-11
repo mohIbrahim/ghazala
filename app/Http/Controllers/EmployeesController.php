@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Ghazala\PHPWorldCitiesArray\WordlCities;
+use App\Ghazala\EgyptCities\EgyptCities;
 use App\Employee;
 use App\Job;
 use App\Http\Requests\EmployeesRequest;
 
 class EmployeesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +23,7 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -29,18 +33,10 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        $cities = [];
-        $wordCities = new WordlCities();
-        $citiesObject = $wordCities->get_excerpt_array($wordCities->cities_array, ['EG'], 300);
-        
-        foreach ( $citiesObject as  $key=>$city) {                
-            $cities = array_add($cities, $key, $city['city']);
-        }
-
-
+        $egyptCities = new EgyptCities();        
+        $cities = $egyptCities->getCities();
         $jobs = Job::all()->pluck('name', 'id');
         return view('employees.create', compact('cities', 'jobs'));
-        
 
     }
 
@@ -68,7 +64,8 @@ class EmployeesController extends Controller
 
         $employee = Employee::create($formValues);
         $employee->jobs()->attach($request->jobs);
-        return $employee;
+        flash()->success('تم إضافة الموظف بنجاح')->important();
+        return redirect()->action('EmployeesController@show', ['slug'=>$employee->slug]);
 
     }
 
