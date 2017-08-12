@@ -26,7 +26,7 @@ class CreateEmployeesTable extends Migration
             $table->dateTime('date_of_birth')->nullable();
             $table->string('contact_person_name')->nullable();
             $table->string('contact_person_phone')->nullable();
-            $table->string('personal_image')->nullable();
+            $table->string('personal_image')->nullable()->default('no_image.png');
             $table->dateTime('date_of_hiring')->nullable();
             $table->string('salary')->nullable()->default('0');
             $table->boolean('status')->nullable();

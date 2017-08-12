@@ -14,7 +14,7 @@
 				<div class="panel-body">
 
 					<div class="row">						
-						<img src="{{ asset('images/employees_images/'.$employee->personal_image)}}" width="220px" class="img-responsive img-thumbnail img-circle center-block" alt="Image">
+						<img src="{{ asset('images/employees_images/'.$employee->personal_image)}}" width="140px" class="img-responsive img-thumbnail img-circle center-block" alt="Image">
 						<br>
 					</div>
 
@@ -36,8 +36,19 @@
 								</tr>
 
 								<tr>
-									<td><strong>{!!(($employee->status)?"<span style='color:#2cc421'>موظف حالى فى الخدمة</span>":"موظف سابق")!!}</strong></td>									
+									<td><strong>{!!(($employee->status)?"<span style='color:#2cc421'>موظف حالى فى الخدمة</span>":"<span style='color:#ce1414'>موظف سابق</span>")!!}</strong></td>									
 								</tr>
+
+								@if(in_array('update_employees', $permissions))
+									<tr>
+										<td><a href="{{action('EmployeesController@edit',['slug'=>$employee->slug])  }}">تعديل</a></td>									
+									</tr>
+								@endif
+								@if(in_array('delete_employees', $permissions))
+									<tr>
+										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>										
+									</tr>
+								@endif
 							</tbody>
 						</table>
 					</div>
@@ -108,7 +119,11 @@
 
 								<tr>
 									<td>تاريخ الميلاد</td>
-									<td>{{ $employee->date_of_birth }}</td>
+									<td>
+										@if($employee->date_of_birth)
+											{{ $employee->date_of_birth->format('d-m-Y') }}
+										@endif
+									</td>
 								</tr>
 
 								<tr>
@@ -132,28 +147,19 @@
 
 								<tr>
 									<td>قيمة الراتب</td>
-									<td>{{ $employee->salary }} جنية</td>
+									<td>
+										@if(in_array('view_finance', $permissions))
+											{{ $employee->salary }} جنية
+										@endif
+									</td>
 								</tr>
 
 								<tr>
 									<td>التعليقات</td>
 									<td>{{ $employee->comments }}</td>
 								</tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 							</tbody>
+
 						</table>
 					</div>
 				</div>
@@ -161,4 +167,9 @@
 		</div>
 
 	</div>
+
+	@include('partial.deleteConfirm',['name'=>$employee->name,
+										'id'=>$employee->id,
+										'message'=>'هل انت متأكد تريد حذف الموظف',
+										'route'=>'EmployeesController@destroy'])
 @endsection

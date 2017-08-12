@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'renters'                               =>  \App\Http\Middleware\Renters::class,
         'renting_contracts'                     =>  \App\Http\Middleware\RentingContracts::class,
         'gates'                                 =>  \App\Http\Middleware\Gates::class,
-        'jobs'                                 =>  \App\Http\Middleware\Jobs::class,
+        'jobs'                                  =>  \App\Http\Middleware\Jobs::class,
+        'employees'                             =>   \App\Http\Middleware\Employees::class,
     ];
 }

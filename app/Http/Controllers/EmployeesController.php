@@ -15,6 +15,7 @@ class EmployeesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('employees');
     }
     /**
      * Display a listing of the resource.
@@ -89,9 +90,12 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $employee = Employee::where('slug', $slug)->first();
+        $cities = $egyptCities->getCities();
+        $jobs = Job::all()->pluck('name', 'id');
+        return view('employees.edit', compact('employee', 'cities', 'jobs'));
     }
 
     /**

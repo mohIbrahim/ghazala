@@ -9,7 +9,7 @@
 				<h3 class="panel-title"><strong>  {{$owner->code}} :تعديل المالك</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::model($owner,['method'=>'PATCH', 'action'=>['OwnersController@update', 'id'=>$owner->id], 'files'=>true]) !!}
+				{!! Form::model($employee,['method'=>'PATCH', 'action'=>['EmployeesController@update', 'id'=>$owner->id], 'files'=>true]) !!}
 					@include('owners._form')
 				{!! Form::close() !!}				
 			</div>

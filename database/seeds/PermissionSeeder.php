@@ -26,6 +26,7 @@ class PermissionSeeder extends Seeder
         $this->gates();
         $this->finance();
         $this->jobs();
+        $this->employees();
 
     }
 
@@ -443,6 +444,39 @@ class PermissionSeeder extends Seeder
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }
+
+
+
+    private function employees()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_employees",
+            "slug"              =>"view-employees",
+            "descriptions"      =>"view employees",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_employees",
+            "slug"              =>"create-employees",
+            "descriptions"      =>"create employees",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_employees",
+            "slug"              =>"update-employees",
+            "descriptions"      =>"update employees",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_employees",
+            "slug"              =>"delete-employees",
+            "descriptions"      =>"delete employees",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+
+
 
 
 
