@@ -93,6 +93,7 @@ class EmployeesController extends Controller
     public function edit($slug)
     {
         $employee = Employee::where('slug', $slug)->first();
+        $egyptCities =  new EgyptCities();
         $cities = $egyptCities->getCities();
         $jobs = Job::all()->pluck('name', 'id');
         return view('employees.edit', compact('employee', 'cities', 'jobs'));
@@ -105,9 +106,10 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmployeesRequest $request, $slug)
     {
-        //
+        $employee = Employee::where('slug', $slug)->first();
+        
     }
 
     /**

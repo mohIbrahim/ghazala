@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Excel;
 class DataEntryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *

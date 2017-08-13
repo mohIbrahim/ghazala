@@ -71,7 +71,7 @@
 				<div class="col-md-2">
 					<div class="checkbox">
 						<label>
-							<img src="{{asset('images/employee_images/'.$employee->personal_image)}}" class="img-responsive" alt="Image">
+							<img src="{{asset('images/employees_images/'.$employee->personal_image)}}" class="img-responsive" alt="Image">
 							<input name="imageToDelete" type="checkbox" value="{{$employee->personal_image}}">
 							قم بوضع علامة لحــذف الصورة
 						</label>
