@@ -68,7 +68,11 @@
                                     <td>
                                         {{(($employee->status)? "حالي":"سابق")}}                                        
                                     </td>                                    
-                                    <td> {{ $employee->name }} </td>
+                                    <td>
+                                        <a href="{{action('EmployeesController@show', ['slug'=>$employee->slug])}}" target="_blank"> 
+                                            {{ $employee->name }}
+                                        </a>
+                                     </td>
                                                                      
                                 </tr>
                             @endforeach
@@ -96,6 +100,23 @@
     <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
     <script>
         $(document).ready(function(){
+
+            $('#op').on('keyup',function(){
+                var key = $('#op').val();
+                $.ajax({
+                    url:"{{action('EmployeesController@indexAjax')}}",
+                    type:"GET",
+                    data:"key="+key,
+                    dataType:'script',
+                    timeout: 3000,
+                    beforeSend:function(http){
+                        $('#search_results').html('Loading..');
+                    },
+                    success:function (response, status, http) {
+                        $('#search_results').html(response);
+                    },
+                });
+            });
 
             $("#employees").dataTable( {
                 "paging": false,

@@ -179,4 +179,93 @@ class EmployeesController extends Controller
 
 
 
+    public function indexAjax()
+    {
+       $key = request()->key;
+
+       $startTable = '<div class="table-responsive"><table id="owners" class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
+       $tHead = '<thead>
+                       <tr>                           
+                            <td><strong>تاريخ التعيين</strong></td>
+                            <td><strong>السن</strong></td>
+                            <td><strong>المدينة  </strong></td>
+                            <td><strong>الرقم القومى</strong></td>
+                            <td><strong>كود الموظف</strong></td>
+                            <td><strong>الوظائف</strong></td>
+                            <td><strong>الحالة الوظيفية</strong></td>
+                            <td><strong>الاسم </strong></td>
+                       </tr>
+                </thead>';
+        $tableBody = '<tbody>';
+        $unitsCodes = '';
+
+        
+
+        $owners = Owner::where('name', 'like', '%'.$key.'%')
+                            ->orWhere('owner_status', 'like', '%'.$key.'%')
+                             ->orWhereHas('units', function($query) use($key) {
+                            $query->where('code', 'like', '%'.$key.'%');
+                            })->get();
+        foreach ($owners as $key => $owner) 
+        {
+
+            foreach ($owner->units as $key => $unit) 
+            {
+                $unitsCodes .= '<p><a href="'.action('UnitsController@show', ['id'=>$unit->id]).'">'.$unit->code.'</a></p>' ;
+            }
+
+            $tableBody .= '<tr>                                    
+                                    
+                                <td>'.$owner->owner_status.'</td>
+                                <td>'.$owner->occupation.'</td>
+                                <td>'.$owner->address.'</td>
+                                <td>'.$owner->contact_person_phone.'</td>
+                                <td>'.$owner->contact_person_name.'</td>
+                                <td>'.$owner->work_email.'</td>
+                                <td>'.$owner->email.'</td>
+                                <td>'.$owner->telephone.'</td>
+                                <td>'.$owner->mobile_2.'</td>
+                                <td>'.$owner->mobile_1.'</td>
+                                <td>'.(($owner->date_of_birth)?$owner->date_of_birth->age:'').'</td>
+                                <td>'.$owner->ssn.'</td>
+                                <td>'.$unitsCodes.'</td>
+                                <td><a href="'.action("OwnersController@show",["slug"=>$owner->slug]).'" target="_blank">'.$owner->name.'</a></td>
+                                <td>
+                                    <img src="'. asset('images/owner_images/'.$owner->personal_image) .'" class="img-responsive" alt="Image" width="30px">
+                                </td>
+                                <td>'.$owner->id.'</td>
+                        </tr>';
+            $unitsCodes = '';
+        }
+        $endTable = '</table></div>
+
+        <script>
+        $("#owners").dataTable( {
+                "paging": false,
+                "searching": false,
+                dom: "Bfrtip",
+                buttons: [
+                ';
+                
+                if(in_array('create_owners', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray()))
+                {
+                  $endTable .=  '"copy", "csv", "excel", "print"';
+                }
+                $endTable .='
+
+                ]
+            } );
+    </script>
+
+
+        ';
+        
+            return $startTable.$tHead.$tableBody.$endTable;
+            
+        
+        
+    }
+
+
+
 }

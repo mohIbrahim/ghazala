@@ -62,6 +62,13 @@ class Employees
        
             $response = $next($request);
         }else
+
+        if($request->route()->getName() == 'employees_gates_index_ajax'    && in_array('view_employees', $permissions)){
+
+            $response = $next($request);
+        }
+
+        else
         {
             flash()->warning('<h3><img src="'.asset("images/helper_images/logo-accessdenied.png").'" width="80">  Ask IT Manager for Permission!</h3>');
         }

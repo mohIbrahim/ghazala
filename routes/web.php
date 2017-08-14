@@ -60,5 +60,6 @@ Route::get('/clear-cache', function() {
  	Route::resource('jobs', 'JobsController');
  //Employees
  	Route::resource('employees', 'EmployeesController');
+ 	Route::get('employees_gates_index_ajax', 'EmployeesController@indexAjax')->name('employees_gates_index_ajax');
 
 
