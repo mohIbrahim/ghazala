@@ -70,6 +70,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'jobs.show',
 
                 'employees.show',
+                'employees.index',
             ];
 
         view()->composer($v, function($view){

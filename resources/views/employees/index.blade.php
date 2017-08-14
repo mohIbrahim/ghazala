@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    عرض المُلاَّك 
+   عرض كل الموظفين
 @endsection
 @section('head')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
@@ -13,7 +13,7 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title text-center"><strong>عرض المُلاَّك</strong></h3>
+            <h3 class="panel-title text-center"><strong>عرض كل الموظفين </strong></h3>
         </div>
         <div class="panel-body">
 
@@ -29,64 +29,54 @@
             <div id="search_results">
                {{-- resutls --}}
                 <div class="table-responsive">
-                    <table id="owners" class="table table-condensed table-hover table-bordered text-center">
+                    <table id="employees" class="table table-condensed table-hover table-bordered text-center">
                        <thead>
-                            <tr>                            
-                                <td><strong>حالة المالك</strong></td>
-                                <td><strong>المهنة</strong></td>
-                                <td><strong>العنوان</strong></td>
-                                <td><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                                <td><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                                <td><strong>الايميل الخاص بالعمل</strong></td>
-                                <td><strong>الايميل الشخصى</strong></td>
-                                <td><strong>التليفون الارضي</strong></td>
-                                <td><strong>موبيل 2</strong></td>
-                                <td><strong>موبيل 1</strong></td>
+                            <tr>
+                                <td><strong>تاريخ التعيين</strong></td>
                                 <td><strong>السن</strong></td>
-                                <td><strong>رقم البطاقة</strong></td>
-                                <td><strong>أرقام الوحدات</strong></td>
-                                <td><strong>الاسم</strong></td>
-                                <td><strong>الصورة الشخصية</strong></td>
-                                <td><strong>الرقم</strong></td>
+                                <td><strong>المدينة  </strong></td>
+                                <td><strong>الرقم القومى</strong></td>
+                                <td><strong>كود الموظف</strong></td>
+                                <td><strong>الوظائف</strong></td>
+                                <td><strong>الحالة الوظيفية</strong></td>
+                                <td><strong>الاسم </strong></td>
+                           
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach($owners as $key=>$owner)
+                            @foreach($employees as $key=>$employee)
                                 <tr>
-                                    <td>{{$owner->owner_status}}</td>
-                                    <td>{{$owner->occupation}}</td>
-                                    <td>{{$owner->address}}</td>
-                                    <td>{{$owner->contact_person_phone}}</td>
-                                    <td>{{$owner->contact_person_name}}</td>
-                                    <td>{{$owner->work_email}}</td>
-                                    <td>{{$owner->email}}</td>
-                                    <td>{{$owner->telephone}}</td>
-                                    <td>{{$owner->mobile_2}}</td>
-                                    <td>{{$owner->mobile_1}}</td>
-                                    <td>
-                                        @if($owner->date_of_birth)
-                                            {{$owner->date_of_birth->age}}
+                                    <td> 
+                                        @if($employee->date_of_hiring)
+                                            {{ $employee->date_of_hiring->format('d-m-Y') }}
                                         @endif
                                     </td>
-                                    <td>{{$owner->ssn}}</td>
+                                    <td> 
+                                        @if($employee->date_of_birth)
+                                             {{ $employee->date_of_birth->age }} 
+                                        @endif
+                                    </td>
+                                    <td> {{ $employee->city }} </td>
+                                    <td> {{ $employee->ssn }} </td>
+                                    <td> {{ $employee->code }} </td>
                                     <td>
-                                        @foreach($owner->units as $unit)
-                                            <p><a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}"> {{ $unit->code }} </a></p>
+                                        @foreach($employee->jobs as $key => $job )
+                                            {{ $job->name }} &bull; <br>                                            
                                         @endforeach
                                     </td>
-                                    <td><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{$owner->name}}</a></td>
                                     <td>
-                                        <img src="{{ asset("images/owner_images/".$owner->personal_image) }}" class="img-responsive" alt="Image" width="30px">
-                                    </td>
-                                    <td>{{$owner->id}}</td>
+                                        {{(($employee->status)? "حالي":"سابق")}}                                        
+                                    </td>                                    
+                                    <td> {{ $employee->name }} </td>
+                                                                     
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
 
-            {{ $owners->links() }}
+            {{ $employees->links() }}
             </div>
 
         </div>
@@ -106,25 +96,8 @@
     <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('#op').on('keyup',function(){
-                var key = $('#op').val();
-                $.ajax({
-                    url:"{{action('OwnersController@indexAjax')}}",
-                    type:"GET",
-                    data:"key="+key,
-                    dataType:'script',
-                    timeout: 3000,
-                    beforeSend:function(http){
-                        $('#search_results').html('Loading..');
-                    },
-                    success:function (response, status, http) {
-                        $('#search_results').html(response);
-                    },
-                });
-            });
 
-
-            $("#owners").dataTable( {
+            $("#employees").dataTable( {
                 "paging": false,
                 "searching": false,
                 dom: 'Bfrtip',

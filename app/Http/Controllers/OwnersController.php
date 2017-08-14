@@ -178,8 +178,12 @@ class OwnersController extends Controller
     public function destroy($id)
     {
         $owner = Owner::findOrFail($id);
+        
+        if($owner->personal_image !== "no_image.png")
+        {
+            $this->deleteFile('images/owner_images/'.$owner->personal_image);
+        }
 
-        $this->deleteFile('images/owner_images/'.$owner->personal_image);
         $this->deleteFile('images/owner_contracts_images/'.$owner->contract_image);
 
         $owner->delete();

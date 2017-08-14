@@ -23,6 +23,7 @@ class EmployeesRequest extends FormRequest
      */
     public function rules()
     {
+        
         return  [
                     'code'=>'required|unique:employees,code,'.$this->employee,
                     'name'=>'required|unique:employees,name,'.$this->employee,

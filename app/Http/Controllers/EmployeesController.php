@@ -24,7 +24,8 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        
+        $employees = Employee::latest()->paginate(35);
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -106,9 +107,38 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeesRequest $request, $slug)
+    public function update(EmployeesRequest $request, $id)
     {
-        $employee = Employee::where('slug', $slug)->first();
+        $employee = Employee::findOrFail($id);
+
+        $formValues = $request->all();
+        $formValues['slug'] = str_slug($request->name);
+
+
+        //if we need to delete old images
+        if(isset($request->imageToDelete) && !empty($request->imageToDelete))
+        {
+            $this->deleteFile('images/employees_images/'.$request->imageToDelete);
+            $employee->personal_image = 'no_image.png';
+        }
+        //update new image if uploaded
+        if ($request->hasFile('personal_image') && 
+            $request->file('personal_image')->isValid()) 
+        {
+            $image = $request->file('personal_image');
+            $imageNewName = str_random(64).'.'.$image->guessExtension();
+            $image->move('images/employees_images', $imageNewName);
+            $formValues['personal_image'] = $imageNewName;
+            if($employee->personal_image !== "no_image.png")
+            {
+                $this->deleteFile('images/employees_images/'.$employee->personal_image);
+            }
+        }
+
+        $employee->update($formValues);
+        $employee->jobs()->sync($request->jobs);
+        flash()->success('تم تعديل الموظف بنجاح')->important();
+        return redirect()->action('EmployeesController@show', ['slug'=>$employee->slug]);
         
     }
 
@@ -120,6 +150,33 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        if($employee->personal_image !== "no_image.png")
+        {
+            $this->deleteFile('images/employees_images/'.$employee->personal_image);
+        }
+        $employee->delete();
+        flash()->success('تم حذف الموظف بنجاح')->important();
+        return redirect()->action('EmployeesController@index');
     }
+
+
+    /**
+     * [deleteFile description]
+     * @param  [type] $source [description]
+     * @return [type]         [description]
+     */
+    private function deleteFile($source)
+    {        
+        if(file_exists($source)){
+            try{
+                unlink(public_path().'/'.$source);
+            }catch(\Exception $e){
+                return $e->getMessage();
+            }
+        }    
+    }
+
+
+
 }

@@ -9,7 +9,7 @@
 				<h3 class="panel-title"><strong>  {{$employee->name}} :تعديل الموظف</strong></h3>
 			</div>
 			<div class="panel-body">				
-				{!! Form::model($employee,['method'=>'PATCH', 'action'=>['EmployeesController@update', 'slug'=>$employee->slug], 'files'=>true]) !!}
+				{!! Form::model($employee,['method'=>'PATCH', 'action'=>['EmployeesController@update', 'id'=>$employee->id], 'files'=>true]) !!}
 					@include('employees._form')
 				{!! Form::close() !!}				
 			</div>
