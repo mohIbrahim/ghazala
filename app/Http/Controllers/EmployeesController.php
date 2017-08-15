@@ -180,10 +180,18 @@ class EmployeesController extends Controller
 
 
     public function indexAjax()
-    {
-       $key = request()->key;
+    {  
+        $key = request()->key;
 
-       $startTable = '<div class="table-responsive"><table id="owners" class="table table-condensed table-hover table-bordered text-center" id="owners-table">';
+        $employees = Employee::where('name', 'like', '%'.$key.'%')
+                                ->orWhereHas('jobs', function($query) use($key) 
+                             {
+                                $query->where('name', 'like', '%'.$key.'%')
+                                      ->orWhere('department', 'like', '%'.$key.'%');
+                            })->get();
+
+       $startTable ='<div class="table-responsive">
+                    <table id="employees" class="table table-condensed table-hover table-bordered text-center">';
        $tHead = '<thead>
                        <tr>                           
                             <td><strong>تاريخ التعيين</strong></td>
@@ -201,46 +209,34 @@ class EmployeesController extends Controller
 
         
 
-        $owners = Owner::where('name', 'like', '%'.$key.'%')
-                            ->orWhere('owner_status', 'like', '%'.$key.'%')
-                             ->orWhereHas('units', function($query) use($key) {
-                            $query->where('code', 'like', '%'.$key.'%');
-                            })->get();
-        foreach ($owners as $key => $owner) 
+        foreach ($employees as $key => $employee) 
         {
 
-            foreach ($owner->units as $key => $unit) 
-            {
-                $unitsCodes .= '<p><a href="'.action('UnitsController@show', ['id'=>$unit->id]).'">'.$unit->code.'</a></p>' ;
-            }
-
-            $tableBody .= '<tr>                                    
-                                    
-                                <td>'.$owner->owner_status.'</td>
-                                <td>'.$owner->occupation.'</td>
-                                <td>'.$owner->address.'</td>
-                                <td>'.$owner->contact_person_phone.'</td>
-                                <td>'.$owner->contact_person_name.'</td>
-                                <td>'.$owner->work_email.'</td>
-                                <td>'.$owner->email.'</td>
-                                <td>'.$owner->telephone.'</td>
-                                <td>'.$owner->mobile_2.'</td>
-                                <td>'.$owner->mobile_1.'</td>
-                                <td>'.(($owner->date_of_birth)?$owner->date_of_birth->age:'').'</td>
-                                <td>'.$owner->ssn.'</td>
-                                <td>'.$unitsCodes.'</td>
-                                <td><a href="'.action("OwnersController@show",["slug"=>$owner->slug]).'" target="_blank">'.$owner->name.'</a></td>
+            $tableBody .= '<tr>
+                                <td>'.(($employee->date_of_hiring)?$employee->date_of_hiring->format('d-m-Y'):"").'</td>
+                                <td>'.(($employee->date_of_birth)?$employee->date_of_birth->age:"").'</td>
+                                <td>'.$employee->city.'</td>
+                                <td>'.$employee->ssn.'</td>
+                                <td>'.$employee->code.'</td>
+                                <td>';
+                                    foreach($employee->jobs as $job){
+                                        $tableBody .= $job->name."&bull; <br>";
+                                    }
+            $tableBody .= '     </td>
+                                <td>'.$employee->status.'</td>
+                                
                                 <td>
-                                    <img src="'. asset('images/owner_images/'.$owner->personal_image) .'" class="img-responsive" alt="Image" width="30px">
+                                    <a href="'.action("EmployeesController@show",["slug"=>$employee->slug]).'" target="_blank">'.$employee->name.'
+                                    </a>
                                 </td>
-                                <td>'.$owner->id.'</td>
                         </tr>';
-            $unitsCodes = '';
+            
         }
-        $endTable = '</table></div>
+        $endTable = '</table>
+        </div>
 
-        <script>
-        $("#owners").dataTable( {
+    <script>
+        $("#employees").dataTable( {
                 "paging": false,
                 "searching": false,
                 dom: "Bfrtip",
@@ -255,10 +251,7 @@ class EmployeesController extends Controller
 
                 ]
             } );
-    </script>
-
-
-        ';
+    </script>';
         
             return $startTable.$tHead.$tableBody.$endTable;
             

@@ -27,6 +27,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
 
+                        {{-- Jobs and Employees --}}
+                        @include('layouts.main_nav.jobs_employees_tab')
                         {{-- gate --}}
                         @include('layouts.main_nav.gate_tab')
                         {{-- Renters --}}

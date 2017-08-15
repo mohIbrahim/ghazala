@@ -13,8 +13,6 @@
                 <li class="dropdown-header text-center"><h4>استعلامات</h4></li>
                 <li><a href="{{ action('GatesController@index') }}" class="text-center">كروت العضوية</a></li>               
             @endif
-
-            <li role="separator" class="divider"></li>            
             
         </ul>
     </li>

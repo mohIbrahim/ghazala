@@ -113,6 +113,7 @@
                         $('#search_results').html('Loading..');
                     },
                     success:function (response, status, http) {
+                        
                         $('#search_results').html(response);
                     },
                 });

@@ -2,7 +2,7 @@
     <li class="dropdown">
         @if(in_array('view_renters',$permissions))
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-           <strong>المستأجرين و عقود الإيجار</strong>
+           <strong>المستأجرين وعقود الإيجار</strong>
             <span class="caret"></span>
         </a>
         @endif
