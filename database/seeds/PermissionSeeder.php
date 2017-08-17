@@ -27,6 +27,7 @@ class PermissionSeeder extends Seeder
         $this->finance();
         $this->jobs();
         $this->employees();
+        $this->complaints();
 
     }
 
@@ -471,6 +472,35 @@ class PermissionSeeder extends Seeder
             "name"              =>"delete_employees",
             "slug"              =>"delete-employees",
             "descriptions"      =>"delete employees",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);
+    }
+
+
+    private function complaints()
+    {
+        DB::table('permissions')->insert([
+            "name"              =>"view_complaints",
+            "slug"              =>"view-complaints",
+            "descriptions"      =>"view complaints",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"create_complaints",
+            "slug"              =>"create-complaints",
+            "descriptions"      =>"create complaints",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"update_complaints",
+            "slug"              =>"update-complaints",
+            "descriptions"      =>"update complaints",
+            "created_at"=>Carbon\Carbon::now(),
+            ]);        
+        DB::table('permissions')->insert([
+            "name"              =>"delete_complaints",
+            "slug"              =>"delete-complaints",
+            "descriptions"      =>"delete complaints",
             "created_at"=>Carbon\Carbon::now(),
             ]);
     }
