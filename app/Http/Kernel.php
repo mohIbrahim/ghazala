@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'gates'                                 =>  \App\Http\Middleware\Gates::class,
         'jobs'                                  =>  \App\Http\Middleware\Jobs::class,
         'employees'                             =>   \App\Http\Middleware\Employees::class,
+        'departments'                           =>   \App\Http\Middleware\Departments::class,
     ];
 }

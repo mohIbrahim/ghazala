@@ -57,7 +57,7 @@
 								@endif
 								@if(in_array('delete_jobs', $permissions))
 									<tr>
-										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوحدة</button></td>
+										<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف الوظيفة</button></td>
 										<th>:حذف</th>
 									</tr>
 								@endif

@@ -67,6 +67,9 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 'gates.index',
 
+                'departments.show',
+                'departments.index',
+                
                 'jobs.show',
 
                 'employees.show',
@@ -74,6 +77,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 'complaints.show',
                 'complaints.index',
+
             ];
 
         view()->composer($v, function($view){
