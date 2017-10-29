@@ -219,7 +219,7 @@ class UnitsController extends Controller
 
                                 <td>'.$unit->updated_at.'</td>';
                                 if(in_array('view_finance', auth()->user()->roles()->first()->permissions()->pluck('name')->toArray()))
-                                    $tableBody .= '<td>'. $unit->the_current_unit_debt .' EGP</td>';
+                                    $tableBody .= '<td>'. $unit->the_current_unit_debt .'</td>';
                                     
                                 $tableBody .= '<td>'.(($unit->for_rent)? "نعم":"لا").'</td>
                                 <td>'.(($unit->for_sale)? "نعم":"لا").'</td>

@@ -221,9 +221,9 @@ class OwnersController extends Controller
                            
                            <td><strong>حالة المالك</strong></td>
                            <td><strong>المهنة</strong></td>
-                           <td><strong>العنوان</strong></td>
-                           <td><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
-                           <td><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+                           <td style="min-width: 200px;"><strong>العنوان</strong></td>
+                           <td style="min-width: 200px;"><strong>رقم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
+                           <td style="min-width: 200px;"><strong>اسم الشخص الذي يمكن الاتصال به فى حالة عدم الوصول للمالك</strong></td>
                            <td><strong>الايميل الخاص بالعمل</strong></td>
                            <td><strong>الايميل الشخصى</strong></td>
                            <td><strong>التليفون الارضي</strong></td>
@@ -232,7 +232,7 @@ class OwnersController extends Controller
                            <td><strong>السن</strong></td>
                            <td><strong>رقم البطاقة</strong></td>
                            <td><strong>أرقام الوحدات</strong></td>
-                           <td><strong>الاسم</strong></td>
+                           <td style="min-width: 200px;"><strong>الاسم</strong></td>
                            <td><strong>الصورة الشخصية</strong></td>
                            <td><strong>الرقم</strong></td>
                        </tr>
