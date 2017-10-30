@@ -91,7 +91,7 @@
             $('#op').on('keyup',function(){
                 var key = $('#op').val();
                 $.ajax({
-                    url:"{{action('GatesController@indexAjax')}}",
+                    url:"{{action('GatesReportsController@indexAjax')}}",
                     type:"GET",
                     data:"key="+key,
                     dataType:'script',

@@ -65,7 +65,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 'renting_contracts.show',
                 'renting_contracts.index',
 
-                'gates.index',
+                'reports.gates.index',
 
                 'departments.show',
                 'departments.index',

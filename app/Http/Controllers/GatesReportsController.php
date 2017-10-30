@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MembershipCardForIndividual;
 
-class GatesController extends Controller
+class GatesReportsController extends Controller
 {
 
     public function __construct()
@@ -22,7 +22,7 @@ class GatesController extends Controller
     public function index()
     {
         $membershipCards = MembershipCardForIndividual::latest()->paginate(25);
-        return view('gates.index',  compact('membershipCards'));
+        return view('reports.gates.index',  compact('membershipCards'));
     }
 
     /**
