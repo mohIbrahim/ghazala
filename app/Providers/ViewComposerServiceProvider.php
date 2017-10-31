@@ -77,6 +77,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 'complaints.show',
                 'complaints.index',
+                'reports.units_debts.debts_notifier',
 
             ];
 
