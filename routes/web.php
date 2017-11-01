@@ -66,6 +66,7 @@ Route::get('/clear-cache', function() {
 
 //Reports
  	//Units Debts
- 		Route::get('reborts/units_debts/debts_notifire', 'UnitedDebtReportsController@getDebtsNotifier');
+ 		Route::get('reports/units_debts/debts_notifire', 'UnitsDebtReportsController@getDebtsNotifier');
+ 		Route::post('reports/units_debts/notify', 'UnitsDebtReportsController@notify');
 
 

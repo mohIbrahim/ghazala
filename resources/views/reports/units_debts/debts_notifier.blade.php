@@ -15,42 +15,57 @@
 			<div class="panel-body">
 			
             
-           
-				<div class="table-responsive">
-					<table id="units" class="table table-hover text-center">
-						<thead>
-							<tr>
-								@if(in_array('view_finance', $permissions))
-									<td><strong>المديونية المستحقة</strong></td>
-								@endif
-								
-								<td><strong>أسماء المُلاَّك</strong></td>
-								<td><strong>كود الوحدة</strong></td>
-							</tr>
-							
-						</thead>
-						<tbody>
-							@foreach($units as $unit)
-								<tr>									
+            {!! Form::open(['method'=>'POST', 'action'=>'UnitsDebtReportsController@notify']) !!}
+            	{!! Form::submit('Send') !!}
+           		
+
+					<div class="table-responsive">
+						<table id="units" class="table table-hover text-center">
+							<thead>
+								<tr>
 									@if(in_array('view_finance', $permissions))
+										<td><strong>المديونية المستحقة</strong></td>
+									@endif									
+									<td><strong>أسماء المُلاَّك</strong></td>
+									<td><strong>كود الوحدة</strong></td>
+									<td><strong>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="" id="select_all">
+												<strong>أختر الكل</strong>
+											</label>
+										</div>
+									</strong></td>
+								</tr>								
+							</thead>
+							<tbody>
+								@foreach($units as $unit)
+									<tr>									
+										@if(in_array('view_finance', $permissions))
 										<td>{{ (int)$unit->the_current_unit_debt }}</td>
-									@endif
+										@endif
 
-									<td>
-										@foreach($unit->owners as $owner)
-											<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }}</a></p>
-										@endforeach
-									</td>
+										<td>
+											@foreach($unit->owners as $owner)
+												<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }}</a></p>
+											@endforeach
+										</td>
 
-									<td>
-										<a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
-									</td>
-								</tr>
-							@endforeach
-							
-						</tbody>
-					</table>
-				</div>
+										<td>
+											<a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
+										</td>
+
+										<td>
+											{!! Form::checkbox('units_ids[]', $unit->id, false, ['class'=>'checkbox form-control']);!!}
+										</td>
+									</tr>
+								@endforeach
+								
+							</tbody>
+						</table>
+					</div>
+
+            	{!! Form::close() !!}
 						
 		
 			</div>
@@ -79,11 +94,26 @@
 	            "paging": true,
 	            "searching": true,
 	            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-	            
 		       
 	        } );
+	    	// SELECT ALL
+			//select all checkboxes
+			$("#select_all").change(function(){  //"select all" change 
+			    $(".checkbox").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+			});
 
-
+			//".checkbox" change 
+			$('.checkbox').change(function(){ 
+			    //uncheck "select all", if one of the listed checkbox item is unchecked
+			    if(false == $(this).prop("checked")){ //if this item is unchecked
+			        $("#select_all").prop('checked', false); //change "select all" checked status to false
+			    }
+			    //check "select all" if all checkbox items are checked
+			    if ($('.checkbox:checked').length == $('.checkbox').length ){
+			        $("#select_all").prop('checked', true);
+			    }
+			});
+			//END SELECT ALL
 
         });
     </script>
