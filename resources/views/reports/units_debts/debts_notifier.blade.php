@@ -23,12 +23,15 @@
 						<table id="units" class="table table-hover text-center">
 							<thead>
 								<tr>
+									<td><strong>ايميل المالك</strong></td>
 									@if(in_array('view_finance', $permissions))
 										<td><strong>المديونية المستحقة</strong></td>
 									@endif									
 									<td><strong>أسماء المُلاَّك</strong></td>
 									<td><strong>كود الوحدة</strong></td>
 									<td><strong>
+												<strong>أختر الوحدة المراد<br> إعلامها بالمديونية المستحقة</strong>
+												<br>
 										<div class="checkbox">
 											<label>
 												<input type="checkbox" value="" id="select_all">
@@ -40,7 +43,12 @@
 							</thead>
 							<tbody>
 								@foreach($units as $unit)
-									<tr>									
+									<tr>
+										<td>
+											@foreach($unit->owners as $owner)
+												{{$owner->email}} <br>
+											@endforeach
+										</td>									
 										@if(in_array('view_finance', $permissions))
 										<td>{{ (int)$unit->the_current_unit_debt }}</td>
 										@endif

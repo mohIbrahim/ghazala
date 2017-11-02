@@ -16,7 +16,13 @@ class UnitsDebtReportsController extends Controller
 
     public function notify(Request $request)
     {
-    	dd($request->input('units_ids'));
+    	
+    	$units = Unit::findOrFail($request->input('units_ids'));
+
+    	foreach ($units as $key => $unit) {
+    		# code...
+    	dd($unit->owners->first()->email);
+    	}
     }
 
     
