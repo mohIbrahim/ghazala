@@ -38,12 +38,13 @@ class UnitsDebtReportsController extends Controller
 						foreach ($unit->owners as $owner) {
 							if (!empty($owner->email)) {
 								
-								Mail::to($owner->email)->later(5, new UnitDebtsNotifyer($unit));
+								Mail::to($owner->email)->send(new UnitDebtsNotifyer($unit));
 								// Delete current Unit ID from units_ids input to not conflict 
 								// with returned other inputs if owner not have email and error happened.
-								array_forget($unitsIds, $arrayKey);
-								flash()->success('تم الإرسال بنجاح');
-								return redirect()->action('UnitsDebtReportsController@getDebtsNotifier');
+								
+								unset($unitsIds[$arrayKey]);
+								$request['units_ids'] = $unitsIds;
+								
 							} else {
 								return redirect()
 										->back()
@@ -58,6 +59,10 @@ class UnitsDebtReportsController extends Controller
 								->withErrors(['الوحدة رقم: <strong>'.$unit->code.'</strong> بدون مالك']);
 					}
 				}
+				flash()->success('تم الإرسال بنجاح');
+				return redirect()->action('UnitsDebtReportsController@getDebtsNotifier');
+
+
 			} elseif ($notifierType == 'pdf') {
 				$pdf = PDF::loadView('pdf.reports.units.unit_debts_notifyer');
 				return $pdf->download('test.pdf');
