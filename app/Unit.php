@@ -29,6 +29,11 @@ class Unit extends Model
                             'date_of_indebtedness',
     						'comments',
     						'creator_user_id',
+                            'unit_expenses',
+                            'garden_maintenance_expenses',
+                            'staff_housing_expenses',
+                            'debt_benefits',
+                            'balances_of_previous_years',
     						];
 
     protected $dates = ['rent_from', 'rent_to', 'date_of_indebtedness'];

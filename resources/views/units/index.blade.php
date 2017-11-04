@@ -60,7 +60,7 @@
 										@endif
 									</td> --}}
 									@if(in_array('view_finance', $permissions))
-										<td>{{ (int)$unit->the_current_unit_debt }}</td>
+										<td>{{ $unit->the_current_unit_debt }}</td>
 									@endif
 									<td>{{ ($unit->for_rent)? "نعم":"لا" }}</td>
 									<td>{{ ($unit->for_sale)? "نعم":"لا" }}</td>

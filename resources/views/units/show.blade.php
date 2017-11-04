@@ -134,19 +134,73 @@
 								</tr>
 
 
-								<tr>
-									<td>{{ $unit->the_current_unit_debt }}</td>
-									<td><strong>:المديونية المستحقة</strong></td>
-								</tr>
 
-								<tr>
-									<td>
-										@if($unit->date_of_indebtedness)
-											{{ $unit->date_of_indebtedness->format('d-m-Y') }}
-										@endif
-									</td>
-									<td><strong>:تاريخ المديونية</strong></td>
-								</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								@if(in_array('view_finance', $permissions))
+
+										
+									<tr>
+										<td>{{ $unit->unit_expenses }}</td>
+										<td><strong>:مصاريف الوحدة</strong></td>
+									</tr>
+
+									<tr>
+										<td>{{ $unit->garden_maintenance_expenses }}</td>
+										<td><strong>:مصاريف صيانة الحدائق</strong></td>
+									</tr>
+
+									<tr>
+										<td>{{ $unit->staff_housing_expenses }}</td>
+										<td><strong>:مصاريف سكن العاملين</strong></td>
+									</tr>
+									
+
+									<tr>
+										<td>{{ $unit->debt_benefits }}</td>
+										<td><strong>:فوائد الدين</strong></td>
+									</tr>
+
+									<tr>
+										<td>{{ $unit->balances_of_previous_years }}</td>
+										<td><strong>:أرصدة سنوات آخرى</strong></td>
+									</tr>				
+
+									<tr>
+										<td>{{ $unit->the_current_unit_debt }}</td>
+										<td><strong>:المديونية المستحقة</strong></td>
+									</tr>
+			
+									<tr>
+										<td>{{ $unit->total_debt_owed }}</td>
+										<td><strong>:إجمالي المديونية المستحقة</strong></td>
+									</tr>
+
+									<tr>
+										<td>
+											@if($unit->date_of_indebtedness)
+												{{ $unit->date_of_indebtedness->format('d-m-Y') }}
+											@endif
+										</td>
+										<td><strong>:تاريخ المديونية</strong></td>
+									</tr>
+								@endif
+
+
+
 
 								<tr>
 									<td>

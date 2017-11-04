@@ -29,7 +29,13 @@ class UnitsRequest extends FormRequest
             'code'=>"required|unique:units,code,".$this->unit,
             'model_id'=>'required',
             'unit_account_code'=>"required|unique:units,unit_account_code,".$this->unit,
-            'electricity_meter_number'=>"required|unique:units,electricity_meter_number,".$this->unit,            
+            'electricity_meter_number'=>"required|unique:units,electricity_meter_number,".$this->unit,
+            'unit_expenses'=>'numeric|nullable',
+            'garden_maintenance_expenses'=>'numeric|nullable',
+            'staff_housing_expenses'=>'numeric|nullable',
+            'debt_benefits'=>'numeric|nullable',
+            'balances_of_previous_years'=>'numeric|nullable',
+            
         ];
         
         for($i = 0 ; $i<= count($this->images) ; $i++){
@@ -51,6 +57,11 @@ class UnitsRequest extends FormRequest
                 'electricity_meter_number.required'=>'برجاء إدخال رقم عداد الكهرباء الخاص بالوحدة',
                 'electricity_meter_number.unique'=>'برجاء أختيار رقم عداد الكهرباء آخر للوحدة هذا الرقم تم أختياره من قبل',
                 'images.0.image'=>'صورة للوحدة يجب أن تكون صورة ليس اى ملف آخر',
+                'unit_expenses.numeric'=>'برجاء إدخال أرقام فقط فى حقل مصاريف الوحدة',
+                'garden_maintenance_expenses.numeric'=>'برجاء إدخال أرقام فقط فى حقل مصاريف صيانة الحدائق',
+                'staff_housing_expenses.numeric'=>'برجاء إدخال أرقام فقط فى حقل مصاريف سكن العاملين',
+                'debt_benefits.numeric'=>'برجاء إدخال أرقام فقط فى حقل فوائد الدين',
+                'balances_of_previous_years.numeric'=>'برجاء إدخال أرقام فقط فى حقل أرصدة سنوات آخرى',
                 ];
 
        

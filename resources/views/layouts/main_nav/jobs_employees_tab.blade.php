@@ -21,7 +21,7 @@
                 <li class="dropdown-header text-center"><h4>الوظائف</h4></li>
                 <li><a href="{{ action('JobsController@index') }}" class="text-center">عرض كل الوظائف</a></li>
                 @if(in_array('create_jobs', $permissions))
-                    <li><a href="{{ action('JobsController@create') }}" class="text-center">إضافة وظيفة إيجار </a></li>
+                    <li><a href="{{ action('JobsController@create') }}" class="text-center">إضافة وظيفة جديدة </a></li>
                 @endif
             @endif            
         </ul>        

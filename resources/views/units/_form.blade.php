@@ -134,20 +134,55 @@
 		</div>
 	</div>
 
-	@if(in_array('create_finance', $permissions) || in_array('update_finance', $permissions) )
-		<div class="form-group">
-			{!! Form::label('the_current_unit_debt', 'مديونية الوحدة الحالية') !!}
-			{!! Form::text('the_current_unit_debt', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مديونية الوحدة الحالية']) !!}
-		</div>
-		
-		<div class="form-group">
-			{!! Form::label('date_of_indebtedness', 'تاريخ المديونية') !!}
-			<p>(تنسيق التاريخ   (سنة/ يوم / شهر </p>
-			{!! Form::text('date_of_indebtedness',
-			 				isset($unit->date_of_indebtedness)? $unit->date_of_indebtedness->format('m/d/Y'):null,
-			 ['id'=>'datepicker3', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ المديونية']) !!}
+	@if((in_array('create_finance', $permissions)) || (in_array('update_finance', $permissions)) )
+		<div class="jumbotron">
+			<div class="container">
+				<h3 class="text-center"> مديونية الوحدة</h3>
+				<span style="color:red">.هذا الجزء لا يظهر إلا لقسم الحسابات</span>
+				
+
+				<div class="form-group">
+					{!! Form::label('unit_expenses', 'مصاريف الوحدة') !!}
+					{!! Form::text('unit_expenses', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مصاريف الوحدة']) !!}
+				</div>
+
+				<div class="form-group">
+					{!! Form::label('garden_maintenance_expenses', 'مصاريف صيانة الحدائق') !!}
+					{!! Form::text('garden_maintenance_expenses', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مصاريف صيانة الحدائق']) !!}
+				</div>
+
+				<div class="form-group">
+					{!! Form::label('staff_housing_expenses', 'مصاريف سكن العاملين') !!}
+					{!! Form::text('staff_housing_expenses', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مصاريف سكن العاملين']) !!}
+				</div>
+
+				<div class="form-group">
+					{!! Form::label('debt_benefits', 'فوائد الدين') !!}
+					{!! Form::text('debt_benefits', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل فوائد الدين']) !!}
+				</div>
+
+				<div class="form-group">
+					{!! Form::label('balances_of_previous_years', 'أرصدة سنوات آخرى') !!}
+					{!! Form::text('balances_of_previous_years', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل أرصدة السنوات الآخرى']) !!}
+				</div>
+
+				<div class="form-group">
+					{!! Form::label('the_current_unit_debt', 'مديونية الوحدة الحالية') !!}
+					{!! Form::text('the_current_unit_debt', null, ['class'=>'form-control text-right', 'placeholder'=>' إدخل مديونية الوحدة الحالية']) !!}
+				</div>
+				
+				<div class="form-group">
+					{!! Form::label('date_of_indebtedness', 'تاريخ المديونية') !!}
+					<h5>(تنسيق التاريخ   (سنة/ يوم / شهر </h5>
+					{!! Form::text('date_of_indebtedness',
+					 				isset($unit->date_of_indebtedness)? $unit->date_of_indebtedness->format('m/d/Y'):null,
+					 ['id'=>'datepicker3', 'class'=>'form-control text-right', 'placeholder'=>' إدخل تاريخ المديونية']) !!}
+				</div>
+
+			</div>
 		</div>
 	@endif
+
 
 	<div class="form-group">
 		{!! Form::label('comments', 'التعليقات') !!}

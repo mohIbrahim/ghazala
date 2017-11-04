@@ -19,7 +19,7 @@ class CreateEmployeeJobPivotTable extends Migration
             $table->integer('job_id')->unsigned();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('ghazala_jobs')->onDelete('cascade');
             $table->timestamps();
         });
     }
