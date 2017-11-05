@@ -21,9 +21,10 @@
 <body>
     <div id="app">
         @include('layouts.main_nav.nav')
-
-        <div class="col-md-8 col-md-offset-2">
-            @include('flash::message')
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                @include('flash::message')
+            </div>            
         </div>
         <div class="container-fluid">
             @yield('content')

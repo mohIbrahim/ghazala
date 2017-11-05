@@ -12,78 +12,79 @@
 			<h3 class="panel-title text-center"><strong>أخطارات مديونيات الوحدات</strong></h3>
 		</div>
 		<div class="panel-body">	    
-	        {!! Form::open(['method'=>'POST', 'action'=>'UnitsDebtReportsController@notify']) !!}
-	        	<div class="panel panel-default">
-	        		<div class="panel-body text-center">
-	        			@include('errors.list')
+		        {!! Form::open(['method'=>'POST', 'action'=>'UnitsDebtReportsController@notify']) !!}
+
+		        	<div class="panel panel-default">
+		        		<div class="panel-body text-center">
+		        			@include('errors.list')
 						<div class="form-group">
 							<h4>.PDF أختر نوع العملية سواء كانت إرسال رسالة لملّاك الوحدة أو الاحتفاظ بملف بامتداد </h4>
-	            			{!! Form::label('email', 'رسالة',['class'=>'h4']) !!}
-	            			{!! Form::radio('notifier_type', 'email', null, ['id'=>'email']) !!}
-							<br>
-	            			{!! Form::label('pdf', 'بي دي آف',['class'=>'h4']) !!}
-	            			{!! Form::radio('notifier_type', 'pdf', null, ['id'=>'pdf']) !!}
+				            			{!! Form::label('email', 'رسالة',['class'=>'h5']) !!}
+				            			{!! Form::radio('notifier_type', 'email', null, ['id'=>'email']) !!}
+										<br>
+				            			{!! Form::label('pdf', 'بي دي آف',['class'=>'h5']) !!}
+				            			{!! Form::radio('notifier_type', 'pdf', null, ['id'=>'pdf']) !!}
 						</div>
-	        			{!! Form::submit('تنفيذ العملية', ['class'=>'btn btn-primary btn-lg']) !!}
-	        		</div>
-	        	</div>
+		        			{!! Form::submit('تنفيذ العملية', ['class'=>'btn btn-primary btn-lg']) !!}
+		        		</div>
+		        	</div>
 
-				<div class="table-responsive">
-					<table id="units" class="table table-hover text-center">
-						<thead>
+			<div class="table-responsive">
+				<table id="units" class="table table-hover text-center">
+					<thead>
+						<tr>
+							<td><strong>ايميل المالك</strong></td>
+							@if(in_array('view_finance', $permissions))
+								<td><strong>المديونية المستحقة</strong></td>
+							@endif
+							<td><strong>أسماء المُلاَّك</strong></td>
+							<td><strong>كود الوحدة</strong></td>
+							<td>
+								<strong>
+									أختر الوحدة المراد  إعلامها بالمديونية المستحقة 
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="" id="select_all">
+											<strong>أختر الكل</strong>
+										</label>
+									</div>
+								</strong>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($units as $unit)
 							<tr>
-								<td><strong>ايميل المالك</strong></td>
-								@if(in_array('view_finance', $permissions))
-									<td><strong>المديونية المستحقة</strong></td>
-								@endif
-								<td><strong>أسماء المُلاَّك</strong></td>
-								<td><strong>كود الوحدة</strong></td>
 								<td>
-									<strong>
-										أختر الوحدة المراد<br> إعلامها بالمديونية المستحقة<br>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="" id="select_all">
-												<strong>أختر الكل</strong>
-											</label>
-										</div>
-									</strong>
+									@foreach($unit->owners as $owner)
+										{{$owner->email}} <br>
+									@endforeach
+								</td>
+								@if(in_array('view_finance', $permissions))
+									<td>{{ $unit->the_current_unit_debt }}</td>
+								@endif
+
+								<td>
+									@foreach($unit->owners as $owner)
+										<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }}</a></p>
+									@endforeach
+								</td>
+
+								<td>
+									<a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
+								</td>
+
+								<td>
+									{!! Form::checkbox('units_ids[]', $unit->id, false, ['class'=>'_checkbox ']);!!}
 								</td>
 							</tr>
-						</thead>
-						<tbody>
-							@foreach($units as $unit)
-								<tr>
-									<td>
-										@foreach($unit->owners as $owner)
-											{{$owner->email}} <br>
-										@endforeach
-									</td>
-									@if(in_array('view_finance', $permissions))
-										<td>{{ $unit->the_current_unit_debt }}</td>
-									@endif
+						@endforeach
+						
+					</tbody>
+				</table>
+			</div>
 
-									<td>
-										@foreach($unit->owners as $owner)
-											<p><a href="{{ action('OwnersController@show', ['slug'=>$owner->slug]) }}" target="_blank"> {{ $owner->name }}</a></p>
-										@endforeach
-									</td>
-
-									<td>
-										<a href="{{ action('UnitsController@show', ['id'=>$unit->id]) }}">{{ $unit->code }}</a>
-									</td>
-
-									<td>
-										{!! Form::checkbox('units_ids[]', $unit->id, false, ['class'=>'checkbox form-control']);!!}
-									</td>
-								</tr>
-							@endforeach
-							
-						</tbody>
-					</table>
-				</div>
-
-	        {!! Form::close() !!}
+		        {!! Form::close() !!}
 		</div>
 	</div>	 
 @endsection
@@ -111,17 +112,17 @@
 	    	// SELECT ALL
 			//select all checkboxes
 			$("#select_all").change(function(){  //"select all" change 
-			    $(".checkbox").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+			    $("._checkbox").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
 			});
 
 			//".checkbox" change 
-			$('.checkbox').change(function(){ 
+			$('._checkbox').change(function(){ 
 			    //uncheck "select all", if one of the listed checkbox item is unchecked
 			    if(false == $(this).prop("checked")){ //if this item is unchecked
 			        $("#select_all").prop('checked', false); //change "select all" checked status to false
 			    }
 			    //check "select all" if all checkbox items are checked
-			    if ($('.checkbox:checked').length == $('.checkbox').length ){
+			    if ($('._checkbox:checked').length == $('._checkbox').length ){
 			        $("#select_all").prop('checked', true);
 			    }
 			});
