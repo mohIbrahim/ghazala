@@ -1,7 +1,6 @@
 @component('mail::message')
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-<div style="direction: rtl; float:right;">
-	<img src="http://www.ghazala-bay.com/assets/asset-1422809375490.png?v=0.8567256918177009">
+![alt text](http://www.ghazala-bay.com/assets/asset-1422809375490.png?v=0.8567256918177009 "Ghazala Bay")
+<div style="direction: rtl; float:right;">	
 	<h3 style="text-align: right;"> السيد / {{ $owner->name }}</h3>
 	<h3 style="text-align: right;"> مالك الوحدة رقم / {{ $unit->code }}</h3>
 	<h2 style="text-align: right; text-decoration: underline;"> الموضوع/ مطالبات مصروفات صيانة عام.</h2>
@@ -11,21 +10,45 @@
 </div>
 
 @component('mail::table')
-|        		| القيمة  	| البند  			|
-| ------------- 	|-------------:	| --------:				|
-|       		| 88288 	|:مصاريف الوحدة	    	|
-|       		| 88288 	|:مصاريف صيانة الحدائق    	|
-|       		| 88288 	|:مصاريف سكن العاملين    	|
-|       		| 88288 	|:فوائد الدين 		    	|
-|       		| 88288 	|:أرصدة سنوات آخرى 	    	|
-|       		| 88288 	|:المديونية المستحقة    	|
-|       		| 88288 	|:تاريخ المديونية 	   	|
+|        		| القيمة  											| البند						|	
+| ------------- |----------:										| --------:					|
+| 	      		| {{$unit->unit_expenses}} 							|:مصاريف الوحدة	 		   	|
+|       		| {{$unit->garden_maintenance_expenses}} 			|:مصاريف صيانة الحدائق    	|
+|       		| {{$unit->staff_housing_expenses}} 				|:مصاريف سكن العاملين    	|
+|       		| {{$unit->debt_benefits}} 							|:فوائد الدين 		    	|
+|       		| {{$unit->balances_of_previous_years}} 			|:أرصدة سنوات آخرى 	    	|
+|				|-----------										|							|
+|       		| {{$unit->the_current_unit_debt}} 					|:إجمالي المديونية المستحقة |
+|       		| {{$unit->date_of_indebtedness->format('d-m-Y')}} 	|:تاريخ المديونية 	   		|
 @endcomponent
 
-@component('mail::button', ['url' => 'http://www.ghazala-bay.com/'])
-Button Text
+<div style="direction: rtl; float:right;">	
+	
+	<h5 style="text-align: right; "> رجاء التكرم بسرعة السداد نقداً/شيكات أو عن طريق البنك أو بتحويل بنكي </h5>
+	<h5 style="text-align: right; "> البنك/: بنك تنمية الصادرات </h5>
+	<h5 style="text-align: right; "> رقم الحساب/: 1601400200610101 </h5>
+	<h5 style="text-align: right; "> سويفت كود/: EXDEEGCXRSH </h5>
+	<h5 style="text-align: right;text-decoration: underline; "> ونرحب بأستفساركم عن طريق الاستاذة/ فاتن حامد - مسئول حساب العملاء تليفون رقم: 01211189900 </h5>
+	<h5 style="text-align: center; "> ولسيادتكم جزيل الشكر ،،</h5>
+	
+</div>
+
+@component('mail::table')
+|        						| 		  											| 											|	
+| :-------------: 				|----------:										| :--------:								|
+|<strong>رئيس الأتحاد</strong>	| 													|<strong>أمين الصندوق</strong>	 		   	|
+|د/ على المصيلحي				|  													|أشرف إسكندر 								|
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+@component('mail::table')
+|        													| 		  											| 																|	
+| :------------- 											|----------:										| --------:														|
+|<h6> Website: www.ghazala-bay.com<br>E-Mail: faten_taha@ymail.com<br>E-Mail: ghazalabayresort@ymail.com<br>Facebook page: facebook.com/GhazalaBay.official</h6>| 													|<h6>عنوان: 30 شارع لبنان المهندسين - الدور 6 - الجيزة<br>الكيلو 142 إسكندرية مطروح - الساحل الشمالي	<br>ت: 	4190121-046<br>فاكس: 	4190251-046<br>محمول: 01211189900</h6>|
+
+
+@endcomponent
+
+							
+
+
 @endcomponent

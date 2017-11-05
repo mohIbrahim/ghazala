@@ -49,7 +49,7 @@ class UnitsDebtReportsController extends Controller
 			$unit = Unit::findOrFail($id);
 			if ($unit->owners->isNotEmpty()) {
 				foreach ($unit->owners as $owner) {
-					if (!empty($owner->email)) {						
+					if (!empty($owner->email)) {											
 						Mail::to($owner->email)->send(new UnitDebtsNotifyer($unit, $owner));
 						// Delete current Unit ID from units_ids input to not conflict 
 						// with returned other inputs if owner not have email and error happened.
