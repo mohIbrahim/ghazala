@@ -1,5 +1,5 @@
 @component('mail::message')
-![alt text](http://www.ghazala-bay.com/assets/asset-1422809375490.png?v=0.8567256918177009 "Ghazala Bay")
+
 <div style="direction: rtl; float:right;">	
 	<h3 style="text-align: right;"> السيد / {{ $owner->name }}</h3>
 	<h3 style="text-align: right;"> مالك الوحدة رقم / {{ $unit->code }}</h3>
@@ -10,16 +10,16 @@
 </div>
 
 @component('mail::table')
-|        		| القيمة  											| البند						|	
-| ------------- |----------:										| --------:					|
-| 	      		| {{$unit->unit_expenses}} 							|:مصاريف الوحدة	 		   	|
-|       		| {{$unit->garden_maintenance_expenses}} 			|:مصاريف صيانة الحدائق    	|
-|       		| {{$unit->staff_housing_expenses}} 				|:مصاريف سكن العاملين    	|
-|       		| {{$unit->debt_benefits}} 							|:فوائد الدين 		    	|
-|       		| {{$unit->balances_of_previous_years}} 			|:أرصدة سنوات آخرى 	    	|
-|				|-----------										|							|
-|       		| {{$unit->the_current_unit_debt}} 					|:إجمالي المديونية المستحقة |
-|       		| {{$unit->date_of_indebtedness->format('d-m-Y')}} 	|:تاريخ المديونية 	   		|
+|        		| القــــيمة  						| البـــند				|	
+| ------------- 	|----------:						| --------:					|
+| 	      	| {{$unit->unit_expenses}} EGP 				|:مصاريف الوحدة	 		|
+|       		| {{$unit->garden_maintenance_expenses}}  EGP	|:مصاريف صيانة الحدائق    		|
+|       		| {{$unit->staff_housing_expenses}}  EGP		|:مصاريف سكن العاملين    		|
+|       		| {{$unit->debt_benefits}}  EGP				|:فوائد الدين 		    		|
+|       		| {{$unit->balances_of_previous_years}}  EGP		|أرصدة سنوات آخرى 	    		|
+|		|-----------						|					|
+|       		| {{$unit->the_current_unit_debt}}  EGP			|:إجمالي المديونية المستحقة 	|
+|       		| {{$unit->date_of_indebtedness->format('d-M-Y')}} 	|:تاريخ المديونية 	   		|
 @endcomponent
 
 <div style="direction: rtl; float:right;">	
